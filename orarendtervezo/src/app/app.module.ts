@@ -7,6 +7,29 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './commons/header/header.component';
 import { FooterComponent } from './commons/footer/footer.component';
 
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input'
+import { MatListModule } from '@angular/material/list'
+import { MatMenuModule} from '@angular/material/menu'
+import { MatTableModule} from '@angular/material/table'
+import { MatButtonModule} from '@angular/material/button'
+import { MatCardModule} from '@angular/material/card'
+import { MatCheckboxModule} from '@angular/material/checkbox'
+import { MatDialogModule} from '@angular/material/dialog'
+
+const Matimports: any[] = [
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatTableModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule
+];
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,9 +39,10 @@ import { FooterComponent } from './commons/footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    [...Matimports]
   ],
-  providers: [],
+  providers: [...Matimports],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
