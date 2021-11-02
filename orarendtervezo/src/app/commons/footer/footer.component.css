@@ -1,0 +1,14 @@
+.footer{
+    background-color: #333333;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 3vh;
+}
+
+p{
+    color: red;
+    margin: auto;
+
+}
