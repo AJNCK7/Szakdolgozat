@@ -1,6 +1,12 @@
 <div class="header" fxLayout="row" fxLayoutAlign="center center" >
-    <div fxFlex="20"><button >Valami</button></div>
-    <p fxFlex="50">Órarendtervező</p>
+    <div fxFlex="20">
+        <button mat-button [matMenuTriggerFor]="menu">Menü</button>
+            <mat-menu #menu="matMenu">
+            <a href="#" button mat-menu-item>Kezdőlap</a>
+            <a href="#" button mat-menu-item>Órarend tervezés</a>
+        </mat-menu>
+    </div>
+    <div fxFlex="60"> Órarendtervező </div>
     <mat-icon fxFlex="10">person_pin</mat-icon>
     <a href="">HUN</a>/<a href="">ENG</a>
 </div>
