@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './commons/header/header.component';
@@ -18,7 +22,7 @@ import { MatCardModule} from '@angular/material/card'
 import { MatCheckboxModule} from '@angular/material/checkbox'
 import { MatDialogModule} from '@angular/material/dialog'
 
-const Matimports: any[] = [
+const MatImports: any[] = [
   MatIconModule,
   MatInputModule,
   MatListModule,
@@ -30,6 +34,20 @@ const Matimports: any[] = [
   MatDialogModule
 ];
 
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader{
+  return new TranslateHttpLoader(http);
+}
+
+const TranslateImports: any[] = [
+  HttpClientModule,
+  TranslateModule.forRoot({
+    loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+    }
+  })
+]
 
 @NgModule({
   declarations: [
@@ -42,9 +60,12 @@ const Matimports: any[] = [
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    [...Matimports]
+    [...TranslateImports],
+    [...MatImports]
   ],
-  providers: [...Matimports],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  
+}

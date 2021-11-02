@@ -1,12 +1,12 @@
 <div class="header" fxLayout="row" fxLayoutAlign="center center" >
     <div fxFlex="20">
-        <button mat-button [matMenuTriggerFor]="menu">Menü</button>
+        <button mat-button [matMenuTriggerFor]="menu">{{ 'MENU' | translate}}</button>
             <mat-menu #menu="matMenu">
-            <a href="#" button mat-menu-item>Kezdőlap</a>
-            <a href="#" button mat-menu-item>Órarend tervezés</a>
+            <a href="#" button mat-menu-item>{{ 'HOME_PAGE' | translate}}</a>
+            <a href="#" button mat-menu-item>{{ 'MAIN_TITLE' | translate}}</a>
         </mat-menu>
     </div>
-    <div fxFlex="60"> Órarendtervező </div>
+    <div fxFlex="60"> {{ 'MAIN_TITLE' | translate}} </div>
     <mat-icon fxFlex="10">person_pin</mat-icon>
-    <a href="">HUN</a>/<a href="">ENG</a>
+    <a href="" (click)="setLanguageLocalStorage('hun')">HUN</a>/<a href="" (click)="setLanguageLocalStorage('en')">ENG</a>
 </div>
