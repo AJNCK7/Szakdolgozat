@@ -7,7 +7,7 @@ import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './commons/header/header.component';
 import { FooterComponent } from './commons/footer/footer.component';
@@ -20,7 +20,7 @@ import { MatTableModule} from '@angular/material/table'
 import { MatButtonModule} from '@angular/material/button'
 import { MatCardModule} from '@angular/material/card'
 import { MatCheckboxModule} from '@angular/material/checkbox'
-import { MatDialogModule} from '@angular/material/dialog'
+import { MatDialogModule} from '@angular/material/dialog';
 
 const MatImports: any[] = [
   MatIconModule,
@@ -53,7 +53,8 @@ const TranslateImports: any[] = [
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RoutingComponents
   ],
   imports: [
     BrowserModule,
