@@ -2,5 +2,17 @@
     "MAIN_TITLE": "Timetable planner",
     "MENU": "Menu",
     "HOME_PAGE": "Home page",
-    "MADE_BY": "Made by"
+    "MADE_BY": "Made by",
+    "USER":{
+        "REGISTER": "Register",
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "CONFIRMPASSWORD": "Confirm password",
+        "EMAIL": "Email",
+        "CONFIRMEMAIL": "Confirm email"
+    },
+    "BUTTON":{
+        "REGISTER": "Register"
+    }
+
 }

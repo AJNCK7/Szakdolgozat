@@ -1,0 +1,36 @@
+<mat-card class="user_register_card">
+    <h1>{{'USER.REGISTER' | translate}}</h1>
+    <mat-card-content>
+      <form class="register_form">
+        <mat-form-field class="register_form_field" appearance="fill">
+          <mat-label>{{'USER.USERNAME' | translate}}</mat-label>
+          <input type="text" matInput>
+        </mat-form-field>
+        <mat-form-field class="register_form_field" appearance="fill">
+          <mat-label>{{'USER.PASSWORD' | translate}}</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field class="register_form_field" appearance="fill">
+          <mat-label>{{'USER.CONFIRMPASSWORD' | translate }}</mat-label>
+          <input matInput [type]="confirm_hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="confirm_hide = !confirm_hide" type="button">
+            <mat-icon>{{confirm_hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field class="register_form_field" appearance="fill">
+          <mat-label>{{'USER.EMAIL' | translate }}</mat-label>
+          <input type="email" matInput>
+        </mat-form-field>
+        <mat-form-field class="register_form_field" appearance="fill">
+          <mat-label>{{'USER.CONFIRMEMAIL' | translate }}</mat-label>
+          <input type="email" matInput>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="user_register_form_submit_button" type="submit">
+          {{ 'BUTTON.REGISTER' | translate }}
+        </button>
+      </form>
+    </mat-card-content>
+</mat-card>

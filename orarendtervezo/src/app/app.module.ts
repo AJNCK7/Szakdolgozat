@@ -20,7 +20,8 @@ import { MatTableModule} from '@angular/material/table'
 import { MatButtonModule} from '@angular/material/button'
 import { MatCardModule} from '@angular/material/card'
 import { MatCheckboxModule} from '@angular/material/checkbox'
-import { MatDialogModule} from '@angular/material/dialog'
+import { MatDialogModule} from '@angular/material/dialog';
+import { UserRegisterComponent } from './user_management/user_register/user_register.component'
 
 const MatImports: any[] = [
   MatIconModule,
@@ -53,7 +54,8 @@ const TranslateImports: any[] = [
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,
