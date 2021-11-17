@@ -7,7 +7,7 @@ import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './commons/header/header.component';
 import { FooterComponent } from './commons/footer/footer.component';
@@ -56,6 +56,7 @@ const TranslateImports: any[] = [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    RoutingComponents,
     UserRegisterComponent,
     UserLoginComponent
   ],
