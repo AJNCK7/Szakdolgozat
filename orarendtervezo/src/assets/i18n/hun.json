@@ -2,5 +2,18 @@
     "MAIN_TITLE": "Órarend tervező",
     "MENU": "Menü",
     "HOME_PAGE": "Kezdőlap",
-    "MADE_BY": "Készítette"
+    "MADE_BY": "Készítette",
+    "USER":{
+        "REGISTER": "Regisztrálás",
+        "LOGIN": "Bejelentkezés",
+        "USERNAME": "Felhasználónév",
+        "PASSWORD": "Jelszó",
+        "CONFIRMPASSWORD": "Jelszó megerősítés",
+        "EMAIL": "Email",
+        "CONFIRMEMAIL": "Email megerősítés"
+    },
+    "BUTTON":{
+        "REGISTER": "Regisztrálás",
+        "LOGIN": "Bejelentkezés"
+    }
 }
