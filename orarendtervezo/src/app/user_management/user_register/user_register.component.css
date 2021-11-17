@@ -12,3 +12,12 @@
 .user_register_form_submit_button{
     width: 50vw;
 }
+
+.alert div {
+    background-color: #fed3d3;
+    color: #820000;
+    padding: 5px;
+    width: 58vw;
+    margin: auto;
+    margin-bottom: 5px;
+  }

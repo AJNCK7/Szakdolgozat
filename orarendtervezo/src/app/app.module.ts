@@ -23,6 +23,8 @@ import { MatCheckboxModule} from '@angular/material/checkbox'
 import { MatDialogModule} from '@angular/material/dialog';
 import { UserRegisterComponent } from './user_management/user_register/user_register.component';
 import { UserLoginComponent } from './user_management/user-login/user-login.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const MatImports: any[] = [
   MatIconModule,
@@ -65,8 +67,11 @@ const TranslateImports: any[] = [
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     [...TranslateImports],
-    [...MatImports]
+    [...MatImports],
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
