@@ -21,7 +21,8 @@ import { MatButtonModule} from '@angular/material/button'
 import { MatCardModule} from '@angular/material/card'
 import { MatCheckboxModule} from '@angular/material/checkbox'
 import { MatDialogModule} from '@angular/material/dialog';
-import { UserRegisterComponent } from './user_management/user_register/user_register.component'
+import { UserRegisterComponent } from './user_management/user_register/user_register.component';
+import { UserLoginComponent } from './user_management/user-login/user-login.component'
 
 const MatImports: any[] = [
   MatIconModule,
@@ -55,7 +56,8 @@ const TranslateImports: any[] = [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,

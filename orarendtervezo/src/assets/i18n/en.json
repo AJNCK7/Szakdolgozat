@@ -5,6 +5,7 @@
     "MADE_BY": "Made by",
     "USER":{
         "REGISTER": "Register",
+        "LOGIN": "Login",
         "USERNAME": "Username",
         "PASSWORD": "Password",
         "CONFIRMPASSWORD": "Confirm password",
@@ -12,7 +13,8 @@
         "CONFIRMEMAIL": "Confirm email"
     },
     "BUTTON":{
-        "REGISTER": "Register"
+        "REGISTER": "Register",
+        "LOGIN": "Login"
     }
 
 }

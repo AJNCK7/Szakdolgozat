@@ -5,6 +5,7 @@
     "MADE_BY": "Készítette",
     "USER":{
         "REGISTER": "Regisztrálás",
+        "LOGIN": "Bejelentkezés",
         "USERNAME": "Felhasználónév",
         "PASSWORD": "Jelszó",
         "CONFIRMPASSWORD": "Jelszó megerősítés",
@@ -12,6 +13,7 @@
         "CONFIRMEMAIL": "Email megerősítés"
     },
     "BUTTON":{
-        "REGISTER": "Regisztrálás"
+        "REGISTER": "Regisztrálás",
+        "LOGIN": "Bejelentkezés"
     }
 }
