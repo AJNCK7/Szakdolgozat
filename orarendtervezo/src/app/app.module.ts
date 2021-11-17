@@ -56,7 +56,7 @@ const TranslateImports: any[] = [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    RoutingComponents
+    RoutingComponents,
     UserRegisterComponent,
     UserLoginComponent
   ],
