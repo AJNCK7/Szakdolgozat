@@ -15,5 +15,23 @@
     "BUTTON":{
         "REGISTER": "Regisztrálás",
         "LOGIN": "Bejelentkezés"
+    },
+    "INPUT_ERRORS":{
+        "REQUIRED":{
+            "USERNAME": "Kötelező mező",
+            "PASSWORD": "Kötelező mező",
+            "EMAIL": "Kötelező mező"
+        },
+        "MINLENGTH":{
+            "USERNAME": "Minimum 3 karakter"
+        },
+        "PATTERN":{
+            "PASSWORD": "Minimum 8 karakter és kötelező tartalmaznia legalább egy számot és egy nagy betűt",
+            "EMAIL": "Kötelező a megadott forma pl.: example@email.com"
+        },
+        "CONFIRM":{
+            "PASSWORD" : "Nem egyezzik a jelszóval",
+            "EMAIL": "Nem egyezzik az emaillel"
+        }
     }
 }
