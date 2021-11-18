@@ -8,5 +8,7 @@
     </div>
     <div fxFlex="60"> {{ 'MAIN_TITLE' | translate}} </div>
     <mat-icon fxFlex="10">person_pin</mat-icon>
-    <a href="" (click)="setLanguageLocalStorage('hun')">HUN</a>/<a href="" (click)="setLanguageLocalStorage('en')">ENG</a>
+    <button class="clickable_button" (click)="setLanguageLocalStorage('hun')">HUN</button>
+    /
+    <button class="clickable_button" (click)="setLanguageLocalStorage('en')">ENG</button>
 </div>
