@@ -10,10 +10,10 @@
                     (registerForm.username.dirty || registerForm.username.touched)" 
                     class="alert">
             <div *ngIf="registerForm.username.errors?.required">
-            .
+              {{'INPUT_ERRORS.REQUIRED.USERNAME' | translate }}
             </div>
             <div *ngIf="registerForm.username.errors?.minlength">
-            .
+              {{'INPUT_ERRORS.MINLENGTH.USERNAME' | translate }}
             </div>
         </div>
         <mat-form-field class="register_form_field" appearance="fill">
@@ -27,10 +27,10 @@
                     (registerForm.password.dirty || registerForm.password.touched)" 
                     class="alert">
             <div *ngIf="registerForm.password.errors?.required">
-            .
+              {{'INPUT_ERRORS.REQUIRED.PASSWORD' | translate }}
             </div>
             <div *ngIf="registerForm.password.errors?.pattern">
-            .
+              {{'INPUT_ERRORS.PATTERN.PASSWORD' | translate }}
             </div>
         </div>
         <mat-form-field class="register_form_field" appearance="fill">
@@ -43,8 +43,11 @@
         <div *ngIf="registerForm.confirmPassword.invalid && 
         (registerForm.confirmPassword.dirty || registerForm.confirmPassword.touched)" 
         class="alert">
+          <div *ngIf="registerForm.confirmPassword.errors?.required">
+            {{'INPUT_ERRORS.CONFIRM.PASSWORD' | translate }}
+          </div>
           <div *ngIf="registerForm.confirmPassword.errors?.confirmedValidator">
-          confirmerror
+            {{'INPUT_ERRORS.CONFIRM.PASSWORD' | translate }}
           </div>
         </div>
         <mat-form-field class="register_form_field" appearance="fill">
@@ -55,10 +58,10 @@
         (registerForm.email.dirty || registerForm.email.touched)" 
         class="alert">
           <div *ngIf="registerForm.email.errors?.required">
-          .
+            {{'INPUT_ERRORS.REQUIRED.EMAIL' | translate }}
           </div>
           <div *ngIf="registerForm.email.errors?.email">
-          .
+            {{'INPUT_ERRORS.PATTERN.EMAIL' | translate }}
           </div>
         </div>
         <mat-form-field class="register_form_field" appearance="fill">
@@ -68,8 +71,14 @@
         <div *ngIf="registerForm.confirmEmail.invalid && 
         (registerForm.confirmEmail.dirty || registerForm.confirmEmail.touched)" 
         class="alert">
+          <div *ngIf="registerForm.confirmEmail.errors?.required">
+            {{'INPUT_ERRORS.CONFIRM.EMAIL' | translate }}
+          </div>
+          <div *ngIf="registerForm.confirmEmail.errors?.confirmedValidator">
+            {{'INPUT_ERRORS.CONFRIRM.EMAIL' | translate }}
+          </div>
         </div>
-        <button mat-raised-button color="primary" class="user_register_form_submit_button" type="submit">
+        <button mat-raised-button color="primary" class="user_register_form_submit_button" type="submit" [disabled]="!form.valid">
           {{ 'BUTTON.REGISTER' | translate }}
         </button>
       </form>

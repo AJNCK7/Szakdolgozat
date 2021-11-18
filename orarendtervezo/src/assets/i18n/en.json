@@ -15,6 +15,24 @@
     "BUTTON":{
         "REGISTER": "Register",
         "LOGIN": "Login"
+    },
+    "INPUT_ERRORS":{
+        "REQUIRED":{
+            "USERNAME": "Required input",
+            "PASSWORD": "Required input",
+            "EMAIL": "Required input"
+        },
+        "MINLENGTH":{
+            "USERNAME": "Minimum 3 character"
+        },
+        "PATTERN":{
+            "PASSWORD": "Minimum 8 character and must contain at least one number and one uppercase charachter",
+            "EMAIL": "You have to use format e.g.: example@email.com"
+        },
+        "CONFIRM":{
+            "PASSWORD" : "Not match with password",
+            "EMAIL": "Not match with email"
+        }
     }
 
 }
