@@ -1,18 +1,18 @@
 <mat-card class="user_register_card">
     <h1>{{'USER.REGISTER' | translate}}</h1>
     <mat-card-content>
-      <form [formGroup]="registerForm" (ngSubmit)="submit()" class="register_form">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="register_form">
         <mat-form-field class="register_form_field" appearance="fill">
           <mat-label>{{'USER.USERNAME' | translate}}</mat-label>
           <input required type="text" matInput formControlName="username" id="username">
         </mat-form-field>
-        <div *ngIf="registerForm.controls['username'].invalid && 
-                    (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)" 
+        <div *ngIf="registerForm.username.invalid && 
+                    (registerForm.username.dirty || registerForm.username.touched)" 
                     class="alert">
-            <div *ngIf="registerForm.controls['username'].errors?.required">
+            <div *ngIf="registerForm.username.errors?.required">
             .
             </div>
-            <div *ngIf="registerForm.controls['username'].errors?.minlength">
+            <div *ngIf="registerForm.username.errors?.minlength">
             .
             </div>
         </div>
@@ -23,13 +23,13 @@
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-        <div *ngIf="registerForm.controls['password'].invalid && 
-                    (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)" 
+        <div *ngIf="registerForm.password.invalid && 
+                    (registerForm.password.dirty || registerForm.password.touched)" 
                     class="alert">
-            <div *ngIf="registerForm.controls['password'].errors?.required">
+            <div *ngIf="registerForm.password.errors?.required">
             .
             </div>
-            <div *ngIf="registerForm.controls['password'].errors?.pattern">
+            <div *ngIf="registerForm.password.errors?.pattern">
             .
             </div>
         </div>
@@ -40,27 +40,24 @@
             <mat-icon>{{confirm_hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
-        <div *ngIf="registerForm.controls['confirmPassword'].invalid && 
-        (registerForm.controls['confirmPassword'].dirty || registerForm.controls['confirmPassword'].touched)" 
+        <div *ngIf="registerForm.confirmPassword.invalid && 
+        (registerForm.confirmPassword.dirty || registerForm.confirmPassword.touched)" 
         class="alert">
-          <div *ngIf="registerForm.controls['confirmPassword'].errors?.required">
-          .
-          </div>
-          <div *ngIf="registerForm.controls['confirmPassword'].errors?.confirmPassword">
-          .
+          <div *ngIf="registerForm.confirmPassword.errors?.confirmedValidator">
+          confirmerror
           </div>
         </div>
         <mat-form-field class="register_form_field" appearance="fill">
           <mat-label>{{'USER.EMAIL' | translate }}</mat-label>
           <input required type="email" matInput formControlName="email" id="email">
         </mat-form-field>
-        <div *ngIf="registerForm.controls['email'].invalid && 
-        (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)" 
+        <div *ngIf="registerForm.email.invalid && 
+        (registerForm.email.dirty || registerForm.email.touched)" 
         class="alert">
-          <div *ngIf="registerForm.controls['email'].errors?.required">
+          <div *ngIf="registerForm.email.errors?.required">
           .
           </div>
-          <div *ngIf="registerForm.controls['email'].errors?.email">
+          <div *ngIf="registerForm.email.errors?.email">
           .
           </div>
         </div>
@@ -68,12 +65,9 @@
           <mat-label>{{'USER.CONFIRMEMAIL' | translate }}</mat-label>
           <input required type="email" matInput formControlName="confirmEmail" id="confirmEmail">
         </mat-form-field>
-        <div *ngIf="registerForm.controls['confirmEmail'].invalid && 
-        (registerForm.controls['confirmEmail'].dirty || registerForm.controls['confirmEmail'].touched)" 
+        <div *ngIf="registerForm.confirmEmail.invalid && 
+        (registerForm.confirmEmail.dirty || registerForm.confirmEmail.touched)" 
         class="alert">
-          <div *ngIf="registerForm.controls['confirmEmail'].errors?.required">
-          .
-          </div>
         </div>
         <button mat-raised-button color="primary" class="user_register_form_submit_button" type="submit">
           {{ 'BUTTON.REGISTER' | translate }}

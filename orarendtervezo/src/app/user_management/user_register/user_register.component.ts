@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ConfirmedValidator } from 'src/app/shared/confirmValidator';
 
 @Component({
   selector: 'app-user_register',
@@ -10,26 +11,37 @@ export class UserRegisterComponent {
   hide = false;
   confirm_hide = false;
   
-  registerForm = new FormGroup({
-    username: new FormControl('', [
-                              Validators.required,
-                              Validators.minLength(3)
-                            ]),
-    password: new FormControl('', [
-                              Validators.required,
-                              Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}')
-                            ]),
-    confirmPassword: new FormControl('', Validators.required),
-    email: new FormControl('', [
-                              Validators.required,
-                              Validators.email
-                              ]),
-    confirmEmail: new FormControl('', Validators.required),
-  })
+  form: FormGroup = new FormGroup({});
+
+  constructor (private fb: FormBuilder) {
+    this.form = fb.group({
+      username: ['', [
+        Validators.required,
+        Validators.minLength(3)
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}')
+      ]],
+      confirmPassword: [''],
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      confirmEmail: ['']
+    }, {
+      validator: [
+        ConfirmedValidator('password', 'confirmPassword'), 
+        ConfirmedValidator('email', 'confirmEmail')
+      ]
+    })
+  }
+
+  get registerForm() {
+    return this.form.controls;
+  }
 
   submit() {
 
   }
 }
-
-
