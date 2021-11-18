@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 export class HeaderComponent{
   setLanguageLocalStorage(language: string){
     localStorage.setItem('Language', language)
+    window.location.reload();
   }
 }

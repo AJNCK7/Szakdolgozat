@@ -9,3 +9,8 @@ a{
     text-decoration: none;
     color: black;
 }
+
+.clickable_button{
+    background:none;
+    border:none; 
+}

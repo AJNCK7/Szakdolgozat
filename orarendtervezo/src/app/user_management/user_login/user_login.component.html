@@ -1,0 +1,35 @@
+<mat-card class="user_login_card">
+    <h1>{{'USER.LOGIN' | translate}}</h1>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="login_form">
+        <mat-form-field class="login_form_field" appearance="fill">
+          <mat-label>{{'USER.USERNAME' | translate}}</mat-label>
+          <input required type="text" matInput formControlName="username" id="username">
+        </mat-form-field>
+        <div *ngIf="loginForm.username.invalid && 
+                    (loginForm.username.dirty || loginForm.username.touched)" 
+                    class="alert">
+            <div *ngIf="loginForm.username.errors?.required">
+              {{'INPUT_ERRORS.REQUIRED.USERNAME' | translate }}
+            </div>
+        </div>
+        <mat-form-field class="login_form_field" appearance="fill">
+          <mat-label>{{'USER.PASSWORD' | translate}}</mat-label>
+          <input required matInput [type]="hide ? 'text' : 'password'" formControlName="password" id="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <div *ngIf="loginForm.password.invalid && 
+                    (loginForm.password.dirty || loginForm.password.touched)" 
+                    class="alert">
+            <div *ngIf="loginForm.password.errors?.required">
+              {{'INPUT_ERRORS.REQUIRED.PASSWORD' | translate }}
+            </div>
+        </div>
+        <button mat-raised-button color="primary" class="user_login_form_submit_button" type="submit">
+          {{ 'BUTTON.LOGIN' | translate }}
+        </button>
+      </form>
+    </mat-card-content>
+</mat-card>
