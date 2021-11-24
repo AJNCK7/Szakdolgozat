@@ -30,6 +30,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from '../environments/environment';
 import { AuthService } from './shared/services/auth.service';
 import { UserVerifyEmailComponent } from './user_management/user_verify_email/user_verify_email.component';
+import { UserForgotPasswordComponent } from './user_management/user-forgot-password/user-forgot-password.component';
 
 const MatImports: any[] = [
   MatIconModule,
@@ -72,7 +73,8 @@ const TranslateImports: any[] = [
     RoutingComponents,
     UserRegisterComponent,
     UserLoginComponent,
-    UserVerifyEmailComponent
+    UserVerifyEmailComponent,
+    UserForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
