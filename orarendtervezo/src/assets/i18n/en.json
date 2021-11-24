@@ -3,6 +3,7 @@
     "MENU": "Menu",
     "HOME_PAGE": "Home page",
     "MADE_BY": "Made by",
+    "SEND": "Send",
     "USER":{
         "REGISTER": "Register",
         "LOGIN": "Login",
@@ -33,6 +34,11 @@
             "PASSWORD" : "Not match with password",
             "EMAIL": "Not match with email"
         }
-    }
-
+    },
+    "RESET_PASSWORD": "Reset password",
+    "SENT_TO": "Already sent to ",
+    "SEND_AGAIN": "Send again",
+    "BACK_TO": "Back to ",
+    "BACK_TO_LOGIN": "Login",
+    "EMAIL_VERIFY": "Email verify"
 }

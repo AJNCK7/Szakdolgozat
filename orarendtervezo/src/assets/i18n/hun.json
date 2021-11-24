@@ -3,6 +3,7 @@
     "MENU": "Menü",
     "HOME_PAGE": "Kezdőlap",
     "MADE_BY": "Készítette",
+    "SEND": "Küldés",
     "USER":{
         "REGISTER": "Regisztrálás",
         "LOGIN": "Bejelentkezés",
@@ -33,5 +34,11 @@
             "PASSWORD" : "Nem egyezzik a jelszóval",
             "EMAIL": "Nem egyezzik az emaillel"
         }
-    }
+    },
+    "RESET_PASSWORD": "Jelszó emlékeztető",
+    "SENT_TO": "Már elküldve ",
+    "SEND_AGAIN": "Újraküldés",
+    "BACK_TO": "Vissza a ",
+    "BACK_TO_LOGIN": "bejelentkezésre",
+    "EMAIL_VERIFY": "Email megerősítő"
 }

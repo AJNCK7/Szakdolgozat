@@ -1,12 +1,14 @@
-<div class="formGroup" *ngIf="authService.userData as user">
-    <p class="text-center">Küldve <strong>{{user.email}}</strong>.</p>
-  <div class="formGroup">
-    <button type="button" class="btn btnPrimary" (click)="authService.SendVerificationMail()">
-      <i class="fas fa-redo-alt"></i>
-      Újraküldés
-    </button>
-  </div>
-
-<div class="redirectToLogin">
-  <span>Login<span class="redirect" routerLink="/sign-in"> Sign in</span></span>
-</div>
+<mat-card class="user_verify_email_card">
+  <h1>{{'EMAIL_VERIFY' | translate}} </h1>
+    <mat-card-content>
+      <div *ngIf="authService.userData as user">
+        <p>{{'SENT_TO' | translate}} <strong>{{user.email}}</strong>.</p>
+          <button mat-raised-button color="primary" type="button" (click)="authService.SendVerificationMail()">
+            {{'SEND_AGAIN' | translate}} 
+        </button>
+        <div>
+          <span>{{'BACK_TO' | translate}}<a routerLink="/user_login">{{'BACK_TO_LOGIN' | translate}} </a></span>
+        </div>
+      </div>
+    </mat-card-content>
+</mat-card>
