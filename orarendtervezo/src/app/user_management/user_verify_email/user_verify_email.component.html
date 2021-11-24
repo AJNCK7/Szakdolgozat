@@ -1,0 +1,12 @@
+<div class="formGroup" *ngIf="authService.userData as user">
+    <p class="text-center">Küldve <strong>{{user.email}}</strong>.</p>
+  <div class="formGroup">
+    <button type="button" class="btn btnPrimary" (click)="authService.SendVerificationMail()">
+      <i class="fas fa-redo-alt"></i>
+      Újraküldés
+    </button>
+  </div>
+
+<div class="redirectToLogin">
+  <span>Login<span class="redirect" routerLink="/sign-in"> Sign in</span></span>
+</div>
