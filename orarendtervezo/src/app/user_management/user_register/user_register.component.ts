@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmedValidator } from 'src/app/shared/confirmValidator';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-user_register',
@@ -13,7 +14,10 @@ export class UserRegisterComponent {
   
   form: FormGroup = new FormGroup({});
 
-  constructor (private fb: FormBuilder) {
+  constructor (
+    private fb: FormBuilder,
+    public authService: AuthService
+    ) {
     this.form = fb.group({
       username: ['', [
         Validators.required,

@@ -29,6 +29,7 @@ import { UserLoginComponent } from './user_management/user_login/user_login.comp
 import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from '../environments/environment';
 import { AuthService } from './shared/services/auth.service';
+import { UserVerifyEmailComponent } from './user_management/user_verify_email/user_verify_email.component';
 
 const MatImports: any[] = [
   MatIconModule,
@@ -70,7 +71,8 @@ const TranslateImports: any[] = [
     FooterComponent,
     RoutingComponents,
     UserRegisterComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    UserVerifyEmailComponent
   ],
   imports: [
     BrowserModule,

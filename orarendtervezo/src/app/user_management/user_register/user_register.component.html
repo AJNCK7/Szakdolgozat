@@ -4,7 +4,7 @@
       <form [formGroup]="form" (ngSubmit)="submit()" class="register_form">
         <mat-form-field class="register_form_field" appearance="fill">
           <mat-label>{{'USER.USERNAME' | translate}}</mat-label>
-          <input required type="text" matInput formControlName="username" id="username">
+          <input required type="text" matInput formControlName="username" #username id="username">
         </mat-form-field>
         <div *ngIf="registerForm.username.invalid && 
                     (registerForm.username.dirty || registerForm.username.touched)" 
@@ -18,7 +18,7 @@
         </div>
         <mat-form-field class="register_form_field" appearance="fill">
           <mat-label>{{'USER.PASSWORD' | translate}}</mat-label>
-          <input required matInput [type]="hide ? 'text' : 'password'" formControlName="password" id="password">
+          <input required matInput [type]="hide ? 'text' : 'password'" formControlName="password" #password id="password">
           <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
@@ -66,7 +66,7 @@
         </div>
         <mat-form-field class="register_form_field" appearance="fill">
           <mat-label>{{'USER.CONFIRMEMAIL' | translate }}</mat-label>
-          <input required type="email" matInput formControlName="confirmEmail" id="confirmEmail">
+          <input required type="email" matInput formControlName="confirmEmail" #email id="confirmEmail">
         </mat-form-field>
         <div *ngIf="registerForm.confirmEmail.invalid && 
         (registerForm.confirmEmail.dirty || registerForm.confirmEmail.touched)" 
@@ -78,7 +78,9 @@
             {{'INPUT_ERRORS.CONFRIRM.EMAIL' | translate }}
           </div>
         </div>
-        <button mat-raised-button color="primary" class="user_register_form_submit_button" type="submit" [disabled]="!form.valid">
+        <button mat-raised-button color="primary" class="user_register_form_submit_button" 
+          type="submit" (click)="authService.SignUp(email.value, password.value)"
+          [disabled]="!form.valid">
           {{ 'BUTTON.REGISTER' | translate }}
         </button>
       </form>
