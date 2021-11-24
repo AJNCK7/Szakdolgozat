@@ -3,11 +3,13 @@ import { UserLoginComponent } from './user_management/user_login/user_login.comp
 import { HomepageComponent } from './commons/homepage/homepage.component';
 import { NgModule} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './shared/guard/auth.guard';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/user_login', pathMatch: 'full'},
   { path: 'home_page', component: HomepageComponent},
   { path: 'user_login', component: UserLoginComponent},
-  { path: 'user_register', component: UserRegisterComponent}
+  { path: 'user_register', component: UserRegisterComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
