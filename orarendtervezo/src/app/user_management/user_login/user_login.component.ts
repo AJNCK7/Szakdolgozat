@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-user-login',
@@ -12,7 +13,10 @@ export class UserLoginComponent {
   
   form: FormGroup = new FormGroup({});
 
-  constructor (private fb: FormBuilder) {
+  constructor (
+    private fb: FormBuilder,
+    public authService: AuthService
+    ) {
     this.form = fb.group({
       username: ['', [
         Validators.required,

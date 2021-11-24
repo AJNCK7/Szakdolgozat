@@ -26,6 +26,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserLoginComponent } from './user_management/user_login/user_login.component';
 
+import { AngularFireModule } from "@angular/fire/compat";
+import { environment } from '../environments/environment';
+import { AuthService } from './shared/services/auth.service';
+
 const MatImports: any[] = [
   MatIconModule,
   MatInputModule,
@@ -37,6 +41,12 @@ const MatImports: any[] = [
   MatCheckboxModule,
   MatDialogModule
 ];
+
+const FirebaseImports: any[] = [
+  AngularFireModule.initializeApp(environment.firebase),
+  AngularFireModule,
+  AngularFireModule,
+]
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader{
   return new TranslateHttpLoader(http);
@@ -69,11 +79,12 @@ const TranslateImports: any[] = [
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    [...TranslateImports],
-    [...MatImports],
-    NgbModule
+    TranslateImports,
+    MatImports,
+    NgbModule,
+    FirebaseImports
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

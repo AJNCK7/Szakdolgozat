@@ -4,7 +4,7 @@
       <form [formGroup]="form" (ngSubmit)="submit()" class="login_form">
         <mat-form-field class="login_form_field" appearance="fill">
           <mat-label>{{'USER.USERNAME' | translate}}</mat-label>
-          <input required type="text" matInput formControlName="username" id="username">
+          <input required type="text" matInput formControlName="username" #username id="username">
         </mat-form-field>
         <div *ngIf="loginForm.username.invalid && 
                     (loginForm.username.dirty || loginForm.username.touched)" 
@@ -15,7 +15,7 @@
         </div>
         <mat-form-field class="login_form_field" appearance="fill">
           <mat-label>{{'USER.PASSWORD' | translate}}</mat-label>
-          <input required matInput [type]="hide ? 'text' : 'password'" formControlName="password" id="password">
+          <input required matInput [type]="hide ? 'text' : 'password'" formControlName="password" #password id="password">
           <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
@@ -27,7 +27,8 @@
               {{'INPUT_ERRORS.REQUIRED.PASSWORD' | translate }}
             </div>
         </div>
-        <button mat-raised-button color="primary" class="user_login_form_submit_button" type="submit" [disabled]="!form.valid">
+        <button mat-raised-button color="primary" class="user_login_form_submit_button" type="submit" [disabled]="!form.valid"
+        (click)="authService.SignIn(username.value, password.value)">
           {{ 'BUTTON.LOGIN' | translate }}
         </button>
       </form>
