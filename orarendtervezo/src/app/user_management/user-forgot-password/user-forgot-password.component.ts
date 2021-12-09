@@ -3,14 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
-  selector: 'app-user-login',
-  templateUrl: './user_login.component.html',
-  styleUrls: ['./user_login.component.css']
+  selector: 'app-user-forgot-password',
+  templateUrl: './user-forgot-password.component.html',
+  styleUrls: ['./user-forgot-password.component.css']
 })
-export class UserLoginComponent {
-  hide = false;
-  confirm_hide = false;
-  
+export class UserForgotPasswordComponent {
+
   form: FormGroup = new FormGroup({});
 
   constructor (
@@ -18,18 +16,14 @@ export class UserLoginComponent {
     public authService: AuthService
     ) {
     this.form = fb.group({
-      username: ['', [
+      email: ['', [
         Validators.required,
+        Validators.email
       ]],
-      password: ['', [
-        Validators.required,
-      ]]
     })
   }
 
-  get loginForm() {
+  get forgetPasswordForm() {
     return this.form.controls;
   }
-
-  submit() {}
 }

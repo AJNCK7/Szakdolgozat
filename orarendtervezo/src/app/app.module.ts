@@ -29,6 +29,8 @@ import { UserLoginComponent } from './user_management/user_login/user_login.comp
 import { AngularFireModule } from "@angular/fire/compat";
 import { environment } from '../environments/environment';
 import { AuthService } from './shared/services/auth.service';
+import { UserVerifyEmailComponent } from './user_management/user_verify_email/user_verify_email.component';
+import { UserForgotPasswordComponent } from './user_management/user-forgot-password/user-forgot-password.component';
 
 const MatImports: any[] = [
   MatIconModule,
@@ -70,9 +72,12 @@ const TranslateImports: any[] = [
     FooterComponent,
     RoutingComponents,
     UserRegisterComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    UserVerifyEmailComponent,
+    UserForgotPasswordComponent
   ],
   imports: [
+    FirebaseImports,
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
@@ -82,7 +87,6 @@ const TranslateImports: any[] = [
     TranslateImports,
     MatImports,
     NgbModule,
-    FirebaseImports
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
