@@ -1,0 +1,40 @@
+<mat-card class="time_table_input_card">
+  <h1>{{'MAIN_TITLE' | translate}}</h1>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="time_table_input_form">
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.SUBJECT_NAME' | translate}}</mat-label>
+        <input required type="text" matInput formControlName="subjectName" #subjectName id="subjectName">
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.subjectName.invalid && 
+                  (timeTableInputGet.subjectName.dirty || timeTableInputGet.subjectName.touched)" 
+                  class="alert">
+          <div *ngIf="timeTableInputGet.subjectName.errors?.required">
+            {{'INPUT_ERRORS.REQUIRED' | translate }}
+          </div>
+      </div>
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.DAY' | translate}}</mat-label>
+        <select required matNativeControl formControlName="day" #day id="day">
+          <option value=0>{{'DAYS.MONDAY'   | translate}}</option>
+          <option value=1>{{'DAYS.TUESDAY'  | translate}}</option>
+          <option value=2>{{'DAYS.WEDNESDAY'| translate}}</option>
+          <option value=3>{{'DAYS.THURSDAY' | translate}}</option>
+          <option value=4>{{'DAYS.FRIDAY'   | translate}}</option>
+          <option value=5>{{'DAYS.SATURDAY' | translate}}</option>
+          <option value=6>{{'DAYS.SUNDAY'   | translate}}</option>
+        </select>
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.day.invalid && 
+                  (timeTableInputGet.day.dirty || timeTableInputGet.day.touched)" 
+                  class="alert">
+          <div *ngIf="timeTableInputGet.day.errors?.required">
+            {{'INPUT_ERRORS.REQUIRED' | translate }}
+          </div>
+      </div>
+      <button mat-raised-button color="primary" class="time_table_input_form_submit_button" type="submit" [disabled]="!form.valid">
+        {{ 'BUTTON.GENERATE' | translate }}
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

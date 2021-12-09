@@ -16,14 +16,11 @@
     "BUTTON":{
         "REGISTER": "Register",
         "LOGIN": "Login",
-        "LOG_OUT": "Log out"
+        "LOG_OUT": "Log out",
+        "GENERATE": "Generate"
     },
     "INPUT_ERRORS":{
-        "REQUIRED":{
-            "USERNAME": "Required input",
-            "PASSWORD": "Required input",
-            "EMAIL": "Required input"
-        },
+        "REQUIRED": "Required input",
         "MINLENGTH":{
             "USERNAME": "Minimum 3 character"
         },
@@ -41,5 +38,31 @@
     "SEND_AGAIN": "Send again",
     "BACK_TO": "Back to ",
     "BACK_TO_LOGIN": "Login",
-    "EMAIL_VERIFY": "Email verify"
+    "EMAIL_VERIFY": "Email verify",
+    "TIME_TABLE_INPUTS": {
+        "SUBJECT_NAME": "Subject name",
+        "DAY": "Day",
+        "SUBJECT_WEIGHT": {
+            "MANDATORY": "Mandatory",
+            "MANDATORY_OPTIONAL": "Mandatory optional",
+            "OPTIONAL": "Optional"
+        },
+        "CLASS_START_TIME": "Class start time",
+        "CLASS_END_TIME": "Class end time",
+        "SAME_SUBJECT": "Same subject",
+        "CLASROOM": "Classroom",
+        "TEACHER": "Teacher",
+        "CREDIT": "Credit",
+        "PRIORITY": "Priority",
+        "COLOR": "Color"
+    },
+    "DAYS": {
+        "MONDAY": "Monday",
+        "TUESDAY": "Tuesday",
+        "WEDNESDAY": "Wednesday",
+        "THURSDAY": "Thursday",
+        "FRIDAY": "Friday",
+        "SATURDAY": "Saturday",
+        "SUNDAY": "Sunday"
+    }
 }

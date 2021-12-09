@@ -16,14 +16,11 @@
     "BUTTON":{
         "REGISTER": "Regisztrálás",
         "LOGIN": "Bejelentkezés",
-        "LOG_OUT": "Kijelentkezés"
+        "LOG_OUT": "Kijelentkezés",
+        "GENERATE": "Generálás"
     },
     "INPUT_ERRORS":{
-        "REQUIRED":{
-            "USERNAME": "Kötelező mező",
-            "PASSWORD": "Kötelező mező",
-            "EMAIL": "Kötelező mező"
-        },
+        "REQUIRED": "Kötelező mező",
         "MINLENGTH":{
             "USERNAME": "Minimum 3 karakter"
         },
@@ -41,5 +38,31 @@
     "SEND_AGAIN": "Újraküldés",
     "BACK_TO": "Vissza a ",
     "BACK_TO_LOGIN": "bejelentkezésre",
-    "EMAIL_VERIFY": "Email megerősítő"
+    "EMAIL_VERIFY": "Email megerősítő",
+    "TIME_TABLE_INPUTS": {
+        "SUBJECT_NAME": "Tantárgy neve",
+        "DAY": "Nap",
+        "SUBJECT_WEIGHT": {
+            "MANDATORY": "Kötelező",
+            "MANDATORY_OPTIONAL": "Kötelezően választható",
+            "OPTIONAL": "Választható"
+        },
+        "CLASS_START_TIME": "Óra kezdete",
+        "CLASS_END_TIME": "Óra vége",
+        "SAME_SUBJECT": "Azonos tárgy",
+        "CLASROOM": "Tanterem",
+        "TEACHER": "Tanár",
+        "CREDIT": "Kredit",
+        "PRIORITY": "Prioritás",
+        "COLOR": "Szín"
+    },
+    "DAYS": {
+        "MONDAY": "Hétfő",
+        "TUESDAY": "Kedd",
+        "WEDNESDAY": "Szerda",
+        "THURSDAY": "Csütörtök",
+        "FRIDAY": "Péntek",
+        "SATURDAY": "Szombat",
+        "SUNDAY": "Vasárnap"
+    }
 }

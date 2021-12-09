@@ -10,7 +10,7 @@
                     (registerForm.username.dirty || registerForm.username.touched)" 
                     class="alert">
             <div *ngIf="registerForm.username.errors?.required">
-              {{'INPUT_ERRORS.REQUIRED.USERNAME' | translate }}
+              {{'INPUT_ERRORS.REQUIRED' | translate }}
             </div>
             <div *ngIf="registerForm.username.errors?.minlength">
               {{'INPUT_ERRORS.MINLENGTH.USERNAME' | translate }}
@@ -27,7 +27,7 @@
                     (registerForm.password.dirty || registerForm.password.touched)" 
                     class="alert">
             <div *ngIf="registerForm.password.errors?.required">
-              {{'INPUT_ERRORS.REQUIRED.PASSWORD' | translate }}
+              {{'INPUT_ERRORS.REQUIRED' | translate }}
             </div>
             <div *ngIf="registerForm.password.errors?.pattern">
               {{'INPUT_ERRORS.PATTERN.PASSWORD' | translate }}
@@ -44,7 +44,7 @@
         (registerForm.confirmPassword.dirty || registerForm.confirmPassword.touched)" 
         class="alert">
           <div *ngIf="registerForm.confirmPassword.errors?.required">
-            {{'INPUT_ERRORS.CONFIRM.PASSWORD' | translate }}
+            {{'INPUT_ERRORS.CONFIRM' | translate }}
           </div>
           <div *ngIf="registerForm.confirmPassword.errors?.confirmedValidator">
             {{'INPUT_ERRORS.CONFIRM.PASSWORD' | translate }}
@@ -58,7 +58,7 @@
         (registerForm.email.dirty || registerForm.email.touched)" 
         class="alert">
           <div *ngIf="registerForm.email.errors?.required">
-            {{'INPUT_ERRORS.REQUIRED.EMAIL' | translate }}
+            {{'INPUT_ERRORS.REQUIRED' | translate }}
           </div>
           <div *ngIf="registerForm.email.errors?.email">
             {{'INPUT_ERRORS.PATTERN.EMAIL' | translate }}
@@ -72,7 +72,7 @@
         (registerForm.confirmEmail.dirty || registerForm.confirmEmail.touched)" 
         class="alert">
           <div *ngIf="registerForm.confirmEmail.errors?.required">
-            {{'INPUT_ERRORS.CONFIRM.EMAIL' | translate }}
+            {{'INPUT_ERRORS.CONFRIRM.EMAIL' | translate }}
           </div>
           <div *ngIf="registerForm.confirmEmail.errors?.confirmedValidator">
             {{'INPUT_ERRORS.CONFRIRM.EMAIL' | translate }}
