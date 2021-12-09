@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit{
     window.location.reload();
   }
 
-  constructor(public afAuth: AngularFireAuth){}
+  constructor(public afAuth: AngularFireAuth, public authService: AuthService){}
 
   ngOnInit(): void {
     this.isLoggedIn();
@@ -22,7 +23,7 @@ export class HeaderComponent implements OnInit{
   isloggedin: boolean = false;
 
   isLoggedIn() {
-    if (localStorage.getItem("user") != null) { this.isloggedin = true; }
+    if (localStorage.getItem("user") != "null") { this.isloggedin = true; }
     else { this.isloggedin = false; }
   }
 }

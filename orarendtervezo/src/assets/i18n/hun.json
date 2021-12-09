@@ -15,7 +15,8 @@
     },
     "BUTTON":{
         "REGISTER": "Regisztrálás",
-        "LOGIN": "Bejelentkezés"
+        "LOGIN": "Bejelentkezés",
+        "LOG_OUT": "Kijelentkezés"
     },
     "INPUT_ERRORS":{
         "REQUIRED":{
