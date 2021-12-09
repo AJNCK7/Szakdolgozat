@@ -7,7 +7,8 @@
         </mat-menu>
     </div>
     <div fxFlex="60"> {{ 'MAIN_TITLE' | translate}} </div>
-    <mat-icon fxFlex="10">person_pin</mat-icon>
+    <mat-icon *ngIf="!isloggedin" fxFlex="10">person_pin</mat-icon>
+    <mat-icon *ngIf="isloggedin" fxFlex="10">home</mat-icon>
     <button class="clickable_button" (click)="setLanguageLocalStorage('hun')">HUN</button>
     /
     <button class="clickable_button" (click)="setLanguageLocalStorage('en')">ENG</button>
