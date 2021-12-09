@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
 import { Injectable, NgZone } from '@angular/core';
 import { User } from "../services/user";
 import { Router } from "@angular/router";
+import { translate } from "@angular/localize/src/utils";
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class AuthService {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['user_login']);
+          this.router.navigate(['home_page']);
         });
         this.SetUserData(result.user);
       }).catch((error) => {
@@ -61,9 +62,10 @@ export class AuthService {
   ForgotPassword(passwordResetEmail: string) {
     return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
     .then(() => {
-      window.alert('Password reset email sent, check your inbox.');
+      this.router.navigate(['user_login']);
     }).catch((error) => {
-      window.alert(error)
+      if (localStorage.getItem("Language") == "hun") { window.alert('Nincs ilyen email címmel rendelkező felhasználó.');}
+      else { window.alert("There is no user record corresponding to this identifier.")}
     })
   }
 

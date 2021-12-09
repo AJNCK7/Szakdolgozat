@@ -31,7 +31,5 @@ export class UserLoginComponent {
     return this.form.controls;
   }
 
-  submit() {
-
-  }
+  submit() {}
 }

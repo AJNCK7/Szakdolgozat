@@ -77,6 +77,7 @@ const TranslateImports: any[] = [
     UserForgotPasswordComponent
   ],
   imports: [
+    FirebaseImports,
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
@@ -86,7 +87,6 @@ const TranslateImports: any[] = [
     TranslateImports,
     MatImports,
     NgbModule,
-    FirebaseImports
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
