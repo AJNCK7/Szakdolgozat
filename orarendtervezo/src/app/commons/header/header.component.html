@@ -7,8 +7,8 @@
         </mat-menu>
     </div>
     <div fxFlex="60"> {{ 'MAIN_TITLE' | translate}} </div>
-    <mat-icon *ngIf="!isloggedin" fxFlex="10">person_pin</mat-icon>
-    <button *ngIf="isloggedin" mat-button [matMenuTriggerFor]="user"  fxFlex="20"><mat-icon>home</mat-icon></button>
+    <mat-icon *ngIf="!authService.isLoggedIn" fxFlex="10">person_pin</mat-icon>
+    <button *ngIf="authService.isLoggedIn" mat-button [matMenuTriggerFor]="user"  fxFlex="20"><mat-icon>home</mat-icon></button>
         <mat-menu #user="matMenu">
             <a routerLink="/home_page" (click)="authService.SignOut()" button mat-menu-item>{{ 'BUTTON.LOG_OUT' | translate}}</a>
         </mat-menu>

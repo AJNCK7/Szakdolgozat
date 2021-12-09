@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent{
 
   setLanguageLocalStorage(language: string){
     localStorage.setItem('Language', language)
@@ -15,15 +15,4 @@ export class HeaderComponent implements OnInit{
   }
 
   constructor(public afAuth: AngularFireAuth, public authService: AuthService){}
-
-  ngOnInit(): void {
-    this.isLoggedIn();
-  }
-
-  isloggedin: boolean = false;
-
-  isLoggedIn() {
-    if (localStorage.getItem("user") != "null") { this.isloggedin = true; }
-    else { this.isloggedin = false; }
-  }
 }
