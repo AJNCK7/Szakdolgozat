@@ -26,7 +26,8 @@
         },
         "PATTERN":{
             "PASSWORD": "Minimum 8 character and must contain at least one number and one uppercase charachter",
-            "EMAIL": "You have to use format e.g.: example@email.com"
+            "EMAIL": "You have to use format e.g.: example@email.com",
+            "ONLY_NUMBER": "Only numbers are accepted"
         },
         "CONFIRM":{
             "PASSWORD" : "Not match with password",
@@ -50,7 +51,7 @@
         "CLASS_START_TIME": "Class start time",
         "CLASS_END_TIME": "Class end time",
         "SAME_SUBJECT": "Same subject",
-        "CLASROOM": "Classroom",
+        "CLASSROOM": "Classroom",
         "TEACHER": "Teacher",
         "CREDIT": "Credit",
         "PRIORITY": "Priority",

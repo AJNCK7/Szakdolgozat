@@ -26,7 +26,8 @@
         },
         "PATTERN":{
             "PASSWORD": "Minimum 8 karakter és kötelező tartalmaznia legalább egy számot és egy nagy betűt",
-            "EMAIL": "Kötelező a megadott forma pl.: example@email.com"
+            "EMAIL": "Kötelező a megadott forma pl.: example@email.com",
+            "ONLY_NUMBER": "Csak szám lehet"
         },
         "CONFIRM":{
             "PASSWORD" : "Nem egyezzik a jelszóval",
@@ -50,7 +51,7 @@
         "CLASS_START_TIME": "Óra kezdete",
         "CLASS_END_TIME": "Óra vége",
         "SAME_SUBJECT": "Azonos tárgy",
-        "CLASROOM": "Tanterem",
+        "CLASSROOM": "Tanterem",
         "TEACHER": "Tanár",
         "CREDIT": "Kredit",
         "PRIORITY": "Prioritás",

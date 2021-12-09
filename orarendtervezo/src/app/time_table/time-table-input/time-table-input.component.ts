@@ -21,6 +21,18 @@ export class TimeTableInputComponent{
       ]],
       day: ['', [
         Validators.required,
+      ]],
+      sameSubject: ['', [
+        Validators.required,
+      ]],
+      classroom: ['', [
+        Validators.pattern('[A-Z][/][a-z0-9A-Z]+')
+      ]],
+      teacher: ['', [
+
+      ]],
+      priority: ['', [
+        Validators.pattern('[0-9]+'),
       ]]
     })
   }

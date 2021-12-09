@@ -21,3 +21,8 @@
     margin: auto;
     margin-bottom: 5px;
 }
+
+#colorPick{
+    width: 55vw;
+    margin:10px; 
+}
