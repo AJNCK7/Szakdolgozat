@@ -7,8 +7,8 @@ export interface TimeTableInputInterface {
   SUBJECT_NAME: string;
   DAY: string;
   SUBJECT_WEIGHT: string;
-  SUBJECT_START_TIME: string;
-  SUBJECT_END_TIME: string;
+  CLASS_START_TIME: string;
+  CLASS_END_TIME: string;
   SAME_SUBJECT: string;
   CLASSROOM: string;
   TEACHER: string;
@@ -17,11 +17,12 @@ export interface TimeTableInputInterface {
   COLOR: string;
 }
 
-const ELEMENT_DATA: TimeTableInputInterface[] = [
-  {ID: 1, SUBJECT_NAME: 'Magprog', DAY: "Monday", SUBJECT_WEIGHT: 'Mandatoriy', SUBJECT_START_TIME: '10:40', 
-  SUBJECT_END_TIME: '11:50', SAME_SUBJECT: 'Asd', CLASSROOM: 'C/111', TEACHER: 'Troll', CREDIT: 1, PRIORITY: 9, COLOR: 'Red'}
+var ELEMENT_DATA: TimeTableInputInterface[] = [
+  {ID: 1, SUBJECT_NAME: 'Magprog', DAY: "Monday", SUBJECT_WEIGHT: 'Mandatoriy', CLASS_START_TIME: '10:40', 
+  CLASS_END_TIME: '11:50', SAME_SUBJECT: 'Asd', CLASSROOM: 'C/111', TEACHER: 'Troll', CREDIT: 1, PRIORITY: 9, COLOR: 'Red'},
+  {ID: 2, SUBJECT_NAME: 'Magprog', DAY: "Monday", SUBJECT_WEIGHT: 'Mandatoriy', CLASS_START_TIME: '10:40', 
+  CLASS_END_TIME: '11:50', SAME_SUBJECT: 'Asd', CLASSROOM: 'C/111', TEACHER: 'Troll', CREDIT: 1, PRIORITY: 9, COLOR: 'Red'}
 ];
-
 
 @Component({
   selector: 'app-time-table-input',
