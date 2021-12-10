@@ -19,9 +19,9 @@ export interface TimeTableInputInterface {
 
 var ELEMENT_DATA: TimeTableInputInterface[] = [
   {ID: 1, SUBJECT_NAME: 'Magprog', DAY: "Monday", SUBJECT_WEIGHT: 'Mandatoriy', CLASS_START_TIME: '10:40', 
-  CLASS_END_TIME: '11:50', SAME_SUBJECT: 'Asd', CLASSROOM: 'C/111', TEACHER: 'Troll', CREDIT: 1, PRIORITY: 9, COLOR: 'Red'},
+  CLASS_END_TIME: '11:50', SAME_SUBJECT: '', CLASSROOM: 'C/111', TEACHER: 'Troll', CREDIT: 1, PRIORITY: 9, COLOR: '#ff6347'},
   {ID: 2, SUBJECT_NAME: 'Magprog', DAY: "Monday", SUBJECT_WEIGHT: 'Mandatoriy', CLASS_START_TIME: '10:40', 
-  CLASS_END_TIME: '11:50', SAME_SUBJECT: 'Asd', CLASSROOM: 'C/111', TEACHER: 'Troll', CREDIT: 1, PRIORITY: 9, COLOR: 'Red'}
+  CLASS_END_TIME: '11:50', SAME_SUBJECT: '', CLASSROOM: 'C/111', TEACHER: 'Troll', CREDIT: 1, PRIORITY: 9, COLOR: 'green'}
 ];
 
 @Component({
