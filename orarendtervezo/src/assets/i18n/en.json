@@ -17,7 +17,8 @@
         "REGISTER": "Register",
         "LOGIN": "Login",
         "LOG_OUT": "Log out",
-        "GENERATE": "Generate"
+        "GENERATE": "Generate",
+        "ADD": "Add"
     },
     "INPUT_ERRORS":{
         "REQUIRED": "Required input",
@@ -27,7 +28,8 @@
         "PATTERN":{
             "PASSWORD": "Minimum 8 character and must contain at least one number and one uppercase charachter",
             "EMAIL": "You have to use format e.g.: example@email.com",
-            "ONLY_NUMBER": "Only numbers are accepted"
+            "ONLY_NUMBER": "Only numbers are accepted",
+            "CLASSROOM": "Classroom must follow the next: 'text/anything' e.g.:C/124"
         },
         "CONFIRM":{
             "PASSWORD" : "Not match with password",
@@ -44,6 +46,7 @@
         "SUBJECT_NAME": "Subject name",
         "DAY": "Day",
         "SUBJECT_WEIGHT": {
+            "SUBJECT_WEIGHT": "Subject weight",
             "MANDATORY": "Mandatory",
             "MANDATORY_OPTIONAL": "Mandatory optional",
             "OPTIONAL": "Optional"

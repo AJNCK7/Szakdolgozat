@@ -26,3 +26,9 @@
     width: 55vw;
     margin:10px; 
 }
+
+table {
+    width: 90vw;
+    margin: auto;
+    margin-top: 10px;
+  }

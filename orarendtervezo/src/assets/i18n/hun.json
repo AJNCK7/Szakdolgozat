@@ -17,7 +17,8 @@
         "REGISTER": "Regisztrálás",
         "LOGIN": "Bejelentkezés",
         "LOG_OUT": "Kijelentkezés",
-        "GENERATE": "Generálás"
+        "GENERATE": "Generálás",
+        "ADD": "Hozzáadás"
     },
     "INPUT_ERRORS":{
         "REQUIRED": "Kötelező mező",
@@ -27,7 +28,8 @@
         "PATTERN":{
             "PASSWORD": "Minimum 8 karakter és kötelező tartalmaznia legalább egy számot és egy nagy betűt",
             "EMAIL": "Kötelező a megadott forma pl.: example@email.com",
-            "ONLY_NUMBER": "Csak szám lehet"
+            "ONLY_NUMBER": "Csak szám lehet",
+            "CLASSROOM": "Az osztályterem követnie kell a következőt: 'szöveg/bármi' pl.:C/124"
         },
         "CONFIRM":{
             "PASSWORD" : "Nem egyezzik a jelszóval",
@@ -44,6 +46,7 @@
         "SUBJECT_NAME": "Tantárgy neve",
         "DAY": "Nap",
         "SUBJECT_WEIGHT": {
+            "SUBJECT_WEIGHT": "Tárgy súlya",
             "MANDATORY": "Kötelező",
             "MANDATORY_OPTIONAL": "Kötelezően választható",
             "OPTIONAL": "Választható"
