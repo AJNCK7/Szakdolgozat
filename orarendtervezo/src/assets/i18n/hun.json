@@ -42,6 +42,9 @@
     "BACK_TO": "Vissza a ",
     "BACK_TO_LOGIN": "bejelentkezésre",
     "EMAIL_VERIFY": "Email megerősítő",
+    "TIME_TABLE": {
+        "BUTTONS": "Gombok"
+    },
     "TIME_TABLE_INPUTS": {
         "SUBJECT_NAME": "Tantárgy neve",
         "DAY": "Nap",

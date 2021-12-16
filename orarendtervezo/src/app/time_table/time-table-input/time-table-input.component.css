@@ -1,4 +1,5 @@
 .time_table_input_card{
+    min-width: 450px;
     margin: auto;
     margin-top: 5vh;
     width: 70vw;
@@ -7,10 +8,12 @@
 
 .time_table_input_form_field{
     width: 60vw;
+    min-width: 400px;
 }
 
 .time_table_input_form_submit_button{
     width: 50vw;
+    min-width: 400px;
 }
 
 .alert div {
@@ -20,14 +23,17 @@
     width: 58vw;
     margin: auto;
     margin-bottom: 5px;
+    min-width: 400px;
 }
 
 #colorPick{
     width: 55vw;
-    margin:10px; 
+    margin:10px;
+    min-width: 350px;
 }
 
 table {
+    min-width: 600px;
     width: 90vw;
     margin: auto;
     margin-top: 10px;
@@ -40,4 +46,9 @@ table {
 }
 .changeColor {
     background: white;
+}
+
+.clickable_button{
+    background:none;
+    border:none; 
 }

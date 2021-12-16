@@ -60,7 +60,7 @@ export class TimeTableInputComponent{
   }
 
   displayedColumns: string[] = ['id', 'subjectName', 'day', 'subjectWeight', 'classStartTime', 
-                                'classEndTime', 'sameSubject', 'classroom',  'teacher', 'credit', 'priority', 'color'];
+                                'classEndTime', 'sameSubject', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
   dataSource = ELEMENT_DATA;
 
   get timeTableInputGet() {

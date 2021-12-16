@@ -42,6 +42,9 @@
     "BACK_TO": "Back to ",
     "BACK_TO_LOGIN": "Login",
     "EMAIL_VERIFY": "Email verify",
+    "TIME_TABLE": {
+        "BUTTONS": "Buttons"
+    },
     "TIME_TABLE_INPUTS": {
         "SUBJECT_NAME": "Subject name",
         "DAY": "Day",
