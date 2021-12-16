@@ -27,6 +27,7 @@
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "@types/color": "^3.0.2",
     "bootstrap": "^4.5.0",
     "firebase": "^9.5.0",
     "flex-layout": "^1.0.1",

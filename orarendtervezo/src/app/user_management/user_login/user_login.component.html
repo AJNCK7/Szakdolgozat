@@ -10,7 +10,7 @@
                     (loginForm.username.dirty || loginForm.username.touched)" 
                     class="alert">
             <div *ngIf="loginForm.username.errors?.required">
-              {{'INPUT_ERRORS.REQUIRED.USERNAME' | translate }}
+              {{'INPUT_ERRORS.REQUIRED' | translate }}
             </div>
         </div>
         <mat-form-field class="login_form_field" appearance="fill">
@@ -24,7 +24,7 @@
                     (loginForm.password.dirty || loginForm.password.touched)" 
                     class="alert">
             <div *ngIf="loginForm.password.errors?.required">
-              {{'INPUT_ERRORS.REQUIRED.PASSWORD' | translate }}
+              {{'INPUT_ERRORS.REQUIRED' | translate }}
             </div>
         </div>
         <button mat-raised-button color="primary" class="user_login_form_submit_button" type="submit" [disabled]="!form.valid"

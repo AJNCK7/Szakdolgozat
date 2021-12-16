@@ -2,8 +2,8 @@
     <div fxFlex="20">
         <button mat-button [matMenuTriggerFor]="menu">{{ 'MENU' | translate}}</button>
             <mat-menu #menu="matMenu">
-            <a href="#" button mat-menu-item>{{ 'HOME_PAGE' | translate}}</a>
-            <a href="#" button mat-menu-item>{{ 'MAIN_TITLE' | translate}}</a>
+            <a routerLink="/home_page" button mat-menu-item>{{ 'HOME_PAGE' | translate}}</a>
+            <a routerLink="/time_table_input" button mat-menu-item>{{ 'MAIN_TITLE' | translate}}</a>
         </mat-menu>
     </div>
     <div fxFlex="60"> {{ 'MAIN_TITLE' | translate}} </div>

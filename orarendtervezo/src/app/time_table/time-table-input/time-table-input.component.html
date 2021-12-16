@@ -1,0 +1,133 @@
+<mat-card class="time_table_input_card">
+  <h1>{{'MAIN_TITLE' | translate}}</h1>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="time_table_input_form">
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.SUBJECT_NAME' | translate}}</mat-label>
+        <input required type="text" matInput formControlName="subjectName" #subjectName id="subjectName">
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.subjectName.invalid && 
+                  (timeTableInputGet.subjectName.dirty || timeTableInputGet.subjectName.touched)" 
+                  class="alert">
+          <div *ngIf="timeTableInputGet.subjectName.errors?.required">
+            {{'INPUT_ERRORS.REQUIRED' | translate }}
+          </div>
+      </div>
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.DAY' | translate}}</mat-label>
+        <select required matNativeControl formControlName="day" #day id="day">
+          <option value=0>{{'DAYS.MONDAY'   | translate}}</option>
+          <option value=1>{{'DAYS.TUESDAY'  | translate}}</option>
+          <option value=2>{{'DAYS.WEDNESDAY'| translate}}</option>
+          <option value=3>{{'DAYS.THURSDAY' | translate}}</option>
+          <option value=4>{{'DAYS.FRIDAY'   | translate}}</option>
+          <option value=5>{{'DAYS.SATURDAY' | translate}}</option>
+          <option value=6>{{'DAYS.SUNDAY'   | translate}}</option>
+        </select>
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.day.invalid && 
+                  (timeTableInputGet.day.dirty || timeTableInputGet.day.touched)" 
+                  class="alert">
+          <div *ngIf="timeTableInputGet.day.errors?.required">
+            {{'INPUT_ERRORS.REQUIRED' | translate }}
+          </div>
+      </div>
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.SAME_SUBJECT' | translate}}</mat-label>
+        <select required matNativeControl formControlName="sameSubject" #sameSubject id="sameSubject">
+          <option value=0>Under develepmonet</option>
+        </select>
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.sameSubject.invalid && 
+                  (timeTableInputGet.sameSubject.dirty || timeTableInputGet.sameSubject.touched)" 
+                  class="alert">
+          <div *ngIf="timeTableInputGet.sameSubject.errors?.required">
+            {{'INPUT_ERRORS.REQUIRED' | translate }}
+          </div>
+      </div>
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.CLASSROOM' | translate}}</mat-label>
+        <input type="text" matInput formControlName="classroom" #classroom id="classroom">
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.classroom.invalid" class="alert">
+        <div *ngIf="timeTableInputGet.classroom.errors?.pattern">
+          {{'INPUT_ERRORS.PATTERN.CLASSROOM' | translate }}
+        </div>
+      </div>
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.TEACHER' | translate}}</mat-label>
+        <input type="text" matInput formControlName="teacher" #teacher id="teacher">
+      </mat-form-field>
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.PRIORITY' | translate}}</mat-label>
+        <input type="text" matInput formControlName="priority" #priority id="priority">
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.priority.invalid" class="alert">
+        <div *ngIf="timeTableInputGet.priority.errors?.pattern">
+          {{'INPUT_ERRORS.PATTERN.ONLY_NUMBER' | translate }}
+        </div>
+      </div>
+      <div class="colorPick">
+        {{'TIME_TABLE_INPUTS.COLOR' | translate}}
+        <input type="color" name="colorPick" #colorPick id="colorPick">
+      </div>
+      <button mat-raised-button color="primary" class="time_table_input_form_submit_button" type="submit" [disabled]="!form.valid">
+        {{ 'BUTTON.ADD' | translate }}
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+  </ng-container>
+  <ng-container matColumnDef="subjectName">
+    <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.SUBJECT_NAME' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.SUBJECT_NAME}} </td>
+  </ng-container>
+  <ng-container matColumnDef="day">
+    <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.DAY' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.DAY}} </td>
+  </ng-container>
+  <ng-container matColumnDef="subjectWeight">
+    <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.SUBJECT_WEIGHT.SUBJECT_WEIGHT' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.SUBJECT_WEIGHT}} </td>
+  </ng-container>
+  <ng-container matColumnDef="classStartTime">
+    <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.CLASS_START_TIME' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.CLASS_START_TIME}} </td>
+  </ng-container>
+  <ng-container matColumnDef="classEndTime">
+    <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.CLASS_END_TIME' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.CLASS_END_TIME}} </td>
+  </ng-container>
+  <ng-container matColumnDef="sameSubject">
+    <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.SAME_SUBJECT' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.SAME_SUBJECT}} </td>
+  </ng-container>
+  <ng-container matColumnDef="classroom">
+    <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.CLASSROOM' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.CLASSROOM}} </td>
+  </ng-container>
+  <ng-container matColumnDef="teacher">
+    <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.TEACHER' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.TEACHER}} </td>
+  </ng-container>
+  <ng-container matColumnDef="credit">
+    <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.CREDIT' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.CREDIT}} </td>
+  </ng-container>
+  <ng-container matColumnDef="priority">
+    <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.PRIORITY' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.PRIORITY}} </td>
+  </ng-container>
+  <ng-container matColumnDef="color">
+    <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.COLOR' | translate}} </th>
+    <td mat-cell *matCellDef="let element" [ngStyle]="{'background': element.COLOR}"></td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

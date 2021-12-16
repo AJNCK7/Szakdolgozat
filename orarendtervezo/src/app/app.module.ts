@@ -31,6 +31,7 @@ import { environment } from '../environments/environment';
 import { AuthService } from './shared/services/auth.service';
 import { UserVerifyEmailComponent } from './user_management/user_verify_email/user_verify_email.component';
 import { UserForgotPasswordComponent } from './user_management/user-forgot-password/user-forgot-password.component';
+import { TimeTableInputComponent } from './time_table/time-table-input/time-table-input.component';
 
 const MatImports: any[] = [
   MatIconModule,
@@ -74,7 +75,8 @@ const TranslateImports: any[] = [
     UserRegisterComponent,
     UserLoginComponent,
     UserVerifyEmailComponent,
-    UserForgotPasswordComponent
+    UserForgotPasswordComponent,
+    TimeTableInputComponent
   ],
   imports: [
     FirebaseImports,

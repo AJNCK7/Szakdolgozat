@@ -1,0 +1,42 @@
+.time_table_input_card{
+    margin: auto;
+    margin-top: 5vh;
+    width: 70vw;
+    text-align: center;
+}
+
+.time_table_input_form_field{
+    width: 60vw;
+}
+
+.time_table_input_form_submit_button{
+    width: 50vw;
+}
+
+.alert div {
+    background-color: #fed3d3;
+    color: #820000;
+    padding: 5px;
+    width: 58vw;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+#colorPick{
+    width: 55vw;
+    margin:10px; 
+}
+
+table {
+    width: 90vw;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+.mat-header-cell {
+    text-align: center;
+}
+.changeColor {
+    background: white;
+}
