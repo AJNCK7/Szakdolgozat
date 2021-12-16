@@ -33,6 +33,10 @@ table {
     margin-top: 10px;
     text-align: center;
   }
+
+.mat-header-cell {
+    text-align: center;
+}
 .changeColor {
     background: white;
 }
