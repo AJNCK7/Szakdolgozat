@@ -1,7 +1,77 @@
 <h3 mat-dialog-title>{{'BUTTON.ADD' | translate}}</h3>
-    <form [formGroup]="form" (ngSubmit)="submit()">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="mat-dialog-content">
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.SUBJECT_NAME' | translate}}</mat-label>
+        <input required type="text" matInput formControlName="subjectName" #subjectName id="subjectName">
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.subjectName.invalid && 
+                  (timeTableInputGet.subjectName.dirty || timeTableInputGet.subjectName.touched)" 
+                  class="alert">
+          <div *ngIf="timeTableInputGet.subjectName.errors?.required">
+            {{'INPUT_ERRORS.REQUIRED' | translate }}
+          </div>
+      </div>
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.DAY' | translate}}</mat-label>
+        <select required matNativeControl formControlName="day" #day id="day">
+          <option value=0>{{'DAYS.MONDAY'   | translate}}</option>
+          <option value=1>{{'DAYS.TUESDAY'  | translate}}</option>
+          <option value=2>{{'DAYS.WEDNESDAY'| translate}}</option>
+          <option value=3>{{'DAYS.THURSDAY' | translate}}</option>
+          <option value=4>{{'DAYS.FRIDAY'   | translate}}</option>
+          <option value=5>{{'DAYS.SATURDAY' | translate}}</option>
+          <option value=6>{{'DAYS.SUNDAY'   | translate}}</option>
+        </select>
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.day.invalid && 
+                  (timeTableInputGet.day.dirty || timeTableInputGet.day.touched)" 
+                  class="alert">
+          <div *ngIf="timeTableInputGet.day.errors?.required">
+            {{'INPUT_ERRORS.REQUIRED' | translate }}
+          </div>
+      </div>
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.SAME_SUBJECT' | translate}}</mat-label>
+        <select required matNativeControl formControlName="sameSubject" #sameSubject id="sameSubject">
+          <option value=0>Under develepmonet</option>
+        </select>
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.sameSubject.invalid && 
+                  (timeTableInputGet.sameSubject.dirty || timeTableInputGet.sameSubject.touched)" 
+                  class="alert">
+          <div *ngIf="timeTableInputGet.sameSubject.errors?.required">
+            {{'INPUT_ERRORS.REQUIRED' | translate }}
+          </div>
+      </div>
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.CLASSROOM' | translate}}</mat-label>
+        <input type="text" matInput formControlName="classroom" #classroom id="classroom">
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.classroom.invalid" class="alert">
+        <div *ngIf="timeTableInputGet.classroom.errors?.pattern">
+          {{'INPUT_ERRORS.PATTERN.CLASSROOM' | translate }}
+        </div>
+      </div>
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.TEACHER' | translate}}</mat-label>
+        <input type="text" matInput formControlName="teacher" #teacher id="teacher">
+      </mat-form-field>
+      <mat-form-field class="time_table_input_form_field" appearance="fill">
+        <mat-label>{{'TIME_TABLE_INPUTS.PRIORITY' | translate}}</mat-label>
+        <input type="text" matInput formControlName="priority" #priority id="priority">
+      </mat-form-field>
+      <div *ngIf="timeTableInputGet.priority.invalid" class="alert">
+        <div *ngIf="timeTableInputGet.priority.errors?.pattern">
+          {{'INPUT_ERRORS.PATTERN.ONLY_NUMBER' | translate }}
+        </div>
+      </div>
+      <div class="colorPick">
+        {{'TIME_TABLE_INPUTS.COLOR' | translate}}
+        <input type="color" name="colorPick" #colorPick id="colorPick">
+      </div>
     <div mat-dialog-actions>
       <button mat-button (click)="cancelClick()" tabindex="-1">{{'BUTTON.CANCEL' | translate}}</button>
-      <button mat-button type="submit" [disabled]="!form.valid" [mat-dialog-close]="1" (click)="addClick()">{{'BUTTON.ADD' | translate}}</button>
+      <button mat-button type="submit" [disabled]="!form.valid" 
+      [mat-dialog-close]="1" (click)="addClick()">{{'BUTTON.ADD' | translate}}</button>
     </div>
   </form>
