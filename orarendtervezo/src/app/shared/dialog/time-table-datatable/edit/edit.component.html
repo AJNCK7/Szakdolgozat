@@ -1,0 +1,7 @@
+<h3 mat-dialog-title>Edit</h3>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+    <div mat-dialog-actions>
+      <button mat-button (click)="cancelClick()" tabindex="-1">Cancel</button>
+      <button mat-button type="submit" [disabled]="!form.valid" [mat-dialog-close]="1" (click)="addClick()">Save</button>
+    </div>
+  </form>

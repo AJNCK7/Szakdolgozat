@@ -1,5 +1,9 @@
+import { EditComponent } from './../../shared/dialog/time-table-datatable/edit/edit.component';
+import { AddComponent } from './../../shared/dialog/time-table-datatable/add/add.component';
+import { DeleteComponent } from './../../shared/dialog/time-table-datatable/delete/delete.component';
 import { Component} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 export interface TimeTableInputInterface {
@@ -35,7 +39,8 @@ export class TimeTableInputComponent{
 
   constructor (
     private fb: FormBuilder,
-    public authService: AuthService
+    public authService: AuthService,
+    public matDialog: MatDialog
     ) {
     this.form = fb.group({
       subjectName: ['', [
@@ -68,4 +73,17 @@ export class TimeTableInputComponent{
   }
 
   submit() {}
+
+  openAddDialog() {
+    const dialog = this.matDialog.open(AddComponent, {data: {issues: {}}});
+  }
+
+  openEditDialog(index: number, id: number, subjectName: string, day: string, subjectWeight: string, classStartTime: string, 
+    classEndTime: string, sameSubject: string, classroom: string, teacher: string, credit: number, priority: number, color: string) {
+      const dialog = this.matDialog.open(EditComponent, {data: {issues: {}}});
+    }
+
+  openDeleteDialog(index: number, subjectName: string) {
+    const dialog = this.matDialog.open(DeleteComponent, {data: {issues: {}}});
+  }
 }

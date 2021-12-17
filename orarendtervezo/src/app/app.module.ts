@@ -32,6 +32,9 @@ import { AuthService } from './shared/services/auth.service';
 import { UserVerifyEmailComponent } from './user_management/user_verify_email/user_verify_email.component';
 import { UserForgotPasswordComponent } from './user_management/user-forgot-password/user-forgot-password.component';
 import { TimeTableInputComponent } from './time_table/time-table-input/time-table-input.component';
+import { AddComponent } from './shared/dialog/time-table-datatable/add/add.component';
+import { EditComponent } from './shared/dialog/time-table-datatable/edit/edit.component';
+import { DeleteComponent } from './shared/dialog/time-table-datatable/delete/delete.component';
 
 const MatImports: any[] = [
   MatIconModule,
@@ -76,7 +79,10 @@ const TranslateImports: any[] = [
     UserLoginComponent,
     UserVerifyEmailComponent,
     UserForgotPasswordComponent,
-    TimeTableInputComponent
+    TimeTableInputComponent,
+    AddComponent,
+    EditComponent,
+    DeleteComponent,
   ],
   imports: [
     FirebaseImports,
