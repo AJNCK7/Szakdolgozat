@@ -18,7 +18,12 @@
         "LOGIN": "Login",
         "LOG_OUT": "Log out",
         "GENERATE": "Generate",
-        "ADD": "Add"
+        "ADD": "Add",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "CANCEL": "Cancel",
+        "NO": "No",
+        "YES": "Yes"
     },
     "INPUT_ERRORS":{
         "REQUIRED": "Required input",
@@ -71,5 +76,6 @@
         "FRIDAY": "Friday",
         "SATURDAY": "Saturday",
         "SUNDAY": "Sunday"
-    }
+    },
+    "CONFIRM_DELETE": "Are you sure, you want to delete?"
 }

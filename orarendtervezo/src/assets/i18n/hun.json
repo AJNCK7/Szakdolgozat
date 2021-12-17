@@ -18,7 +18,12 @@
         "LOGIN": "Bejelentkezés",
         "LOG_OUT": "Kijelentkezés",
         "GENERATE": "Generálás",
-        "ADD": "Hozzáadás"
+        "ADD": "Hozzáadás",
+        "EDIT": "Módosítás",
+        "DELETE": "Törlés",
+        "CANCEL": "Visszavonás",
+        "NO": "Nem",
+        "YES": "Igen"
     },
     "INPUT_ERRORS":{
         "REQUIRED": "Kötelező mező",
@@ -71,5 +76,6 @@
         "FRIDAY": "Péntek",
         "SATURDAY": "Szombat",
         "SUNDAY": "Vasárnap"
-    }
+    },
+    "CONFIRM_DELETE": "Biztosan törölni szeretnéd?"
 }
