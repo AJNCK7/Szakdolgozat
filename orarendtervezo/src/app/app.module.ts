@@ -21,6 +21,7 @@ import { MatButtonModule} from '@angular/material/button'
 import { MatCardModule} from '@angular/material/card'
 import { MatCheckboxModule} from '@angular/material/checkbox'
 import { MatDialogModule} from '@angular/material/dialog';
+import { MatPaginatorModule} from '@angular/material/paginator';
 import { UserRegisterComponent } from './user_management/user_register/user_register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -45,7 +46,8 @@ const MatImports: any[] = [
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
-  MatDialogModule
+  MatDialogModule,
+  MatPaginatorModule
 ];
 
 const FirebaseImports: any[] = [

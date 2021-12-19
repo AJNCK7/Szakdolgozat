@@ -3,7 +3,6 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
 import { Injectable, NgZone } from '@angular/core';
 import { User } from "../services/user";
 import { Router } from "@angular/router";
-import { translate } from "@angular/localize/src/utils";
 
 @Injectable({
   providedIn: 'root'

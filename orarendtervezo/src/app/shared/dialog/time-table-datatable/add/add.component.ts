@@ -1,7 +1,22 @@
-import { Component} from '@angular/core';
+import { Component, Inject, Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
+
+export interface TimeTableInputInterface {
+  ID: number;
+  SUBJECT_NAME: string;
+  DAY: string;
+  SUBJECT_WEIGHT: string;
+  CLASS_START_TIME: string;
+  CLASS_END_TIME: string;
+  SAME_SUBJECT: string;
+  CLASSROOM: string;
+  TEACHER: string;
+  CREDIT: number;
+  PRIORITY: number;
+  COLOR: string;
+}
 
 @Component({
   selector: 'app-add-tableDialogInputs',
@@ -9,11 +24,12 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent {
-  
+
   form: FormGroup = new FormGroup({});
 
   constructor (
     public dialogRef: MatDialogRef<AddComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: TimeTableInputInterface,
     private fb: FormBuilder,
     public authService: AuthService
     ) {
@@ -24,17 +40,27 @@ export class AddComponent {
       day: ['', [
         Validators.required,
       ]],
-      sameSubject: ['', [
+      subjectWeight: ['', [
         Validators.required,
       ]],
+      classStartTime: ['', [
+        Validators.required,
+      ]],
+      classEndTime: ['', [
+        Validators.required,
+      ]],
+      sameSubject: ['', []],
       classroom: ['', [
         Validators.pattern('[A-Z][/][a-z0-9A-Z]+')
       ]],
-      teacher: ['', [
+      teacher: ['', [ ]],
+      credit: ['', [ 
+        Validators.pattern('[0-9]+'),
       ]],
       priority: ['', [
         Validators.pattern('[0-9]+'),
-      ]]
+      ]],
+      colorPick: ['', [ ]]
     })
   }
 
@@ -43,8 +69,6 @@ export class AddComponent {
   }
 
   submit() { }
-
-  addClick() {}
 
   cancelClick() {
   this.dialogRef.close();
