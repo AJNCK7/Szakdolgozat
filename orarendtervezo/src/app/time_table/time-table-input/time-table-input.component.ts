@@ -5,7 +5,7 @@ import { ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
 export interface TimeTableInputInterface {
@@ -39,11 +39,8 @@ export class TimeTableInputComponent{
   constructor (
     public authService: AuthService,
     public matDialog: MatDialog,
-    private changeDetectorRefs: ChangeDetectorRef
     ) {
   }
-  @ViewChild(MatPaginator, { static: true })
-  paginator!: MatPaginator;
 
   displayedColumns: string[] = ['id', 'subjectName', 'day', 'subjectWeight', 'classStartTime', 
                                 'classEndTime', 'sameSubject', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
@@ -66,13 +63,19 @@ export class TimeTableInputComponent{
     });
   }
 
-  openEditDialog(index: number, id: number, subjectName: string, day: string, subjectWeight: string, classStartTime: string, 
-    classEndTime: string, sameSubject: string, classroom: string, teacher: string, credit: number, priority: number, color: string) {
-      const dialog = this.matDialog.open(EditComponent, {data: {issues: {}}});
+  openEditDialog(index: number, id: number) {
+      this.matDialog.open(EditComponent, {data: {}
+      }).afterClosed().subscribe(result =>{
+        if (result != null) {
+          this.dataSource.data[index] = result; 
+          this.dataSource.data[index].ID = id;
+          this.dataSource.data = this.dataSource.data;
+        }
+      });
     }
 
-  openDeleteDialog(index: number, id: number) {
-    this.matDialog.open(DeleteComponent, {data: {ID: id}
+  openDeleteDialog(index: number) {
+    this.matDialog.open(DeleteComponent, {
     }).afterClosed().subscribe(result =>{
       if (result == 1) {
         this.dataSource.data.splice(index, 1);
