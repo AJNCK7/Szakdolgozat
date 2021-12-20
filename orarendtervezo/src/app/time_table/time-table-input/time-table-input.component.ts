@@ -1,12 +1,11 @@
 import { EditComponent } from './../../shared/dialog/time-table-datatable/edit/edit.component';
 import { AddComponent } from './../../shared/dialog/time-table-datatable/add/add.component';
 import { DeleteComponent } from './../../shared/dialog/time-table-datatable/delete/delete.component';
-import { ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import { Component} from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface TimeTableInputInterface {
   ID: number;
@@ -22,9 +21,6 @@ export interface TimeTableInputInterface {
   PRIORITY: number;
   COLOR: string;
 }
-var ELEMENT_DATA: TimeTableInputInterface = 
-  {ID: 1, SUBJECT_NAME: 'Magprog', DAY: "Monday", SUBJECT_WEIGHT: 'Mandatoriy', CLASS_START_TIME: '10:40', 
-  CLASS_END_TIME: '11:50', SAME_SUBJECT: '', CLASSROOM: 'C/111', TEACHER: 'Troll', CREDIT: 1, PRIORITY: 9, COLOR: '#ff6347'};
 @Component({
   selector: 'app-time-table-input',
   templateUrl: './time-table-input.component.html',
@@ -44,8 +40,9 @@ export class TimeTableInputComponent{
 
   displayedColumns: string[] = ['id', 'subjectName', 'day', 'subjectWeight', 'classStartTime', 
                                 'classEndTime', 'sameSubject', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
+
   dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
-  dataSource2 = new MatTableDataSource<TimeTableInputInterface>([]);
+
   get timeTableInputGet() {
     return this.form.controls;
   }
@@ -53,8 +50,8 @@ export class TimeTableInputComponent{
   submit() {}
 
   openAddDialog() {
-    this.matDialog.open(AddComponent, {data: {ID: this.ID},
-    }).afterClosed().subscribe(result => {
+    this.matDialog.open(AddComponent)
+      .afterClosed().subscribe(result => {
       if(!!result){
       this.ID++;
       this.dataSource.data.push(result);
@@ -64,7 +61,7 @@ export class TimeTableInputComponent{
   }
 
   openEditDialog(index: number, id: number) {
-      this.matDialog.open(EditComponent, {data: {}
+      this.matDialog.open(EditComponent, {data: this.dataSource.data[index]
       }).afterClosed().subscribe(result =>{
         if (result != null) {
           this.dataSource.data[index] = result; 
@@ -75,8 +72,8 @@ export class TimeTableInputComponent{
     }
 
   openDeleteDialog(index: number) {
-    this.matDialog.open(DeleteComponent, {
-    }).afterClosed().subscribe(result =>{
+    this.matDialog.open(DeleteComponent)
+    .afterClosed().subscribe(result => {
       if (result == 1) {
         this.dataSource.data.splice(index, 1);
         this.dataSource.data = this.dataSource.data;
