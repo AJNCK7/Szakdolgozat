@@ -33,6 +33,7 @@ var ELEMENT_DATA: TimeTableInputInterface =
 export class TimeTableInputComponent{
 
   ID = 1;
+  index = 0;
   form: FormGroup = new FormGroup({});
 
   constructor (
@@ -70,7 +71,13 @@ export class TimeTableInputComponent{
       const dialog = this.matDialog.open(EditComponent, {data: {issues: {}}});
     }
 
-  openDeleteDialog(index: number, subjectName: string) {
-    const dialog = this.matDialog.open(DeleteComponent, {data: {issues: {}}});
+  openDeleteDialog(index: number, id: number) {
+    this.matDialog.open(DeleteComponent, {data: {ID: id}
+    }).afterClosed().subscribe(result =>{
+      if (result == 1) {
+        this.dataSource.data.splice(index, 1);
+        this.dataSource.data = this.dataSource.data;
+      }
+    });
   }
 }
