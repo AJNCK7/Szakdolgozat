@@ -50,8 +50,8 @@ export class TimeTableInputComponent{
   submit() {}
 
   openAddDialog() {
-    this.matDialog.open(AddComponent)
-      .afterClosed().subscribe(result => {
+    this.matDialog.open(AddComponent, {data: {ID: this.ID}
+    }).afterClosed().subscribe(result => {
       if(!!result){
       this.ID++;
       this.dataSource.data.push(result);
