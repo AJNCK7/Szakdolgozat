@@ -1,8 +1,8 @@
-import { Component} from '@angular/core';
+import { Component, Inject} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { AddComponent } from '../add/add.component';
+import { AddComponent, TimeTableInputInterface } from '../add/add.component';
 
 @Component({
   selector: 'app-edit',
@@ -10,10 +10,12 @@ import { AddComponent } from '../add/add.component';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent{
+
   form: FormGroup = new FormGroup({});
 
   constructor (
-    public dialogRef: MatDialogRef<AddComponent>,
+    public dialogRef: MatDialogRef<EditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: TimeTableInputInterface,
     private fb: FormBuilder,
     public authService: AuthService
     ) {
@@ -24,17 +26,27 @@ export class EditComponent{
       day: ['', [
         Validators.required,
       ]],
-      sameSubject: ['', [
+      subjectWeight: ['', [
         Validators.required,
       ]],
+      classStartTime: ['', [
+        Validators.required,
+      ]],
+      classEndTime: ['', [
+        Validators.required,
+      ]],
+      sameSubject: ['', []],
       classroom: ['', [
         Validators.pattern('[A-Z][/][a-z0-9A-Z]+')
       ]],
-      teacher: ['', [
+      teacher: ['', [ ]],
+      credit: ['', [ 
+        Validators.pattern('[0-9]+'),
       ]],
       priority: ['', [
         Validators.pattern('[0-9]+'),
-      ]]
+      ]],
+      colorPick: ['', [ ]]
     })
   }
 
@@ -44,7 +56,6 @@ export class EditComponent{
 
   submit() { }
 
-  addClick() {}
 
   cancelClick() {
   this.dialogRef.close();

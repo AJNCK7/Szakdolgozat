@@ -54,11 +54,10 @@
       </button>
     </mat-header-cell>
     <mat-cell *matCellDef="let row; let i=index;">
-      <button mat-icon-button (click)="openEditDialog(i, row.id, row.subjectName, row.day, row.subjectWeight, row.classStartTime, row.classEndTime,
-                                                      row.sameSubject, row.classroom, row.teacher, row.credit, row.priority, row.color)">
+      <button mat-icon-button (click)="openEditDialog(i, row.ID)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button (click)="openDeleteDialog(i, row.subjectName)">
+      <button mat-icon-button (click)="openDeleteDialog(i)">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-cell>
