@@ -38,6 +38,7 @@ export class TimeTableInputComponent{
   constructor (
     public authService: AuthService,
     public matDialog: MatDialog,
+    private changeDetectorRefs: ChangeDetectorRef
     ) {
   }
   @ViewChild(MatPaginator, { static: true })
@@ -58,11 +59,8 @@ export class TimeTableInputComponent{
     }).afterClosed().subscribe(result => {
       if(!!result){
       this.ID++;
-      this.dataSource2.data.push(result);
-      this.dataSource2.data.push(result);
-      this.dataSource = this.dataSource2;
-      console.log(this.dataSource2);
-      console.log(this.dataSource);
+      this.dataSource.data.push(result);
+      this.dataSource.data = this.dataSource.data;
       }
     });
   }
