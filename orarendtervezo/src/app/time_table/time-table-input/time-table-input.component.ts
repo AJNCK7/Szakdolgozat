@@ -42,7 +42,7 @@ export class TimeTableInputComponent{
                                 'classEndTime', 'sameSubject', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
 
   dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
-
+  
   get timeTableInputGet() {
     return this.form.controls;
   }
