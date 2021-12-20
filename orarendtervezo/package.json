@@ -31,6 +31,7 @@
     "bootstrap": "^4.5.0",
     "firebase": "^9.5.0",
     "flex-layout": "^1.0.1",
+    "paginator": "^1.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
