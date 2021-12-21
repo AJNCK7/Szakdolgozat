@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{'BUTTON.DELETE' | translate}}</h1>
+<div mat-dialog-content>
+  <p>{{'CONFIRM_DELETE_ALL' | translate}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="noClick()">{{'BUTTON.NO' | translate}}</button>
+  <button mat-button [mat-dialog-close]="1" cdkFocusInitial>{{'BUTTON.YES' | translate}}</button>
+</div>

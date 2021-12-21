@@ -52,6 +52,9 @@
       <button mat-icon-button color="primary" (click)="openAddDialog()">
         <mat-icon>add</mat-icon>
       </button>
+      <button mat-icon-button color="primary" (click)="openDeleteAllDialog()">
+        <mat-icon>delete</mat-icon>
+      </button>
     </th>
     <td mat-cell *matCellDef="let row; let i=index;">
       <button mat-icon-button (click)="openEditDialog(i, row.ID)">

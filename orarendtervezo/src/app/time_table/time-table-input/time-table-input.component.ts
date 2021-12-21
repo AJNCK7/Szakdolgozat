@@ -6,6 +6,7 @@ import { FormGroup} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { DeleteAllComponent } from 'src/app/shared/dialog/time-table-datatable/delete-all/delete-all.component';
 
 export interface TimeTableInputInterface {
   ID: number;
@@ -79,5 +80,14 @@ export class TimeTableInputComponent{
         this.dataSource.data = this.dataSource.data;
       }
     });
+  }
+
+  openDeleteAllDialog() {
+    this.matDialog.open(DeleteAllComponent).afterClosed().subscribe(result => {
+      if (result == 1) {
+        this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
+        this.ID = 1;
+      }
+    })
   }
 }

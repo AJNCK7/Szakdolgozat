@@ -36,6 +36,7 @@ import { TimeTableInputComponent } from './time_table/time-table-input/time-tabl
 import { AddComponent } from './shared/dialog/time-table-datatable/add/add.component';
 import { EditComponent } from './shared/dialog/time-table-datatable/edit/edit.component';
 import { DeleteComponent } from './shared/dialog/time-table-datatable/delete/delete.component';
+import { DeleteAllComponent } from './shared/dialog/time-table-datatable/delete-all/delete-all.component';
 
 const MatImports: any[] = [
   MatIconModule,
@@ -85,6 +86,7 @@ const TranslateImports: any[] = [
     AddComponent,
     EditComponent,
     DeleteComponent,
+    DeleteAllComponent,
   ],
   imports: [
     FirebaseImports,

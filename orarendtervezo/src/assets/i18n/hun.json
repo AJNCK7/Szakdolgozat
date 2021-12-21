@@ -77,5 +77,6 @@
         "SATURDAY": "Szombat",
         "SUNDAY": "Vasárnap"
     },
-    "CONFIRM_DELETE": "Biztosan törölni szeretnéd?"
+    "CONFIRM_DELETE": "Biztosan törölni szeretnéd?",
+    "CONFIRM_DELETE_ALL": "Biztosan törölni szeretnéd mindet?"
 }
