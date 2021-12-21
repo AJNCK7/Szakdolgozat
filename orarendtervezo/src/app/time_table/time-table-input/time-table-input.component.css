@@ -6,16 +6,9 @@ table {
     text-align: center;
     margin-bottom: 5vh;
 }
-td,tr {
-    border-right: 1px solid black;
-    border-collapse: collapse;
-}
-
-tr {
-    padding: 0px;
-}
-
 td {
+    border-right: 1px solid gray;
+    border-collapse: collapse;
     word-break: break-word;
 }
 
@@ -25,6 +18,24 @@ td {
 
 .changeColor {
     background: white;
+}
+
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type {
+    padding-right: 6px;
+}
+
+th.mat-header-cell:first-of-type{
+    padding-left: 6px;
+}
+
+.mat-icon-button {
+    width: 25px;
+}
+
+.mat-cell:last-of-type {
+    width: 60px;
+    font-size: 1px;
+    border-right: 0px;
 }
 
 .clickable_button {
