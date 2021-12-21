@@ -28,10 +28,7 @@ export class UserRegisterComponent {
         Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}')
       ]],
       confirmPassword: ['', Validators.required],
-      email: ['', [
-        Validators.required,
-        Validators.email
-      ]],
+      email: ['', Validators.email],
       confirmEmail: ['', Validators.required]
     }, {
       validator: [

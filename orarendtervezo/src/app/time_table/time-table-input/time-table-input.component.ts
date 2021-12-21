@@ -1,7 +1,7 @@
 import { EditComponent } from './../../shared/dialog/time-table-datatable/edit/edit.component';
 import { AddComponent } from './../../shared/dialog/time-table-datatable/add/add.component';
 import { DeleteComponent } from './../../shared/dialog/time-table-datatable/delete/delete.component';
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -27,22 +27,29 @@ export interface TimeTableInputInterface {
   templateUrl: './time-table-input.component.html',
   styleUrls: ['./time-table-input.component.css']
 })
-export class TimeTableInputComponent{
+export class TimeTableInputComponent implements OnInit{
 
   ID = 1;
   index = 0;
+
   form: FormGroup = new FormGroup({});
+
+  displayedColumns: string[] = ['id', 'subjectName', 'day', 'subjectWeight', 'classStartTime', 
+  'classEndTime', 'sameSubject', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
+  dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
 
   constructor (
     public authService: AuthService,
     public matDialog: MatDialog,
     ) {
   }
-
-  displayedColumns: string[] = ['id', 'subjectName', 'day', 'subjectWeight', 'classStartTime', 
-                                'classEndTime', 'sameSubject', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
-
-  dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
+  ngOnInit(): void {
+    this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
+    this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableDatas') || '{}');
+    if (this.dataSource.data[this.dataSource.data.length - 1].ID != 1) {
+      this.ID = this.dataSource.data[this.dataSource.data.length-1].ID + 1;
+    }
+  }
   
   get timeTableInputGet() {
     return this.form.controls;
@@ -57,6 +64,7 @@ export class TimeTableInputComponent{
       this.ID++;
       this.dataSource.data.push(result);
       this.dataSource.data = this.dataSource.data;
+      localStorage.setItem('TimeTableDatas', JSON.stringify(this.dataSource.data));
       }
     });
   }
@@ -68,6 +76,7 @@ export class TimeTableInputComponent{
           this.dataSource.data[index] = result; 
           this.dataSource.data[index].ID = id;
           this.dataSource.data = this.dataSource.data;
+          localStorage.setItem('TimeTableDatas', JSON.stringify(this.dataSource.data));
         }
       });
     }
@@ -78,6 +87,7 @@ export class TimeTableInputComponent{
       if (result == 1) {
         this.dataSource.data.splice(index, 1);
         this.dataSource.data = this.dataSource.data;
+        localStorage.setItem('TimeTableDatas', JSON.stringify(this.dataSource.data));
       }
     });
   }
@@ -87,6 +97,7 @@ export class TimeTableInputComponent{
       if (result == 1) {
         this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
         this.ID = 1;
+        localStorage.setItem('TimeTableDatas', JSON.stringify(this.dataSource.data));
       }
     })
   }
