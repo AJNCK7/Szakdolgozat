@@ -2,7 +2,7 @@ import { Component, Inject} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { AddComponent, TimeTableInputInterface } from '../add/add.component';
+import { TimeTableInputInterface } from 'src/app/time_table/time-table-input/time-table-input.component';
 
 @Component({
   selector: 'app-edit',
@@ -37,7 +37,6 @@ export class EditComponent{
         Validators.required,
         Validators.pattern('([1]?[0-9]|2[0-3]):[0-5][0-9]')
       ]],
-      sameSubject: ['', []],
       classroom: ['', [
         Validators.pattern('[A-Z][/][a-z0-9A-Z]+')
       ]],
