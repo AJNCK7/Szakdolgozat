@@ -34,7 +34,8 @@
             "PASSWORD": "Minimum 8 character and must contain at least one number and one uppercase charachter",
             "EMAIL": "You have to use format e.g.: example@email.com",
             "ONLY_NUMBER": "Only numbers are accepted",
-            "CLASSROOM": "Classroom must follow the next: 'text/anything' e.g.:C/124"
+            "CLASSROOM": "Classroom must follow the next: 'text/anything' e.g.:C/124",
+            "CLASS_TIME_PATTERN": "Requested time format: 1:00, 10:24, 23:59"
         },
         "CONFIRM":{
             "PASSWORD" : "Not match with password",

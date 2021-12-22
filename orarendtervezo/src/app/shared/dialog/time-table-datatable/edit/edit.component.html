@@ -59,6 +59,9 @@
       <div *ngIf="timeTableInputGet.classStartTime.errors?.required">
         {{'INPUT_ERRORS.REQUIRED' | translate }}
       </div>
+      <div *ngIf="timeTableInputGet.classStartTime.errors?.pattern">
+        {{'INPUT_ERRORS.PATTERN.CLASS_TIME_PATTERN' | translate }}
+      </div>
   </div>
   <mat-form-field class="time_table_input_form_field" appearance="fill">
     <mat-label>{{'TIME_TABLE_INPUTS.CLASS_END_TIME' | translate}}</mat-label>
@@ -70,6 +73,9 @@
               class="alert">
       <div *ngIf="timeTableInputGet.classEndTime.errors?.required">
         {{'INPUT_ERRORS.REQUIRED' | translate }}
+      </div>
+      <div *ngIf="timeTableInputGet.classEndTime.errors?.pattern">
+        {{'INPUT_ERRORS.PATTERN.CLASS_TIME_PATTERN' | translate }}
       </div>
   </div>
   <mat-form-field class="time_table_input_form_field" appearance="fill">

@@ -45,9 +45,11 @@ export class AddComponent {
       ]],
       classStartTime: ['', [
         Validators.required,
+        Validators.pattern('([1]?[0-9]|2[0-3]):[0-5][0-9]')
       ]],
       classEndTime: ['', [
         Validators.required,
+        Validators.pattern('([1]?[0-9]|2[0-3]):[0-5][0-9]')
       ]],
       sameSubject: ['', []],
       classroom: ['', [
