@@ -40,7 +40,8 @@
         "CONFIRM":{
             "PASSWORD" : "Not match with password",
             "EMAIL": "Not match with email"
-        }
+        },
+        "START_ISGREATER_END": "Time can't be the same or End time is grater than Start time"
     },
     "RESET_PASSWORD": "Reset password",
     "SENT_TO": "Already sent to ",

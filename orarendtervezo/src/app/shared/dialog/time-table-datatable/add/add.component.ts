@@ -1,6 +1,7 @@
 import { Component, Inject, Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { startTimeIsGreaterThanEndTime } from 'src/app/shared/customValidators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 export interface TimeTableInputInterface {
@@ -63,6 +64,10 @@ export class AddComponent {
         Validators.pattern('[0-9]+'),
       ]],
       colorPick: ['', [ ]]
+    }, {
+      validator: [
+        startTimeIsGreaterThanEndTime('classStartTime', 'classEndTime'), 
+      ]
     })
   }
 

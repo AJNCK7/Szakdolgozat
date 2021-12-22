@@ -40,7 +40,8 @@
         "CONFIRM":{
             "PASSWORD" : "Nem egyezzik a jelszóval",
             "EMAIL": "Nem egyezzik az emaillel"
-        }
+        },
+        "START_ISGREATER_END": "Az idő nem lehet ugyan az vagy a vége idő nagyobb mint a kezdési idő"
     },
     "RESET_PASSWORD": "Jelszó emlékeztető",
     "SENT_TO": "Már elküldve ",

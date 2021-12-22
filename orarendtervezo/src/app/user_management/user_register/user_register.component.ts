@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ConfirmedValidator } from 'src/app/shared/confirmValidator';
+import { ConfirmedValidator } from 'src/app/shared/customValidators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
