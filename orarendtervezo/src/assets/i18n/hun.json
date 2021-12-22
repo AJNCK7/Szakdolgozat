@@ -79,6 +79,20 @@
         "SATURDAY": "Szombat",
         "SUNDAY": "Vasárnap"
     },
+    "DAYS_SHORT_FORM": {
+        "MONDAY": "Hét",
+        "TUESDAY": "Kedd",
+        "WEDNESDAY": "Szer",
+        "THURSDAY": "Csüt",
+        "FRIDAY": "Pén",
+        "SATURDAY": "Szom",
+        "SUNDAY": "Vas"
+    },
+    "SUBJECT_WEIGHT_SHORT_FORM": {
+        "MANDATORY": "Köt.",
+        "MANDATORY_OPTIONAL": "Köt. vál.",
+        "OPTIONAL": "Vál."
+    },
     "CONFIRM_DELETE": "Biztosan törölni szeretnéd?",
     "CONFIRM_DELETE_ALL": "Biztosan törölni szeretnéd mindet?"
 }

@@ -101,4 +101,38 @@ export class TimeTableInputComponent implements OnInit{
       }
     })
   }
+
+  dayChanger(day: string){
+    switch (day) {
+      case "0":
+        return 'DAYS_SHORT_FORM.MONDAY';
+      case "1":
+        return 'DAYS_SHORT_FORM.TUESDAY';
+      case "2":
+        return 'DAYS_SHORT_FORM.WEDNESDAY';
+      case "3":
+        return 'DAYS_SHORT_FORM.THURSDAY';
+      case "4":
+        return 'DAYS_SHORT_FORM.FRIDAY';
+      case "5":
+        return 'DAYS_SHORT_FORM.SATURDAY';
+      case "6":
+        return 'DAYS_SHORT_FORM.SUNDAY';
+      default:
+        return 'Error'
+    }
+  }
+
+  subjectWeightChanger(subjectWeight: string){
+    switch (subjectWeight) {
+      case "0":
+        return 'SUBJECT_WEIGHT_SHORT_FORM.MANDATORY';
+      case "1":
+        return 'SUBJECT_WEIGHT_SHORT_FORM.MANDATORY_OPTIONAL';
+      case "2":
+        return 'SUBJECT_WEIGHT_SHORT_FORM.OPTIONAL';
+      default:
+        return 'Error'
+      }
+    }
 }

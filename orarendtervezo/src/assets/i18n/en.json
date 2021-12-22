@@ -61,8 +61,8 @@
             "MANDATORY_OPTIONAL": "Mandatory optional",
             "OPTIONAL": "Optional"
         },
-        "CLASS_START_TIME": "Class start time",
-        "CLASS_END_TIME": "Class end time",
+        "CLASS_START_TIME": "Class start",
+        "CLASS_END_TIME": "Class end",
         "SAME_SUBJECT": "Same subject",
         "CLASSROOM": "Classroom",
         "TEACHER": "Teacher",
@@ -78,6 +78,20 @@
         "FRIDAY": "Friday",
         "SATURDAY": "Saturday",
         "SUNDAY": "Sunday"
+    },
+    "DAYS_SHORT_FORM": {
+        "MONDAY": "Mon",
+        "TUESDAY": "Tue",
+        "WEDNESDAY": "Wen",
+        "THURSDAY": "Thu",
+        "FRIDAY": "Fri",
+        "SATURDAY": "Sat",
+        "SUNDAY": "Sun"
+    },
+    "SUBJECT_WEIGHT_SHORT_FORM": {
+        "MANDATORY": "Mand.",
+        "MANDATORY_OPTIONAL": "Mand. opt.",
+        "OPTIONAL": "Opt."
     },
     "CONFIRM_DELETE": "Are you sure, you want to delete?",
     "CONFIRM_DELETE_ALL": "Are you sure, you want to delete all?"
