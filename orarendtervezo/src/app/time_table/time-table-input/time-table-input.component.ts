@@ -45,7 +45,7 @@ export class TimeTableInputComponent implements OnInit{
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
     this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableDatas') || '{}');
-    if (this.dataSource.data[this.dataSource.data.length - 1].ID != 1) {
+    if (this.dataSource.data[this.dataSource.data.length - 1]) {
       this.ID = this.dataSource.data[this.dataSource.data.length-1].ID + 1;
     }
   }
