@@ -27,13 +27,12 @@
     },
     "INPUT_ERRORS":{
         "REQUIRED": "Kötelező mező",
-        "MINLENGTH":{
-            "USERNAME": "Minimum 3 karakter"
-        },
+        "MINLENGTH": "Minimum {{value}} karakter",
+        "MAXLENGTH": "Maximum {{value}} karakter",
         "PATTERN":{
             "PASSWORD": "Minimum 8 karakter és kötelező tartalmaznia legalább egy számot és egy nagy betűt",
             "EMAIL": "Kötelező a megadott forma pl.: example@email.com",
-            "ONLY_NUMBER": "Csak szám lehet",
+            "ONLY_NUMBER": "Csak szám lehet és csak {{value}} db",
             "CLASSROOM": "Az osztályterem követnie kell a következőt: 'szöveg/bármi' pl.:C/124",
             "CLASS_TIME_PATTERN": "Kért időformátum: 1:00, 10:24, 23:59"
         },

@@ -12,6 +12,7 @@ export class UserRegisterComponent {
   hide = false;
   confirm_hide = false;
   
+  minimumLength = {value: '3'};
   form: FormGroup = new FormGroup({});
 
   constructor (

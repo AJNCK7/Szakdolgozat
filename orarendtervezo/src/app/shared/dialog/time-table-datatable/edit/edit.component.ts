@@ -1,6 +1,7 @@
 import { Component, Inject} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { startTimeIsGreaterThanEndTime } from 'src/app/shared/customValidators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TimeTableInputInterface } from 'src/app/time_table/time-table-input/time-table-input.component';
 
@@ -11,6 +12,11 @@ import { TimeTableInputInterface } from 'src/app/time_table/time-table-input/tim
 })
 export class EditComponent{
 
+  subjectNameMaxLengthParam = {value: '40'};
+  classroomMaxLengthParam = {value: '10'};
+  teacherMaxLengthParam = {value: '40'};
+  priorityMaxLengthParam = {value: '1'};
+  creditMaxLengthParam = {value: '2'};
   form: FormGroup = new FormGroup({});
 
   constructor (
@@ -22,6 +28,7 @@ export class EditComponent{
     this.form = fb.group({
       subjectName: ['', [
         Validators.required,
+        Validators.maxLength(40)
       ]],
       day: ['', [
         Validators.required,
@@ -38,16 +45,23 @@ export class EditComponent{
         Validators.pattern('([1]?[0-9]|2[0-3]):[0-5][0-9]')
       ]],
       classroom: ['', [
-        Validators.pattern('[A-Z][/][a-z0-9A-Z]+')
+        Validators.pattern('[a-zA-Z][/][a-z0-9A-Z]+'),
+        Validators.maxLength(10)
       ]],
-      teacher: ['', [ ]],
+      teacher: ['', [
+        Validators.maxLength(40)
+      ]],
       credit: ['', [ 
-        Validators.pattern('[0-9]+'),
+        Validators.pattern('[0-9].{0,1}'),
       ]],
       priority: ['', [
-        Validators.pattern('[0-9]+'),
+        Validators.pattern('[0-9]'),
       ]],
       colorPick: ['', [ ]]
+    }, {
+      validator: [
+        startTimeIsGreaterThanEndTime('classStartTime', 'classEndTime'), 
+      ]
     })
   }
 

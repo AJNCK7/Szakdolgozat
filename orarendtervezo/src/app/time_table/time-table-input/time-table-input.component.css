@@ -9,6 +9,8 @@ table {
 td {
     border-right: 1px solid gray;
     border-collapse: collapse;
+}
+.breakword{
     word-break: break-word;
 }
 

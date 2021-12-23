@@ -12,6 +12,11 @@ import { TimeTableInputInterface } from 'src/app/time_table/time-table-input/tim
 })
 export class AddComponent {
 
+  subjectNameMaxLengthParam = {value: '40'};
+  classroomMaxLengthParam = {value: '10'};
+  teacherMaxLengthParam = {value: '40'};
+  priorityMaxLengthParam = {value: '1'};
+  creditMaxLengthParam = {value: '2'};
   form: FormGroup = new FormGroup({});
 
   constructor (
@@ -23,6 +28,7 @@ export class AddComponent {
     this.form = fb.group({
       subjectName: ['', [
         Validators.required,
+        Validators.maxLength(40)
       ]],
       day: ['', [
         Validators.required,
@@ -39,14 +45,17 @@ export class AddComponent {
         Validators.pattern('([1]?[0-9]|2[0-3]):[0-5][0-9]')
       ]],
       classroom: ['', [
-        Validators.pattern('[A-Z][/][a-z0-9A-Z]+')
+        Validators.pattern('[a-zA-Z][/][a-z0-9A-Z]+'),
+        Validators.maxLength(10)
       ]],
-      teacher: ['', [ ]],
+      teacher: ['', [
+        Validators.maxLength(40)
+      ]],
       credit: ['', [ 
-        Validators.pattern('[0-9]+'),
+        Validators.pattern('[0-9].{0,1}'),
       ]],
       priority: ['', [
-        Validators.pattern('[0-9]+'),
+        Validators.pattern('[0-9]'),
       ]],
       colorPick: ['', [ ]]
     }, {

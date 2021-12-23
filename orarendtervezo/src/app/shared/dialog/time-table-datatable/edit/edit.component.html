@@ -11,6 +11,9 @@
       <div *ngIf="timeTableInputGet.subjectName.errors?.required">
         {{'INPUT_ERRORS.REQUIRED' | translate }}
       </div>
+      <div *ngIf="timeTableInputGet.subjectName.errors?.maxlength">
+        {{'INPUT_ERRORS.MAXLENGTH' | translate:subjectNameMaxLengthParam }}
+      </div>
   </div>
   <mat-form-field class="time_table_input_form_field" appearance="fill">
     <mat-label>{{'TIME_TABLE_INPUTS.DAY' | translate}}</mat-label>
@@ -77,6 +80,9 @@
       <div *ngIf="timeTableInputGet.classEndTime.errors?.pattern">
         {{'INPUT_ERRORS.PATTERN.CLASS_TIME_PATTERN' | translate }}
       </div>
+      <div *ngIf="timeTableInputGet.classEndTime.errors?.startTimeIsGreaterThanEndTime">
+        {{'INPUT_ERRORS.START_ISGREATER_END' | translate }}
+      </div>
   </div>
   <mat-form-field class="time_table_input_form_field" appearance="fill">
     <mat-label>{{'TIME_TABLE_INPUTS.CLASSROOM' | translate}}</mat-label>
@@ -87,12 +93,20 @@
     <div *ngIf="timeTableInputGet.classroom.errors?.pattern">
       {{'INPUT_ERRORS.PATTERN.CLASSROOM' | translate }}
     </div>
+    <div *ngIf="timeTableInputGet.classroom.errors?.maxlength">
+      {{'INPUT_ERRORS.MAXLENGTH' | translate:classroomMaxLengthParam }}
+    </div>
   </div>
   <mat-form-field class="time_table_input_form_field" appearance="fill">
     <mat-label>{{'TIME_TABLE_INPUTS.TEACHER' | translate}}</mat-label>
     <input type="text" matInput formControlName="teacher" 
     id="teacher" [(ngModel)]="data.TEACHER">
   </mat-form-field>
+  <div *ngIf="timeTableInputGet.teacher.invalid" class="alert">
+    <div *ngIf="timeTableInputGet.teacher.errors?.maxlength">
+      {{'INPUT_ERRORS.MAXLENGTH' | translate:teacherMaxLengthParam }}
+    </div>
+  </div>
   <mat-form-field class="time_table_input_form_field" appearance="fill">
     <mat-label>{{'TIME_TABLE_INPUTS.CREDIT' | translate}}</mat-label>
     <input type="text" matInput formControlName="credit" 
@@ -100,7 +114,7 @@
   </mat-form-field>
   <div *ngIf="timeTableInputGet.credit.invalid" class="alert">
     <div *ngIf="timeTableInputGet.credit.errors?.pattern">
-      {{'INPUT_ERRORS.PATTERN.ONLY_NUMBER' | translate }}
+      {{'INPUT_ERRORS.PATTERN.ONLY_NUMBER' | translate:creditMaxLengthParam }}
     </div>
   </div>
   <mat-form-field class="time_table_input_form_field" appearance="fill">
@@ -110,7 +124,7 @@
   </mat-form-field>
   <div *ngIf="timeTableInputGet.priority.invalid" class="alert">
     <div *ngIf="timeTableInputGet.priority.errors?.pattern">
-      {{'INPUT_ERRORS.PATTERN.ONLY_NUMBER' | translate }}
+      {{'INPUT_ERRORS.PATTERN.ONLY_NUMBER' | translate:priorityMaxLengthParam }}
     </div>
   </div>
   <mat-form-field class="time_table_input_form_field">
@@ -120,6 +134,7 @@
   </mat-form-field>
     <div mat-dialog-actions>
       <button mat-button (click)="cancelClick()" tabindex="-1">{{'BUTTON.CANCEL' | translate}}</button>
-      <button mat-button type="submit" [disabled]="!form.valid" [mat-dialog-close]="data">{{'BUTTON.EDIT' | translate}}</button>
+      <button mat-button type="submit" [disabled]="!form.valid" 
+      [mat-dialog-close]="data">{{'BUTTON.EDIT' | translate}}</button>
     </div>
   </form>
