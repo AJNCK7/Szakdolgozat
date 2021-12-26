@@ -120,7 +120,7 @@
       <mat-form-field class="time_table_input_form_field" appearance="fill">
         <mat-label>{{'TIME_TABLE_INPUTS.PRIORITY' | translate}}</mat-label>
         <input type="text" matInput formControlName="priority" 
-        id="priority" [(ngModel)]="data.PRIORITY">
+        id="priority" [ngModel]="0" (ngModelChange)="data.PRIORITY = $event">
       </mat-form-field>
       <div *ngIf="timeTableInputGet.priority.invalid" class="alert">
         <div *ngIf="timeTableInputGet.priority.errors?.pattern">
@@ -134,7 +134,7 @@
       </mat-form-field>
     <div mat-dialog-actions>
       <button mat-button (click)="cancelClick()">{{'BUTTON.CANCEL' | translate}}</button>
-      <button mat-button type="submit" [disabled]="!form.valid" 
+      <button mat-button type="submit" [disabled]="form.valid" 
       [mat-dialog-close]="data">{{'BUTTON.ADD' | translate}}</button>
     </div>
   </form>

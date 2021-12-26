@@ -1,7 +1,7 @@
 import { EditComponent } from './../../shared/dialog/time-table-datatable/edit/edit.component';
 import { AddComponent } from './../../shared/dialog/time-table-datatable/add/add.component';
 import { DeleteComponent } from './../../shared/dialog/time-table-datatable/delete/delete.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -21,6 +21,7 @@ export interface TimeTableInputInterface {
   PRIORITY: number;
   COLOR: string;
 }
+
 @Component({
   selector: 'app-time-table-input',
   templateUrl: './time-table-input.component.html',
@@ -37,14 +38,18 @@ export class TimeTableInputComponent implements OnInit{
   'classEndTime', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
   dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
 
+  prioritySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[],[],[],[],[]];
+
   constructor (
     public authService: AuthService,
     public matDialog: MatDialog,
     ) {
+      this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableDatas') || '[]');
   }
+
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
-    this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableDatas') || '{}');
+    this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableDatas') || '[]');
     if (this.dataSource.data[this.dataSource.data.length - 1]) {
       this.ID = this.dataSource.data[this.dataSource.data.length-1].ID + 1;
     }
@@ -54,16 +59,20 @@ export class TimeTableInputComponent implements OnInit{
     return this.form.controls;
   }
 
-  submit() {}
+  submit() {
+  }
 
+  //#region dialogs
   openAddDialog() {
     this.matDialog.open(AddComponent, {data: {ID: this.ID}
     }).afterClosed().subscribe(result => {
       if(!!result){
-      this.ID++;
       this.dataSource.data.push(result);
       this.dataSource.data = this.dataSource.data;
       localStorage.setItem('TimeTableDatas', JSON.stringify(this.dataSource.data));
+      this.prioritySortedData[this.dataSource.data[this.dataSource.data.length-1].PRIORITY].push(result);
+      this.ID++;
+      console.log(this.prioritySortedData);
       }
     });
   }
@@ -101,6 +110,8 @@ export class TimeTableInputComponent implements OnInit{
     })
   }
 
+//#endregion
+  //#region dataChangers
   dayChanger(day: string){
     switch (day) {
       case "0": return 'DAYS_SHORT_FORM.MONDAY';
@@ -122,4 +133,6 @@ export class TimeTableInputComponent implements OnInit{
       default: return 'Error';
       }
     }
+  //#endregion
+
 }
