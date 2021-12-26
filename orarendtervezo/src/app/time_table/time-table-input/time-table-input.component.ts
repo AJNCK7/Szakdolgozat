@@ -44,12 +44,14 @@ export class TimeTableInputComponent implements OnInit{
     public authService: AuthService,
     public matDialog: MatDialog,
     ) {
-      this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableDatas') || '[]');
+      this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
+      this.prioritySortedData = JSON.parse(localStorage.getItem('TimeTablePrioritySortedDatas') || '[[],[],[],[],[],[],[],[],[],[]]');
   }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
-    this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableDatas') || '[]');
+    this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
+    this.prioritySortedData = JSON.parse(localStorage.getItem('TimeTablePrioritySortedDatas') || '[[],[],[],[],[],[],[],[],[],[]]');
     if (this.dataSource.data[this.dataSource.data.length - 1]) {
       this.ID = this.dataSource.data[this.dataSource.data.length-1].ID + 1;
     }
@@ -69,10 +71,10 @@ export class TimeTableInputComponent implements OnInit{
       if(!!result){
       this.dataSource.data.push(result);
       this.dataSource.data = this.dataSource.data;
-      localStorage.setItem('TimeTableDatas', JSON.stringify(this.dataSource.data));
       this.prioritySortedData[this.dataSource.data[this.dataSource.data.length-1].PRIORITY].push(result);
+      localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
+      localStorage.setItem('TimeTablePrioritySortedDatas', JSON.stringify(this.prioritySortedData));
       this.ID++;
-      console.log(this.prioritySortedData);
       }
     });
   }
@@ -81,10 +83,12 @@ export class TimeTableInputComponent implements OnInit{
       this.matDialog.open(EditComponent, {data: this.dataSource.data[index]
       }).afterClosed().subscribe(result =>{
         if (result != null) {
-          this.dataSource.data[index] = result; 
+          this.prioritySortedData[this.dataSource.data[index].PRIORITY].
+          //this.dataSource.data[index] = result; 
           this.dataSource.data[index].ID = id;
           this.dataSource.data = this.dataSource.data;
-          localStorage.setItem('TimeTableDatas', JSON.stringify(this.dataSource.data));
+          localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
+          localStorage.setItem('TimeTablePrioritySortedDatas', JSON.stringify(this.prioritySortedData));
         }
       });
     }
@@ -95,7 +99,8 @@ export class TimeTableInputComponent implements OnInit{
       if (result == 1) {
         this.dataSource.data.splice(index, 1);
         this.dataSource.data = this.dataSource.data;
-        localStorage.setItem('TimeTableDatas', JSON.stringify(this.dataSource.data));
+        localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
+        localStorage.setItem('TimeTablePrioritySortedDatas', JSON.stringify(this.prioritySortedData));
       }
     });
   }
@@ -105,7 +110,8 @@ export class TimeTableInputComponent implements OnInit{
       if (result == 1) {
         this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
         this.ID = 1;
-        localStorage.setItem('TimeTableDatas', JSON.stringify(this.dataSource.data));
+        localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
+        localStorage.setItem('TimeTablePrioritySortedDatas', JSON.stringify(this.prioritySortedData));
       }
     })
   }
