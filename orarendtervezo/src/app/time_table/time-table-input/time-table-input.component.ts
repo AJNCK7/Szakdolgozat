@@ -80,13 +80,16 @@ export class TimeTableInputComponent implements OnInit{
   }
 
   openEditDialog(index: number, id: number) {
+    const changeElementInIndex = this.prioritySortedData[this.dataSource.data[index].PRIORITY].findIndex(element => element.ID == this.dataSource.data[index].ID);
+    const changeElementOutIndex = this.dataSource.data[index].PRIORITY
       this.matDialog.open(EditComponent, {data: this.dataSource.data[index]
       }).afterClosed().subscribe(result =>{
         if (result != null) {
-          this.prioritySortedData[this.dataSource.data[index].PRIORITY].
-          //this.dataSource.data[index] = result; 
+          this.prioritySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
+          this.dataSource.data[index] = result; 
           this.dataSource.data[index].ID = id;
           this.dataSource.data = this.dataSource.data;
+          this.prioritySortedData[this.dataSource.data[index].PRIORITY].push(result);
           localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
           localStorage.setItem('TimeTablePrioritySortedDatas', JSON.stringify(this.prioritySortedData));
         }
@@ -94,9 +97,12 @@ export class TimeTableInputComponent implements OnInit{
     }
 
   openDeleteDialog(index: number) {
+    const changeElementInIndex = this.prioritySortedData[this.dataSource.data[index].PRIORITY].findIndex(element => element.ID == this.dataSource.data[index].ID);
+    const changeElementOutIndex = this.dataSource.data[index].PRIORITY
     this.matDialog.open(DeleteComponent)
     .afterClosed().subscribe(result => {
       if (result == 1) {
+        this.prioritySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
         this.dataSource.data.splice(index, 1);
         this.dataSource.data = this.dataSource.data;
         localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
@@ -109,6 +115,7 @@ export class TimeTableInputComponent implements OnInit{
     this.matDialog.open(DeleteAllComponent).afterClosed().subscribe(result => {
       if (result == 1) {
         this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
+        this.prioritySortedData = [[],[],[],[],[],[],[],[],[],[]];
         this.ID = 1;
         localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
         localStorage.setItem('TimeTablePrioritySortedDatas', JSON.stringify(this.prioritySortedData));
