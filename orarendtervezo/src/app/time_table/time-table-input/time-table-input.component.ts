@@ -61,7 +61,13 @@ export class TimeTableInputComponent implements OnInit{
     return this.form.controls;
   }
 
-  submit() {
+  submit() {}
+
+  sorting() {
+    for (let index = 0; index < 10; index++) {
+      this.prioritySortedData[index].sort((first,second) => parseInt(first.SUBJECT_WEIGHT) - parseInt(second.SUBJECT_WEIGHT));
+    }
+    console.log(this.prioritySortedData);
   }
 
   //#region dialogs
@@ -140,9 +146,9 @@ export class TimeTableInputComponent implements OnInit{
 
   subjectWeightChanger(subjectWeight: string){
     switch (subjectWeight) {
-      case "0": return 'SUBJECT_WEIGHT_SHORT_FORM.MANDATORY';
+      case "2": return 'SUBJECT_WEIGHT_SHORT_FORM.MANDATORY';
       case "1": return 'SUBJECT_WEIGHT_SHORT_FORM.MANDATORY_OPTIONAL';
-      case "2": return 'SUBJECT_WEIGHT_SHORT_FORM.OPTIONAL';
+      case "0": return 'SUBJECT_WEIGHT_SHORT_FORM.OPTIONAL';
       default: return 'Error';
       }
     }
