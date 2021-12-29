@@ -39,9 +39,9 @@
     <mat-label>{{'TIME_TABLE_INPUTS.SUBJECT_WEIGHT.SUBJECT_WEIGHT' | translate}}</mat-label>
     <select required matNativeControl formControlName="subjectWeight" id="subjectWeight" 
     [(ngModel)]="data.SUBJECT_WEIGHT">
-      <option value=0>{{'TIME_TABLE_INPUTS.SUBJECT_WEIGHT.MANDATORY' | translate}}</option>
+      <option value=2>{{'TIME_TABLE_INPUTS.SUBJECT_WEIGHT.MANDATORY' | translate}}</option>
       <option value=1>{{'TIME_TABLE_INPUTS.SUBJECT_WEIGHT.MANDATORY_OPTIONAL' | translate}}</option>
-      <option value=2>{{'TIME_TABLE_INPUTS.SUBJECT_WEIGHT.OPTIONAL' | translate}}</option>
+      <option value=0>{{'TIME_TABLE_INPUTS.SUBJECT_WEIGHT.OPTIONAL' | translate}}</option>
     </select>
   </mat-form-field>
   <div *ngIf="timeTableInputGet.subjectWeight.invalid && 
@@ -134,7 +134,7 @@
   </mat-form-field>
     <div mat-dialog-actions>
       <button mat-button (click)="cancelClick()" tabindex="-1">{{'BUTTON.CANCEL' | translate}}</button>
-      <button mat-button type="submit" [disabled]="!form.valid" 
+      <button mat-button type="submit" [disabled]="form.valid" 
       [mat-dialog-close]="data">{{'BUTTON.EDIT' | translate}}</button>
     </div>
   </form>
