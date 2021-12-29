@@ -36,22 +36,22 @@ export class TimeTableInputComponent implements OnInit{
 
   displayedColumns: string[] = ['id', 'subjectName', 'day', 'subjectWeight', 'classStartTime', 
   'classEndTime', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
-  dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
 
-  prioritySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[],[],[],[],[]];
+  dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
+  daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[],[]];
 
   constructor (
     public authService: AuthService,
     public matDialog: MatDialog,
     ) {
       this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
-      this.prioritySortedData = JSON.parse(localStorage.getItem('TimeTablePrioritySortedDatas') || '[[],[],[],[],[],[],[],[],[],[]]');
+      this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
   }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
     this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
-    this.prioritySortedData = JSON.parse(localStorage.getItem('TimeTablePrioritySortedDatas') || '[[],[],[],[],[],[],[],[],[],[]]');
+    this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
     if (this.dataSource.data[this.dataSource.data.length - 1]) {
       this.ID = this.dataSource.data[this.dataSource.data.length-1].ID + 1;
     }
@@ -64,10 +64,21 @@ export class TimeTableInputComponent implements OnInit{
   submit() {}
 
   sorting() {
-    for (let index = 0; index < 10; index++) {
-      this.prioritySortedData[index].sort((first,second) => parseInt(first.SUBJECT_WEIGHT) - parseInt(second.SUBJECT_WEIGHT));
+    for (let index = 0; index < 7; index++)
+      this.daySortedData[index].sort((first,second) => first.PRIORITY - second.PRIORITY)
+
+    for (let day = 0; day < 7; day++) {
+      for (let index = 0; index < this.daySortedData[day].length - 1; index++) {
+        if (this.daySortedData[day][index].PRIORITY == this.daySortedData[day][index+1].PRIORITY) {
+          if (parseInt(this.daySortedData[day][index].SUBJECT_WEIGHT) > parseInt(this.daySortedData[day][index+1].SUBJECT_WEIGHT)) {
+            const temp = this.daySortedData[day][index];
+            this.daySortedData[day][index] = this.daySortedData[day][index+1];
+            this.daySortedData[day][index+1] = temp;
+          }
+        }
+      }
     }
-    console.log(this.prioritySortedData);
+    localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
   }
 
   //#region dialogs
@@ -75,44 +86,45 @@ export class TimeTableInputComponent implements OnInit{
     this.matDialog.open(AddComponent, {data: {ID: this.ID}
     }).afterClosed().subscribe(result => {
       if(!!result){
-      this.dataSource.data.push(result);
-      this.dataSource.data = this.dataSource.data;
-      this.prioritySortedData[this.dataSource.data[this.dataSource.data.length-1].PRIORITY].push(result);
-      localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
-      localStorage.setItem('TimeTablePrioritySortedDatas', JSON.stringify(this.prioritySortedData));
-      this.ID++;
+        this.dataSource.data.push(result);
+        this.dataSource.data = this.dataSource.data;
+        this.daySortedData[this.dataSource.data[this.dataSource.data.length-1].DAY].push(result);
+        localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
+        localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
+        this.ID++;
       }
     });
   }
 
   openEditDialog(index: number, id: number) {
-    const changeElementInIndex = this.prioritySortedData[this.dataSource.data[index].PRIORITY].findIndex(element => element.ID == this.dataSource.data[index].ID);
-    const changeElementOutIndex = this.dataSource.data[index].PRIORITY
+    const changeElementInIndex = this.daySortedData[this.dataSource.data[index].DAY]
+          .findIndex(element => element.ID == this.dataSource.data[index].ID);
+    const changeElementOutIndex = parseInt(this.dataSource.data[index].DAY);
       this.matDialog.open(EditComponent, {data: this.dataSource.data[index]
       }).afterClosed().subscribe(result =>{
         if (result != null) {
-          this.prioritySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
+          this.daySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
           this.dataSource.data[index] = result; 
           this.dataSource.data[index].ID = id;
           this.dataSource.data = this.dataSource.data;
-          this.prioritySortedData[this.dataSource.data[index].PRIORITY].push(result);
+          this.daySortedData[this.dataSource.data[index].DAY].push(result);
           localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
-          localStorage.setItem('TimeTablePrioritySortedDatas', JSON.stringify(this.prioritySortedData));
+          localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
         }
       });
     }
 
   openDeleteDialog(index: number) {
-    const changeElementInIndex = this.prioritySortedData[this.dataSource.data[index].PRIORITY].findIndex(element => element.ID == this.dataSource.data[index].ID);
-    const changeElementOutIndex = this.dataSource.data[index].PRIORITY
+    const changeElementInIndex = this.daySortedData[this.dataSource.data[index].DAY].findIndex(element => element.ID == this.dataSource.data[index].ID);
+    const changeElementOutIndex = parseInt(this.dataSource.data[index].DAY)
     this.matDialog.open(DeleteComponent)
     .afterClosed().subscribe(result => {
       if (result == 1) {
-        this.prioritySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
+        this.daySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
         this.dataSource.data.splice(index, 1);
         this.dataSource.data = this.dataSource.data;
         localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
-        localStorage.setItem('TimeTablePrioritySortedDatas', JSON.stringify(this.prioritySortedData));
+        localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
       }
     });
   }
@@ -121,10 +133,10 @@ export class TimeTableInputComponent implements OnInit{
     this.matDialog.open(DeleteAllComponent).afterClosed().subscribe(result => {
       if (result == 1) {
         this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
-        this.prioritySortedData = [[],[],[],[],[],[],[],[],[],[]];
+        this.daySortedData = [[],[],[],[],[],[],[]];
         this.ID = 1;
         localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
-        localStorage.setItem('TimeTablePrioritySortedDatas', JSON.stringify(this.prioritySortedData));
+        localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
       }
     })
   }
