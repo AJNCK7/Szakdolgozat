@@ -1,1 +1,15 @@
-<p>time-table-result-display works!</p>
+<mat-card>
+    <table>
+        <th></th>
+        <th *ngFor="let day of days">{{day | translate}}</th>
+        <tr *ngFor="let hour of hours">{{hour}}
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</mat-card>
