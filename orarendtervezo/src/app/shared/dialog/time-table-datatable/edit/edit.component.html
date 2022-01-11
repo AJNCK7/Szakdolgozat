@@ -134,7 +134,7 @@
   </mat-form-field>
     <div mat-dialog-actions>
       <button mat-button (click)="cancelClick()" tabindex="-1">{{'BUTTON.CANCEL' | translate}}</button>
-      <button mat-button type="submit" [disabled]="form.valid" 
+      <button mat-button type="submit" [disabled]="!form.valid" 
       [mat-dialog-close]="data">{{'BUTTON.EDIT' | translate}}</button>
     </div>
   </form>

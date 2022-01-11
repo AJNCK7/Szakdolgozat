@@ -1,4 +1,4 @@
-.mat-card {
+.mainCard {
     width: 90vw;
     height: 50%;
     min-width: 500px;
@@ -24,12 +24,13 @@ th {
 
 tr {
     border: 1px black solid;
+    height: 60px;
     text-align: center;
     background: orange;
 }
 
 td {
     border: 1px black solid;
-    height: 30px;
     background: lightblue;
 }
+  
