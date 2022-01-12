@@ -9,8 +9,6 @@ import { TimeTableInputInterface } from '../time-table-input/time-table-input.co
 
 export class TimeTableResultDisplayComponent implements OnInit {
 
-  days: string[] = ['DAYS_SHORT_FORM.MONDAY', 'DAYS_SHORT_FORM.TUESDAY', 'DAYS_SHORT_FORM.WEDNESDAY', 
-                    'DAYS_SHORT_FORM.THURSDAY', 'DAYS_SHORT_FORM.FRIDAY', 'DAYS_SHORT_FORM.SATURDAY', 'DAYS_SHORT_FORM.SUNDAY'];
   hours: string[] = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
   daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[],[]];
 
@@ -34,9 +32,10 @@ export class TimeTableResultDisplayComponent implements OnInit {
       const endTime = this.daySortedData[i][j].CLASS_END_TIME.replace(':', '');
       div!.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth.toString() + "px";
       div!.style.height = this.timeDifferenceInMinute(startTime, endTime).toString() + "px";
-      div!.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().y +
-                    (this.timeDifferenceInMinute("7:00", startTime)) - 73 + "px";
-      div!.style.left = document.getElementById(this.daySortedData[i][j].DAY)?.getBoundingClientRect().x + "px";
+      div!.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom +
+                       this.timeDifferenceInMinute("7:00", startTime) + "px";
+      div!.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
+                        - document.getElementById("mainCard")!.getBoundingClientRect().left) + "px";
       div!.style.fontSize = "16px";
     }); 
   }
@@ -60,10 +59,12 @@ export class TimeTableResultDisplayComponent implements OnInit {
             const endTime = this.daySortedData[i][j].CLASS_END_TIME;
             div.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth.toString() + "px";
             div.style.height = this.timeDifferenceInMinute(startTime, endTime).toString() + "px";
-            div.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().y +
-                          this.timeDifferenceInMinute("7:00", startTime) - 73 + "px";
-                          console.log(this.timeDifferenceInMinute(startTime, endTime));
-            div.style.left = document.getElementById(this.daySortedData[i][j].DAY)?.getBoundingClientRect().x + "px";
+            div.style.top = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom 
+                            - document.getElementById("mainCard")!.getBoundingClientRect().top + 19)
+                            + this.timeDifferenceInMinute("7:00", startTime) + "px";
+                            console.log(this.timeDifferenceInMinute(startTime, endTime));
+            div.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
+                            - document.getElementById("mainCard")!.getBoundingClientRect().left) + "px";
             div.style.fontSize = "16px";
             document.getElementById("table")?.append(div);
             this.createdDivs.push([div.id, i.toString(), j.toString()]);
