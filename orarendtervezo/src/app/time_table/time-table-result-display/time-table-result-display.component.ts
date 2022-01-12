@@ -35,7 +35,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
       div!.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom +
                        this.timeDifferenceInMinute("7:00", startTime) + "px";
       div!.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
-                        - document.getElementById("mainCard")!.getBoundingClientRect().left) + "px";
+                        - document.getElementById("mainCard")!.getBoundingClientRect().left) - 1 + "px";
       div!.style.fontSize = "16px";
     }); 
   }
@@ -51,10 +51,11 @@ export class TimeTableResultDisplayComponent implements OnInit {
             + ", " + this.daySortedData[i][j].CLASS_END_TIME;
             div.title = div.innerHTML;
             div.id = "div" + i + j;
-            div.style.backgroundColor = "red";
+            div.style.backgroundColor = this.daySortedData[i][j].COLOR != null ? this.daySortedData[i][j].COLOR : "red";
             div.style.position = "absolute";
             div.style.overflow = "hidden";
             div.style.textOverflow = "ellipsis";
+            div.style.border = "1px"; div.style.borderStyle = "solid";
             const startTime = this.daySortedData[i][j].CLASS_START_TIME
             const endTime = this.daySortedData[i][j].CLASS_END_TIME;
             div.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth.toString() + "px";
@@ -62,9 +63,8 @@ export class TimeTableResultDisplayComponent implements OnInit {
             div.style.top = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom 
                             - document.getElementById("mainCard")!.getBoundingClientRect().top + 19)
                             + this.timeDifferenceInMinute("7:00", startTime) + "px";
-                            console.log(this.timeDifferenceInMinute(startTime, endTime));
             div.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
-                            - document.getElementById("mainCard")!.getBoundingClientRect().left) + "px";
+                            - document.getElementById("mainCard")!.getBoundingClientRect().left) - 1 + "px";
             div.style.fontSize = "16px";
             document.getElementById("table")?.append(div);
             this.createdDivs.push([div.id, i.toString(), j.toString()]);
