@@ -23,7 +23,8 @@
         "DELETE": "Törlés",
         "CANCEL": "Visszavonás",
         "NO": "Nem",
-        "YES": "Igen"
+        "YES": "Igen",
+        "OK": "Ok"
     },
     "INPUT_ERRORS":{
         "REQUIRED": "Kötelező mező",

@@ -1,4 +1,6 @@
+import { TimeTableResultDisplayDialogComponent } from './../time-table-result-display-dialog/time-table-result-display-dialog.component';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { TimeTableInputInterface } from '../time-table-input/time-table-input.component';
 
 @Component({
@@ -11,8 +13,10 @@ export class TimeTableResultDisplayComponent implements OnInit {
 
   hours: string[] = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
   daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[],[]];
+  ID: any;
+  dataSource: any;
 
-  constructor() { 
+  constructor(public matDialog: MatDialog) { 
     this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
   }
 
@@ -55,6 +59,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
             div.style.position = "absolute";
             div.style.overflow = "hidden";
             div.style.textOverflow = "ellipsis";
+            div.onclick=() => {this.openInfoDialog(this.daySortedData[i][j])};
             div.style.border = "1px"; div.style.borderStyle = "solid";
             const startTime = this.daySortedData[i][j].CLASS_START_TIME
             const endTime = this.daySortedData[i][j].CLASS_END_TIME;
@@ -75,8 +80,12 @@ export class TimeTableResultDisplayComponent implements OnInit {
     }
   }
 
+  openInfoDialog(element) {
+    this.matDialog.open(TimeTableResultDisplayDialogComponent, {data: {element: element}});
+  }
   timeDifferenceInMinute(start: string, end: string){
     const startTime = start.split(':'); const endTime = end.split(':');
     return ((parseInt(endTime[0]) - parseInt(startTime[0]))*60 + parseInt(endTime[1]) - parseInt(startTime[1]));
   }
 }
+

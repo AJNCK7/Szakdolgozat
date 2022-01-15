@@ -66,7 +66,6 @@ export class TimeTableInputComponent implements OnInit{
   sorting() {
     for (let index = 0; index < 7; index++)
       this.daySortedData[index].sort((first,second) => first.PRIORITY - second.PRIORITY)
-
     for (let day = 0; day < 7; day++) {
       for (let index = 0; index < this.daySortedData[day].length - 1; index++) {
         if (this.daySortedData[day][index].PRIORITY == this.daySortedData[day][index+1].PRIORITY) {
