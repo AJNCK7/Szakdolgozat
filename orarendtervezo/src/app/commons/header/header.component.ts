@@ -9,7 +9,6 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit{
-
   setLanguageLocalStorage(language: string){
     localStorage.setItem('Language', language)
     window.location.reload();

@@ -37,6 +37,8 @@ import { AddComponent } from './shared/dialog/time-table-datatable/add/add.compo
 import { EditComponent } from './shared/dialog/time-table-datatable/edit/edit.component';
 import { DeleteComponent } from './shared/dialog/time-table-datatable/delete/delete.component';
 import { DeleteAllComponent } from './shared/dialog/time-table-datatable/delete-all/delete-all.component';
+import { TimeTableResultDisplayComponent } from './time_table/time-table-result-display/time-table-result-display.component';
+import { TimeTableResultDisplayDialogComponent } from './time_table/time-table-result-display-dialog/time-table-result-display-dialog.component';
 
 const MatImports: any[] = [
   MatIconModule,
@@ -87,6 +89,8 @@ const TranslateImports: any[] = [
     EditComponent,
     DeleteComponent,
     DeleteAllComponent,
+    TimeTableResultDisplayComponent,
+    TimeTableResultDisplayDialogComponent,
   ],
   imports: [
     FirebaseImports,

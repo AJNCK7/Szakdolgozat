@@ -1,3 +1,4 @@
+import { TimeTableResultDisplayComponent } from './time_table/time-table-result-display/time-table-result-display.component';
 import { TimeTableInputComponent } from './time_table/time-table-input/time-table-input.component';
 import { UserForgotPasswordComponent } from './user_management/user-forgot-password/user-forgot-password.component';
 import { UserVerifyEmailComponent } from './user_management/user_verify_email/user_verify_email.component';
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'user_register', component: UserRegisterComponent},
   { path: 'user_verify_email', component: UserVerifyEmailComponent},
   { path: 'user_forgot_password', component: UserForgotPasswordComponent},
-  { path: 'time_table_input', component: TimeTableInputComponent}
+  { path: 'time_table_input', component: TimeTableInputComponent},
+  { path: 'time_table_result_display', component: TimeTableResultDisplayComponent}
 ];
 
 @NgModule({

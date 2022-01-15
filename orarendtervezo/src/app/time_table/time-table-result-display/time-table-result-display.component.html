@@ -1,0 +1,18 @@
+<mat-card id="mainCard"  class="mainCard">
+    <table id="table">
+        <th></th>
+        <th id="0">{{'DAYS_SHORT_FORM.MONDAY' | translate}}</th>
+        <th id="1">{{'DAYS_SHORT_FORM.TUESDAY' | translate}}</th>
+        <th id="2">{{'DAYS_SHORT_FORM.WEDNESDAY' | translate}}</th>
+        <th id="3">{{'DAYS_SHORT_FORM.THURSDAY' | translate}}</th>
+        <th id="4">{{'DAYS_SHORT_FORM.FRIDAY' | translate}}</th>
+        <th id="5">{{'DAYS_SHORT_FORM.SATURDAY' | translate}}</th>
+        <tr *ngFor="let hour of hours">{{hour}}</tr>
+    </table>
+    {{tableDataFiller()}}
+</mat-card>
+
+<div (window:resize)="onResize()"></div>
+
+
+

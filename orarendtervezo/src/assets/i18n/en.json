@@ -23,7 +23,8 @@
         "DELETE": "Delete",
         "CANCEL": "Cancel",
         "NO": "No",
-        "YES": "Yes"
+        "YES": "Yes",
+        "OK": "Ok"
     },
     "INPUT_ERRORS":{
         "REQUIRED": "Required input",
