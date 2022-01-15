@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TimeTableInputComponent } from 'src/app/time_table/time-table-input/time-table-input.component';
 import { DeleteComponent } from '../delete/delete.component';

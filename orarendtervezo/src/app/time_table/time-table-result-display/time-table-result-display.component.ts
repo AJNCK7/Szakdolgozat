@@ -1,6 +1,6 @@
 import { TimeTableResultDisplayDialogComponent } from './../time-table-result-display-dialog/time-table-result-display-dialog.component';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { TimeTableInputInterface } from '../time-table-input/time-table-input.component';
 
 @Component({
@@ -13,8 +13,6 @@ export class TimeTableResultDisplayComponent implements OnInit {
 
   hours: string[] = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
   daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[],[]];
-  ID: any;
-  dataSource: any;
 
   constructor(public matDialog: MatDialog) { 
     this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
@@ -33,14 +31,11 @@ export class TimeTableResultDisplayComponent implements OnInit {
       var i = parseInt(element[1]);
       var j = parseInt(element[2]);
       const startTime = this.daySortedData[i][j].CLASS_START_TIME.replace(':', '');
-      const endTime = this.daySortedData[i][j].CLASS_END_TIME.replace(':', '');
       div!.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth.toString() + "px";
-      div!.style.height = this.timeDifferenceInMinute(startTime, endTime).toString() + "px";
       div!.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom +
                        this.timeDifferenceInMinute("7:00", startTime) + "px";
       div!.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
                         - document.getElementById("mainCard")!.getBoundingClientRect().left) - 1 + "px";
-      div!.style.fontSize = "16px";
     }); 
   }
 
@@ -61,16 +56,16 @@ export class TimeTableResultDisplayComponent implements OnInit {
             div.style.textOverflow = "ellipsis";
             div.onclick=() => {this.openInfoDialog(this.daySortedData[i][j])};
             div.style.border = "1px"; div.style.borderStyle = "solid";
-            const startTime = this.daySortedData[i][j].CLASS_START_TIME
+            const startTime = this.daySortedData[i][j].CLASS_START_TIME;
             const endTime = this.daySortedData[i][j].CLASS_END_TIME;
-            div.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth.toString() + "px";
             div.style.height = this.timeDifferenceInMinute(startTime, endTime).toString() + "px";
+            div.style.fontSize = "16px";
+            div.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth.toString() + "px";
             div.style.top = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom 
                             - document.getElementById("mainCard")!.getBoundingClientRect().top + 19)
                             + this.timeDifferenceInMinute("7:00", startTime) + "px";
             div.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
                             - document.getElementById("mainCard")!.getBoundingClientRect().left) - 1 + "px";
-            div.style.fontSize = "16px";
             document.getElementById("table")?.append(div);
             this.createdDivs.push([div.id, i.toString(), j.toString()]);
           }
@@ -83,6 +78,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
   openInfoDialog(element) {
     this.matDialog.open(TimeTableResultDisplayDialogComponent, {data: {element: element}});
   }
+
   timeDifferenceInMinute(start: string, end: string){
     const startTime = start.split(':'); const endTime = end.split(':');
     return ((parseInt(endTime[0]) - parseInt(startTime[0]))*60 + parseInt(endTime[1]) - parseInt(startTime[1]));
