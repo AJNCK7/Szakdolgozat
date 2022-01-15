@@ -93,5 +93,6 @@
         "OPTIONAL": "Vál."
     },
     "CONFIRM_DELETE": "Biztosan törölni szeretnéd?",
-    "CONFIRM_DELETE_ALL": "Biztosan törölni szeretnéd mindet?"
+    "CONFIRM_DELETE_ALL": "Biztosan törölni szeretnéd mindet?",
+    "GENERATING": "Generálás"
 }

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { EditComponent } from './../../shared/dialog/time-table-datatable/edit/edit.component';
 import { AddComponent } from './../../shared/dialog/time-table-datatable/add/add.component';
 import { DeleteComponent } from './../../shared/dialog/time-table-datatable/delete/delete.component';
@@ -43,6 +44,7 @@ export class TimeTableInputComponent implements OnInit{
   constructor (
     public authService: AuthService,
     public matDialog: MatDialog,
+    public router: Router
     ) {
       this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
       this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
@@ -61,8 +63,6 @@ export class TimeTableInputComponent implements OnInit{
     return this.form.controls;
   }
 
-  submit() {}
-
   sorting() {
     for (let index = 0; index < 7; index++)
       this.daySortedData[index].sort((first,second) => first.PRIORITY - second.PRIORITY)
@@ -78,6 +78,7 @@ export class TimeTableInputComponent implements OnInit{
       }
     }
     localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
+    this.router.navigate(['time_table_result_display']);
   }
 
   //#region dialogs

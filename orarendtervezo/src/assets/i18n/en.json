@@ -93,5 +93,6 @@
         "OPTIONAL": "Opt."
     },
     "CONFIRM_DELETE": "Are you sure, you want to delete?",
-    "CONFIRM_DELETE_ALL": "Are you sure, you want to delete all?"
+    "CONFIRM_DELETE_ALL": "Are you sure, you want to delete all?",
+    "GENERATING": "Generating"
 }
