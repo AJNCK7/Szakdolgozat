@@ -3,7 +3,7 @@
     height: 50%;
     min-width: 500px;
     min-height: 400px;
-    margin: auto;
+    margin: 10px auto auto auto;
     border: 1px black solid;
 }
 
@@ -12,7 +12,6 @@ table {
     height: 100%;
     margin: auto;
     border: 1px black solid;
-
 }
 
 th {
@@ -33,4 +32,13 @@ td {
     border: 1px black solid;
     background: lightblue;
 }
-  
+
+button {
+    margin-top: 2vh;
+    width: 15vw;
+    min-width: 100px;
+    margin-bottom: 4vh;
+}
+button:first-of-type {
+    margin-right: 10px;
+}

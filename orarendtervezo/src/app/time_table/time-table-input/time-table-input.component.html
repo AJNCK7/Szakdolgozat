@@ -64,5 +64,6 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<button mat-raised-button color="primary" class="sortingButton" (click)="sorting()">{{'GENERATING' | translate}}</button>
-
+<div fxLayout="row" fxLayoutAlign="center center">
+  <button  mat-raised-button color="primary" class="sortingButton" (click)="sorting()">{{'GENERATING' | translate}}</button>
+</div>

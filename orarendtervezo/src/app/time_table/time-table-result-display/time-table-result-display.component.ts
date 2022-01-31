@@ -1,5 +1,5 @@
 import { TimeTableResultDisplayDialogComponent } from './../time-table-result-display-dialog/time-table-result-display-dialog.component';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TimeTableInputInterface } from '../time-table-input/time-table-input.component';
 
@@ -13,6 +13,12 @@ export class TimeTableResultDisplayComponent implements OnInit {
 
   hours: string[] = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
   daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[],[]];
+  wasLoaded = false;
+  currentDivs: string[][][] = [[],[],[],[],[],[],[]];
+  savedDivs: string[][][][] = [];
+  savedHtmlElements: HTMLElement[][] = [];
+  generationIndex: number = -1;
+  maxGenerationIndex: number = -1;
 
   constructor(public matDialog: MatDialog) { 
     this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
@@ -22,19 +28,16 @@ export class TimeTableResultDisplayComponent implements OnInit {
     this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
   }
 
-  wasLoaded = false;
-  createdDivs: string[][][] = [[],[],[],[],[],[],[]];
-
   onResize() {
-    for (let index = 0; index < this.createdDivs.length - 1; index++) {
-      this.createdDivs[index].forEach(element => {
+    for (let index = 0; index < this.currentDivs.length - 1; index++) {
+      this.currentDivs[index].forEach(element => {
         var div = document.getElementById(element[0]);
         var i = index;
         var j = parseInt(element[1]);
         const startTime = this.daySortedData[i][j].CLASS_START_TIME.replace(':', '');
         div!.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth.toString() + "px";
         div!.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom +
-                        this.timeDifferenceInMinute("7:00", startTime) + "px";
+                         this.timeDifferenceInMinute("7:00", startTime) + 19 + "px";
         div!.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
                           - document.getElementById("mainCard")!.getBoundingClientRect().left) - 1 + "px";
       });
@@ -64,12 +67,12 @@ export class TimeTableResultDisplayComponent implements OnInit {
               div.style.fontSize = "16px";
               div.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth.toString() + "px";
               div.style.top = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom 
-                              - document.getElementById("mainCard")!.getBoundingClientRect().top + 19)
-                              + this.timeDifferenceInMinute("7:00", startTime) + "px";
+                              - document.getElementById("mainCard")!.getBoundingClientRect().top)
+                              + this.timeDifferenceInMinute("7:00", startTime) - 1 + "px";
               div.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
                               - document.getElementById("mainCard")!.getBoundingClientRect().left) - 1 + "px";
               document.getElementById("table")?.append(div);
-              this.createdDivs[i].push([div.id, j.toString()]);
+              this.currentDivs[i].push([div.id, j.toString()]);
             }
           }
         }
@@ -90,11 +93,10 @@ export class TimeTableResultDisplayComponent implements OnInit {
   isTimeSlotAvailable(start: string, end: string, i: number){
     const startTime: number = parseInt(start.replace(':', '')); const endTime: number = parseInt(end.replace(':', ''));
     let available: boolean = false;
-    if (this.createdDivs[i].length == 0) return true;
-    for(let element of this.createdDivs[i]) {
+    if (this.currentDivs[i].length == 0) return true;
+    for(let element of this.currentDivs[i]) {
         const elementStartTime = parseInt(this.daySortedData[i][element[1]].CLASS_START_TIME.replace(':',''));
         const elementEndTime = parseInt(this.daySortedData[i][element[1]].CLASS_END_TIME.replace(':',''));
-        console.log(startTime, elementStartTime, endTime, elementEndTime);
         if (startTime < elementStartTime && endTime > elementEndTime) available = false;
         else if (endTime <= elementStartTime) available = true;
         else if (startTime >= elementEndTime) available = true;
@@ -104,6 +106,102 @@ export class TimeTableResultDisplayComponent implements OnInit {
         }
     };
     return available;
+  }
+
+  newGeneration() {
+    if (this.generationIndex == this.maxGenerationIndex) {
+      this.generationIndex++;
+      this.maxGenerationIndex++;
+      if (this.maxGenerationIndex < 10) {
+        for(let days of this.daySortedData) {
+          for(let element of days) {
+            if (element.PRIORITY > 0) {
+              element.PRIORITY--;
+            }
+          }
+        }  
+        this.sortingByPriority();
+      }
+      else {
+        this.sortingByRandomOrder();
+      }
+      this.saveHTMLElements();
+      this.clearHTMLElements();
+      this.saveDivs();
+      this.currentDivs = [[],[],[],[],[],[],[]];
+      this.wasLoaded = false;
+      this.tableDataFiller();
+      this.onResize();
+    }
+    else{
+      this.clearHTMLElements();
+      this.loadHTMLElements();
+      this.loadDivs();
+      this.onResize();
+      this.generationIndex++;
+    }
+  }
+
+  previousGeneration() {
+    if (this.generationIndex > 0) {
+      this.generationIndex--;
+      this.clearHTMLElements();
+      for(let div of this.savedHtmlElements[this.generationIndex]) {
+          document.getElementById("table")?.append(div);
+      }
+    }
+  }
+
+  sortingByPriority() {
+    for (let index = 0; index < 7; index++)
+      this.daySortedData[index].sort((first,second) => second.PRIORITY - first.PRIORITY)
+    for (let day = 0; day < 7; day++) {
+      for (let index = 0; index < this.daySortedData[day].length - 1; index++) {
+        if (this.daySortedData[day][index].PRIORITY == this.daySortedData[day][index+1].PRIORITY) {
+          if (parseInt(this.daySortedData[day][index].SUBJECT_WEIGHT) < parseInt(this.daySortedData[day][index+1].SUBJECT_WEIGHT)) {
+            const temp = this.daySortedData[day][index];
+            this.daySortedData[day][index] = this.daySortedData[day][index+1];
+            this.daySortedData[day][index+1] = temp;
+          }
+        }
+      }
+    }
+  }
+
+  sortingByRandomOrder() {
+    for (let index = 0; index < 7; index++)
+      this.daySortedData[index].sort(() => Math.random() - 0.5)
+  }
+
+  clearHTMLElements() {
+    for(let divs of this.currentDivs) {
+      for(let element of divs) {
+        document.getElementById(element[0])?.remove();
+      }
+    }
+  }
+
+  saveHTMLElements() {
+    this.savedHtmlElements.push([])
+    for(let divs of this.currentDivs) {
+      for(let element of divs) {
+        this.savedHtmlElements[this.generationIndex].push(document.getElementById(element[0])!);
+      }
+    }
+  }
+
+  loadHTMLElements() {
+    for(let element of this.savedHtmlElements[this.generationIndex]){
+      document.getElementById("table")?.append(element);
+    }
+  }
+
+  saveDivs() {
+    this.savedDivs.push(this.currentDivs);
+  }
+
+  loadDivs() {
+    this.currentDivs = this.savedDivs[this.generationIndex];
   }
 }
 

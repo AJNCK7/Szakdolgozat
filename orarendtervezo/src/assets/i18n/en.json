@@ -94,5 +94,7 @@
     },
     "CONFIRM_DELETE": "Are you sure, you want to delete?",
     "CONFIRM_DELETE_ALL": "Are you sure, you want to delete all?",
-    "GENERATING": "Generating"
+    "GENERATING": "Generating",
+    "PREVIOUS": "Previous",
+    "NEXT": "Next"
 }

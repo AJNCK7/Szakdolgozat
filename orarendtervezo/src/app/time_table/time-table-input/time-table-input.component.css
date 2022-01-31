@@ -53,6 +53,5 @@ td.mat-cell:first-of-type{
 .sortingButton {
     min-width: 350px;
     width: 50vw;
-    position: absolute;
-    transform: translate(50%, 0%);
+    margin-bottom: 40px;
 }
