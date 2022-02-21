@@ -30,6 +30,4 @@ export class UserLoginComponent {
   get loginForm() {
     return this.form.controls;
   }
-
-  submit() {}
 }

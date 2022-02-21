@@ -37,7 +37,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
         const startTime = this.daySortedData[i][j].CLASS_START_TIME.replace(':', '');
         div!.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth! + 1 + "px";
         div!.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom +
-                         this.timeDifferenceInMinute("7:00", startTime) + "px";
+                        this.timeDifferenceInMinute("7:00", startTime) + "px";
         div!.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
                           - document.getElementById("mainCard")!.getBoundingClientRect().left)- 2 + "px";
       });
@@ -147,8 +147,9 @@ export class TimeTableResultDisplayComponent implements OnInit {
       this.generationIndex--;
       this.clearHTMLElements();
       for(let div of this.savedHtmlElements[this.generationIndex]) {
-          document.getElementById("table")?.append(div);
+        document.getElementById("table")?.append(div);
       }
+      this.onResize();
     }
   }
 
@@ -202,6 +203,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
 
   loadDivs() {
     this.currentDivs = this.savedDivs[this.generationIndex];
+    
   }
 }
 

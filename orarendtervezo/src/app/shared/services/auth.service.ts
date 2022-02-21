@@ -1,7 +1,7 @@
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Injectable, NgZone } from '@angular/core';
-import { User } from "../services/user";
+import { User } from "../interfaces/user";
 import { Router } from "@angular/router";
 
 @Injectable({
@@ -15,7 +15,7 @@ export class AuthService {
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
     public router: Router,  
-    public ngZone: NgZone
+    public ngZone: NgZone,
   ) {    
     this.afAuth.authState.subscribe(user => {
       if (user) {

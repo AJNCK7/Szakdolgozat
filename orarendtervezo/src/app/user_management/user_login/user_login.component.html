@@ -1,7 +1,7 @@
 <mat-card class="user_login_card">
     <h1>{{'USER.LOGIN' | translate}}</h1>
     <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="submit()" class="login_form">
+      <form [formGroup]="form" class="login_form">
         <mat-form-field class="login_form_field" appearance="fill">
           <mat-label>{{'USER.USERNAME' | translate}}</mat-label>
           <input required type="text" matInput formControlName="username" #username id="username">
