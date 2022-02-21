@@ -27,10 +27,13 @@ tr {
     text-align: center;
     background: orange;
 }
-
 td {
     border: 1px black solid;
-    background: lightblue;
+    background: yellow;
+}
+
+td:first-of-type {
+    background: orange;
 }
 
 button {

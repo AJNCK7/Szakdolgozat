@@ -5,13 +5,24 @@
     width: 100vw;
     height: 15vh;
     min-width: 700px;
+    font-size: 16px;
 }
+
 a{
     text-decoration: none;
     color: black;
+    font-size: 20px;
 }
 
 .clickable_button{
     background:none;
     border:none; 
+}
+
+.homeButton{
+    font-size: 32px;
+}
+
+button {
+    font-size: 24px;
 }

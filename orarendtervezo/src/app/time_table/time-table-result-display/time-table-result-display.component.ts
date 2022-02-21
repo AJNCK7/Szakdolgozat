@@ -35,11 +35,11 @@ export class TimeTableResultDisplayComponent implements OnInit {
         var i = index;
         var j = parseInt(element[1]);
         const startTime = this.daySortedData[i][j].CLASS_START_TIME.replace(':', '');
-        div!.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth.toString() + "px";
+        div!.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth! + 1 + "px";
         div!.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom +
-                         this.timeDifferenceInMinute("7:00", startTime) + 19 + "px";
+                         this.timeDifferenceInMinute("7:00", startTime) + "px";
         div!.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
-                          - document.getElementById("mainCard")!.getBoundingClientRect().left) - 1 + "px";
+                          - document.getElementById("mainCard")!.getBoundingClientRect().left)- 2 + "px";
       });
     }
   }
@@ -65,12 +65,12 @@ export class TimeTableResultDisplayComponent implements OnInit {
               const endTime = this.daySortedData[i][j].CLASS_END_TIME;
               div.style.height = this.timeDifferenceInMinute(startTime, endTime).toString() + "px";
               div.style.fontSize = "16px";
-              div.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth.toString() + "px";
+              div.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth! + 1 + "px";
               div.style.top = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom 
                               - document.getElementById("mainCard")!.getBoundingClientRect().top)
-                              + this.timeDifferenceInMinute("7:00", startTime) - 1 + "px";
+                              + this.timeDifferenceInMinute("7:00", startTime) + "px";
               div.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
-                              - document.getElementById("mainCard")!.getBoundingClientRect().left) - 1 + "px";
+                              - document.getElementById("mainCard")!.getBoundingClientRect().left) - 2 + "px";
               document.getElementById("table")?.append(div);
               this.currentDivs[i].push([div.id, j.toString()]);
             }
@@ -134,11 +134,11 @@ export class TimeTableResultDisplayComponent implements OnInit {
       this.onResize();
     }
     else{
+      this.generationIndex++;
       this.clearHTMLElements();
       this.loadHTMLElements();
       this.loadDivs();
       this.onResize();
-      this.generationIndex++;
     }
   }
 

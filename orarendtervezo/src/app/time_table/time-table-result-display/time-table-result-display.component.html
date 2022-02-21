@@ -7,7 +7,16 @@
         <th id="3">{{'DAYS_SHORT_FORM.THURSDAY' | translate}}</th>
         <th id="4">{{'DAYS_SHORT_FORM.FRIDAY' | translate}}</th>
         <th id="5">{{'DAYS_SHORT_FORM.SATURDAY' | translate}}</th>
-        <tr *ngFor="let hour of hours">{{hour}}</tr>
+        <tr *ngFor="let hour of hours">
+            <td>{{hour}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
     </table>
     {{tableDataFiller()}}
 </mat-card>
