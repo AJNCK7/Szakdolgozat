@@ -33,6 +33,7 @@ td {
 }
 
 td:first-of-type {
+    vertical-align: top;
     background: orange;
 }
 
