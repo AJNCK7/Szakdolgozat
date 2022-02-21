@@ -132,9 +132,12 @@
     <input type="color" matInput formControlName="colorPick" name="colorPick"
     id="colorPick" [(ngModel)]="data.COLOR">
   </mat-form-field>
-    <div mat-dialog-actions>
-      <button mat-button (click)="cancelClick()" tabindex="-1">{{'BUTTON.CANCEL' | translate}}</button>
-      <button mat-button type="submit" [disabled]="!form.valid" 
-      [mat-dialog-close]="data">{{'BUTTON.EDIT' | translate}}</button>
-    </div>
-  </form>
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-raised-button color="primary" (click)="cancelClick()" tabindex="-1">
+      {{'BUTTON.CANCEL' | translate}}
+    </button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid" [mat-dialog-close]="data">
+      {{'BUTTON.EDIT' | translate}}
+    </button>
+  </div>
+</form>

@@ -203,7 +203,6 @@ export class TimeTableResultDisplayComponent implements OnInit {
 
   loadDivs() {
     this.currentDivs = this.savedDivs[this.generationIndex];
-    
   }
 }
 

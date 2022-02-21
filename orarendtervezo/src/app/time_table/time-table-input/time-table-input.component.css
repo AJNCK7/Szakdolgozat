@@ -55,3 +55,8 @@ td.mat-cell:first-of-type{
     width: 50vw;
     margin-bottom: 40px;
 }
+
+.mat-header-cell {
+    font-weight: bold;
+    font-size: 16px;
+}

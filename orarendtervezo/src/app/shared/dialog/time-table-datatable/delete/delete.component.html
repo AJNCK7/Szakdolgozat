@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <p>{{'CONFIRM_DELETE' | translate}}</p>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="noClick()">{{'BUTTON.NO' | translate}}</button>
-  <button mat-button [mat-dialog-close]="1" cdkFocusInitial>{{'BUTTON.YES' | translate}}</button>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center" >
+  <button mat-raised-button color="primary" (click)="noClick()">{{'BUTTON.NO' | translate}}</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="1" cdkFocusInitial>{{'BUTTON.YES' | translate}}</button>
 </div>

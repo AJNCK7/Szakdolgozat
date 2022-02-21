@@ -25,6 +25,7 @@ export class EditComponent{
     private fb: FormBuilder,
     public authService: AuthService
     ) {
+    this.dialogRef.disableClose = true;
     this.form = fb.group({
       subjectName: ['', [
         Validators.required,

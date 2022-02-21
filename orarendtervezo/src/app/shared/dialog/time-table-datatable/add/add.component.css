@@ -1,11 +1,5 @@
-.time_table_input_card{
-    min-width: 450px;
-    margin-top: 5vh;
-    width: 70vw;
-}
-
 .time_table_input_form_field{
-    width: 60vw;
+    width: 100%;
     min-width: 400px;
 }
 
@@ -33,7 +27,7 @@
 }
 
 #colorPick{
-    width: 55vw;
+    width: 68vw;
     margin:10px;
     min-width: 350px;
 }
