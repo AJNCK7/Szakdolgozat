@@ -1,4 +1,5 @@
-import { Component} from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -7,7 +8,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './user_login.component.html',
   styleUrls: ['./user_login.component.css']
 })
-export class UserLoginComponent {
+export class UserLoginComponent implements OnInit{
   hide = false;
   confirm_hide = false;
   
@@ -15,6 +16,7 @@ export class UserLoginComponent {
 
   constructor (
     private fb: FormBuilder,
+    private router: Router,
     public authService: AuthService
     ) {
     this.form = fb.group({
@@ -25,6 +27,10 @@ export class UserLoginComponent {
         Validators.required,
       ]]
     })
+  }
+  
+  ngOnInit(): void {
+    if(localStorage.getItem('user') != "null") this.router.navigate(['home_page']);
   }
 
   get loginForm() {

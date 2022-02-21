@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ConfirmedValidator } from 'src/app/shared/customValidators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -8,7 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   templateUrl: './user_register.component.html',
   styleUrls: ['./user_register.component.css']
 })
-export class UserRegisterComponent {
+export class UserRegisterComponent implements OnInit{
   hide = false;
   confirm_hide = false;
   
@@ -17,7 +18,8 @@ export class UserRegisterComponent {
 
   constructor (
     private fb: FormBuilder,
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router
     ) {
     this.form = fb.group({
       username: ['', [
@@ -37,6 +39,10 @@ export class UserRegisterComponent {
         ConfirmedValidator('email', 'confirmEmail')
       ]
     })
+  }
+
+  ngOnInit(): void {
+    if(localStorage.getItem('user') != "null") this.router.navigate(['home_page']);
   }
 
   get registerForm() {

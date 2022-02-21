@@ -36,6 +36,7 @@ export class AuthService {
           this.router.navigate(['home_page']);
         });
         this.SetUserData(result.user);
+        window.location.reload();
       }).catch((error) => {
         window.alert(error.message)
       })
