@@ -17,8 +17,8 @@ export class TimeTableResultDisplayComponent implements OnInit {
   currentDivs: string[][][] = [[],[],[],[],[],[],[]];
   savedDivs: string[][][][] = [];
   savedHtmlElements: HTMLElement[][] = [];
-  generationIndex: number = -1;
-  maxGenerationIndex: number = -1;
+  generationIndex: number = 0;
+  maxGenerationIndex: number = 0;
 
   constructor(public matDialog: MatDialog) { 
     this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
@@ -34,12 +34,14 @@ export class TimeTableResultDisplayComponent implements OnInit {
         var div = document.getElementById(element[0]);
         var i = index;
         var j = parseInt(element[1]);
+        if(div){
         const startTime = this.daySortedData[i][j].CLASS_START_TIME.replace(':', '');
         div!.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth! + 1 + "px";
         div!.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom +
                         this.timeDifferenceInMinute("7:00", startTime) + "px";
         div!.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
                           - document.getElementById("mainCard")!.getBoundingClientRect().left)- 2 + "px";
+        }
       });
     }
   }
@@ -77,7 +79,10 @@ export class TimeTableResultDisplayComponent implements OnInit {
           }
         }
       }
-    this.wasLoaded = true;
+      this.saveHTMLElements();
+      this.saveDivs();
+      this.wasLoaded = true;
+      this.maxGenerationIndex++;
     }
   }
 
@@ -109,9 +114,8 @@ export class TimeTableResultDisplayComponent implements OnInit {
   }
 
   newGeneration() {
+    this.generationIndex++;
     if (this.generationIndex == this.maxGenerationIndex) {
-      this.generationIndex++;
-      this.maxGenerationIndex++;
       if (this.maxGenerationIndex < 10) {
         for(let days of this.daySortedData) {
           for(let element of days) {
@@ -125,31 +129,25 @@ export class TimeTableResultDisplayComponent implements OnInit {
       else {
         this.sortingByRandomOrder();
       }
-      this.saveHTMLElements();
       this.clearHTMLElements();
-      this.saveDivs();
       this.currentDivs = [[],[],[],[],[],[],[]];
       this.wasLoaded = false;
       this.tableDataFiller();
       this.onResize();
     }
     else{
-      this.generationIndex++;
       this.clearHTMLElements();
       this.loadHTMLElements();
       this.loadDivs();
-      this.onResize();
     }
   }
 
   previousGeneration() {
     if (this.generationIndex > 0) {
-      this.generationIndex--;
       this.clearHTMLElements();
-      for(let div of this.savedHtmlElements[this.generationIndex]) {
-        document.getElementById("table")?.append(div);
-      }
-      this.onResize();
+      this.generationIndex--;
+      this.loadDivs();
+      this.loadHTMLElements();
     }
   }
 
