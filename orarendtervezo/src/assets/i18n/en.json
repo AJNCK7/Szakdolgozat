@@ -75,8 +75,7 @@
         "WEDNESDAY": "Wednesday",
         "THURSDAY": "Thursday",
         "FRIDAY": "Friday",
-        "SATURDAY": "Saturday",
-        "SUNDAY": "Sunday"
+        "SATURDAY": "Saturday"
     },
     "DAYS_SHORT_FORM": {
         "MONDAY": "Mon",
@@ -84,8 +83,7 @@
         "WEDNESDAY": "Wen",
         "THURSDAY": "Thu",
         "FRIDAY": "Fri",
-        "SATURDAY": "Sat",
-        "SUNDAY": "Sun"
+        "SATURDAY": "Sat"
     },
     "SUBJECT_WEIGHT_SHORT_FORM": {
         "MANDATORY": "Mand.",

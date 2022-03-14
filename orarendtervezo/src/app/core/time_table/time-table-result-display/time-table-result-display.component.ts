@@ -12,9 +12,9 @@ import { TimeTableInputInterface } from '../time-table-input/time-table-input.co
 export class TimeTableResultDisplayComponent implements OnInit {
 
     hours: string[] = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
-    daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[],[]];
+    daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[]];
     wasLoaded = false;
-    currentDivs: string[][][] = [[],[],[],[],[],[],[]];
+    currentDivs: string[][][] = [[],[],[],[],[],[]];
     savedDivs: string[][][][] = [];
     savedHtmlElements: HTMLElement[][] = [];
     generationIndex = 0;
@@ -22,11 +22,11 @@ export class TimeTableResultDisplayComponent implements OnInit {
     maxPriority = 0;
 
     constructor(public matDialog: MatDialog) { 
-        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
+        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
     }
 
     ngOnInit(): void {
-        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
+        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
         this.daySortedData.forEach(element => {
             element.forEach(element => {
                 if(element.PRIORITY > this.maxPriority) this.maxPriority = element.PRIORITY;
@@ -42,11 +42,11 @@ export class TimeTableResultDisplayComponent implements OnInit {
                 const j = parseInt(element[1]);
                 if(div){
                     const startTime = this.daySortedData[i][j].CLASS_START_TIME.replace(':', '');
-        div!.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth! + 1 + 'px';
+        div!.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth! - 10  + 'px';
         div!.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom +
                         this.timeDifferenceInMinute('7:00', startTime) + 'px';
         div!.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
-                        - document.getElementById('mainCard')!.getBoundingClientRect().left)- 2 + 'px';
+                        - document.getElementById('mainCard')!.getBoundingClientRect().left) + 4 + 'px';
                 }
             });
         }
@@ -59,28 +59,27 @@ export class TimeTableResultDisplayComponent implements OnInit {
                     if (this.daySortedData[i].length != 0) {
                         if(this.isTimeSlotAvailable(this.daySortedData[i][j].CLASS_START_TIME, this.daySortedData[i][j].CLASS_END_TIME, i)){
                             const div = document.createElement('div');
-                            div.innerHTML = this.daySortedData[i][j].SUBJECT_NAME + ', ' + this.daySortedData[i][j].CLASS_START_TIME
-                            + ', ' + this.daySortedData[i][j].CLASS_END_TIME + ', ';
+                            div.innerHTML = this.daySortedData[i][j].SUBJECT_NAME + ', <br>' + this.daySortedData[i][j].CLASS_START_TIME
+                            + '-' + this.daySortedData[i][j].CLASS_END_TIME;
                             div.title = div.innerHTML;
                             div.id = 'div' + i + j;
                             div.style.backgroundColor = this.daySortedData[i][j].COLOR != null ? this.daySortedData[i][j].COLOR : 'red';
                             div.style.position = 'absolute';
-                            div.style.overflow = 'hidden'; //ez mit csinál?
+                            div.style.overflow = 'hidden';
                             div.style.textOverflow = 'ellipsis';
                             div.onclick=() => {this.openInfoDialog(this.daySortedData[i][j]);};
                             div.style.border = '1px'; div.style.borderStyle = 'solid'; 
                             const startTime = this.daySortedData[i][j].CLASS_START_TIME;
                             const endTime = this.daySortedData[i][j].CLASS_END_TIME;
                             div.style.height = this.timeDifferenceInMinute(startTime, endTime).toString() + 'px';
-                            div.style.fontSize = '16px';
-                            //lehet értelmes lenne a szélességet kissebbre venni és annyival beljebb helyezni 
-                            //ezzel megoldódik a borderek hülyén kinézése
-                            div.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth! + 1 + 'px';
+                            div.style.fontSize = '20px';
+                            div.style.fontWeight = 'bold';
+                            div.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth! - 10 + 'px';
                             div.style.top = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom 
                             - document.getElementById('mainCard')!.getBoundingClientRect().top)
                             + this.timeDifferenceInMinute('7:00', startTime) + 'px';
                             div.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
-                            - document.getElementById('mainCard')!.getBoundingClientRect().left) - 2 + 'px';
+                            - document.getElementById('mainCard')!.getBoundingClientRect().left) + 4 + 'px';
                             document.getElementById('table')?.append(div);
                             this.currentDivs[i].push([div.id, j.toString()]);
                         }
@@ -163,9 +162,8 @@ export class TimeTableResultDisplayComponent implements OnInit {
     }
 
     sortingByPriority() {
-        for (let index = 0; index < 7; index++) // nem lehet egybe vonni?
-            this.daySortedData[index].sort((first,second) => second.PRIORITY - first.PRIORITY);
-        for (let day = 0; day < 7; day++) { //ide berakni
+        for (let day = 0; day < 6; day++) {
+            this.daySortedData[day].sort((first,second) => second.PRIORITY - first.PRIORITY);
             for (let index = 0; index < this.daySortedData[day].length - 1; index++) {
                 if (this.daySortedData[day][index].PRIORITY == this.daySortedData[day][index+1].PRIORITY) {
                     if (parseInt(this.daySortedData[day][index].SUBJECT_WEIGHT) < parseInt(this.daySortedData[day][index+1].SUBJECT_WEIGHT)) {
@@ -179,7 +177,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
     }
 
     sortingByRandomOrder() {
-        for (let index = 0; index < 7; index++)
+        for (let index = 0; index < 6; index++)
             this.daySortedData[index].sort(() => Math.random() - 0.5);
     }
 

@@ -1,13 +1,13 @@
 import { Router } from '@angular/router';
-import { EditComponent } from './curd-dialogs/edit/edit.component';
-import { AddComponent } from './curd-dialogs/add/add.component';
-import { DeleteComponent } from './curd-dialogs/delete/delete.component';
+import { EditComponent } from './crud-dialogs/edit/edit.component';
+import { AddComponent } from './crud-dialogs/add/add.component';
+import { DeleteComponent } from './crud-dialogs/delete/delete.component';
 import { Component, OnInit} from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { DeleteAllComponent } from 'src/app/core/time_table/time-table-input/curd-dialogs/delete-all/delete-all.component';
+import { DeleteAllComponent } from 'src/app/core/time_table/time-table-input/crud-dialogs/delete-all/delete-all.component';
 
 export interface TimeTableInputInterface {
     ID: number;
@@ -39,7 +39,7 @@ export class TimeTableInputComponent implements OnInit{
         'classEndTime', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
 
     dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
-    daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[],[]];
+    daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[]];
 
     constructor (
     public authService: AuthService,
@@ -47,7 +47,7 @@ export class TimeTableInputComponent implements OnInit{
     public router: Router
     ) {
         this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
-        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
+        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
     }
 
     ngOnInit(): void {
@@ -64,9 +64,8 @@ export class TimeTableInputComponent implements OnInit{
     }
 
     sorting() {
-        for (let index = 0; index < 7; index++)
-            this.daySortedData[index].sort((first,second) => second.PRIORITY - first.PRIORITY);
-        for (let day = 0; day < 7; day++) {
+        for (let day = 0; day < 6; day++) {
+            this.daySortedData[day].sort((first,second) => second.PRIORITY - first.PRIORITY);
             for (let index = 0; index < this.daySortedData[day].length - 1; index++) {
                 if (this.daySortedData[day][index].PRIORITY == this.daySortedData[day][index+1].PRIORITY) {
                     if (parseInt(this.daySortedData[day][index].SUBJECT_WEIGHT) < parseInt(this.daySortedData[day][index+1].SUBJECT_WEIGHT)) {
@@ -132,7 +131,7 @@ export class TimeTableInputComponent implements OnInit{
         this.matDialog.open(DeleteAllComponent).afterClosed().subscribe(result => {
             if (result == 1) {
                 this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
-                this.daySortedData = [[],[],[],[],[],[],[]];
+                this.daySortedData = [[],[],[],[],[],[]];
                 this.ID = 1;
                 localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
                 localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));

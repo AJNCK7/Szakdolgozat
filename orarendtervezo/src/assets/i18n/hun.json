@@ -75,8 +75,7 @@
         "WEDNESDAY": "Szerda",
         "THURSDAY": "Csütörtök",
         "FRIDAY": "Péntek",
-        "SATURDAY": "Szombat",
-        "SUNDAY": "Vasárnap"
+        "SATURDAY": "Szombat"
     },
     "DAYS_SHORT_FORM": {
         "MONDAY": "Hét",
@@ -84,8 +83,7 @@
         "WEDNESDAY": "Szer",
         "THURSDAY": "Csüt",
         "FRIDAY": "Pén",
-        "SATURDAY": "Szom",
-        "SUNDAY": "Vas"
+        "SATURDAY": "Szom"
     },
     "SUBJECT_WEIGHT_SHORT_FORM": {
         "MANDATORY": "Köt.",
