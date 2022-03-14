@@ -12,13 +12,13 @@ export function ConfirmedValidator(controlName: string, matchingControlName: str
         } else {
             matchingControl.setErrors(null);
         }
-    }
+    };
 }
 
 export function startTimeIsGreaterThanEndTime(startTime: string, endTime: string){
     return (formGroup: FormGroup) => {
-        var control = formGroup.controls[startTime];
-        var matchingControl = formGroup.controls[endTime];
+        const control = formGroup.controls[startTime];
+        const matchingControl = formGroup.controls[endTime];
         if (matchingControl.errors && !matchingControl.errors.startTimeIsGreaterThanEndTime) {
             return;
         }
@@ -28,5 +28,5 @@ export function startTimeIsGreaterThanEndTime(startTime: string, endTime: string
         } else {
             matchingControl.setErrors(null);
         }
-    }
+    };
 }

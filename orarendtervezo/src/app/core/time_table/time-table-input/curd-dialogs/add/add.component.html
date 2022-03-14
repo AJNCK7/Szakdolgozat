@@ -1,0 +1,142 @@
+<h3 mat-dialog-title>{{'BUTTON.ADD' | translate}}</h3>
+    <form [formGroup]="form" class="mat-dialog-content">
+        <mat-form-field class="time_table_input_form_field" appearance="fill">
+            <mat-label>{{'TIME_TABLE_INPUTS.SUBJECT_NAME' | translate}}</mat-label>
+            <input required type="text" matInput formControlName="subjectName" id="subjectName" 
+            [(ngModel)]="data.SUBJECT_NAME">
+        </mat-form-field>
+        <div *ngIf="timeTableInputGet.subjectName.invalid && 
+                    (timeTableInputGet.subjectName.dirty || timeTableInputGet.subjectName.touched)" 
+                    class="alert">
+            <div *ngIf="timeTableInputGet.subjectName.errors?.required">
+                {{'INPUT_ERRORS.REQUIRED' | translate }}
+            </div>
+            <div *ngIf="timeTableInputGet.subjectName.errors?.maxlength">
+                {{'INPUT_ERRORS.MAXLENGTH' | translate:subjectNameMaxLengthParam }}
+            </div>
+        </div>
+        <mat-form-field class="time_table_input_form_field" appearance="fill">
+            <mat-label>{{'TIME_TABLE_INPUTS.DAY' | translate}}</mat-label>
+            <select required matNativeControl formControlName="day" id="day" 
+            [(ngModel)]="data.DAY">
+                <option value=0>{{'DAYS.MONDAY'   | translate}}</option>
+                <option value=1>{{'DAYS.TUESDAY'  | translate}}</option>
+                <option value=2>{{'DAYS.WEDNESDAY'| translate}}</option>
+                <option value=3>{{'DAYS.THURSDAY' | translate}}</option>
+                <option value=4>{{'DAYS.FRIDAY'   | translate}}</option>
+                <option value=5>{{'DAYS.SATURDAY' | translate}}</option>
+            </select>
+        </mat-form-field>
+        <div *ngIf="timeTableInputGet.day.invalid && 
+                    (timeTableInputGet.day.dirty || timeTableInputGet.day.touched)" 
+                    class="alert">
+            <div *ngIf="timeTableInputGet.day.errors?.required">
+                {{'INPUT_ERRORS.REQUIRED' | translate }}
+            </div>
+        </div>
+        <mat-form-field class="time_table_input_form_field" appearance="fill">
+            <mat-label>{{'TIME_TABLE_INPUTS.SUBJECT_WEIGHT.SUBJECT_WEIGHT' | translate}}</mat-label>
+            <select required matNativeControl formControlName="subjectWeight" id="subjectWeight" 
+            [(ngModel)]="data.SUBJECT_WEIGHT">
+                <option value=2>{{'TIME_TABLE_INPUTS.SUBJECT_WEIGHT.MANDATORY' | translate}}</option>
+                <option value=1>{{'TIME_TABLE_INPUTS.SUBJECT_WEIGHT.MANDATORY_OPTIONAL' | translate}}</option>
+                <option value=0>{{'TIME_TABLE_INPUTS.SUBJECT_WEIGHT.OPTIONAL' | translate}}</option>
+            </select>
+        </mat-form-field>
+        <div *ngIf="timeTableInputGet.subjectWeight.invalid && 
+                    (timeTableInputGet.subjectWeight.dirty || timeTableInputGet.subjectWeight.touched)" 
+                    class="alert">
+            <div *ngIf="timeTableInputGet.subjectWeight.errors?.required">
+                {{'INPUT_ERRORS.REQUIRED' | translate }}
+            </div>
+        </div>
+        <mat-form-field class="time_table_input_form_field" appearance="fill">
+            <mat-label>{{'TIME_TABLE_INPUTS.CLASS_START_TIME' | translate}}</mat-label>
+            <input required type="text" matInput formControlName="classStartTime" id="classStartTime" 
+            [(ngModel)]="data.CLASS_START_TIME">
+        </mat-form-field>
+        <div *ngIf="timeTableInputGet.classStartTime.invalid && 
+                    (timeTableInputGet.classStartTime.dirty || timeTableInputGet.classStartTime.touched)" 
+                    class="alert">
+            <div *ngIf="timeTableInputGet.classStartTime.errors?.required">
+                {{'INPUT_ERRORS.REQUIRED' | translate }}
+            </div>
+            <div *ngIf="timeTableInputGet.classStartTime.errors?.pattern">
+                {{'INPUT_ERRORS.PATTERN.CLASS_TIME_PATTERN' | translate }}
+            </div>
+        </div>
+        <mat-form-field class="time_table_input_form_field" appearance="fill">
+            <mat-label>{{'TIME_TABLE_INPUTS.CLASS_END_TIME' | translate}}</mat-label>
+            <input required type="text" matInput formControlName="classEndTime" id="classEndTime" 
+            [(ngModel)]="data.CLASS_END_TIME">
+        </mat-form-field>
+        <div *ngIf="timeTableInputGet.classEndTime.invalid && 
+                    (timeTableInputGet.classEndTime.dirty || timeTableInputGet.classEndTime.touched)" 
+                    class="alert">
+            <div *ngIf="timeTableInputGet.classEndTime.errors?.required">
+                {{'INPUT_ERRORS.REQUIRED' | translate }}
+            </div>
+            <div *ngIf="timeTableInputGet.classEndTime.errors?.pattern">
+                {{'INPUT_ERRORS.PATTERN.CLASS_TIME_PATTERN' | translate }}
+            </div>
+            <div *ngIf="timeTableInputGet.classEndTime.errors?.startTimeIsGreaterThanEndTime">
+                {{'INPUT_ERRORS.START_ISGREATER_END' | translate }}
+            </div>
+        </div>
+        <mat-form-field class="time_table_input_form_field" appearance="fill">
+            <mat-label>{{'TIME_TABLE_INPUTS.CLASSROOM' | translate}}</mat-label>
+            <input type="text" matInput formControlName="classroom" 
+            id="classroom" [(ngModel)]="data.CLASSROOM">
+        </mat-form-field>
+        <div *ngIf="timeTableInputGet.classroom.invalid" class="alert">
+            <div *ngIf="timeTableInputGet.classroom.errors?.pattern">
+                {{'INPUT_ERRORS.PATTERN.CLASSROOM' | translate }}
+            </div>
+            <div *ngIf="timeTableInputGet.classroom.errors?.maxlength">
+                {{'INPUT_ERRORS.MAXLENGTH' | translate:classroomMaxLengthParam }}
+            </div>
+        </div>
+        <mat-form-field class="time_table_input_form_field" appearance="fill">
+            <mat-label>{{'TIME_TABLE_INPUTS.TEACHER' | translate}}</mat-label>
+            <input type="text" matInput formControlName="teacher" 
+            id="teacher" [(ngModel)]="data.TEACHER">
+        </mat-form-field>
+        <div *ngIf="timeTableInputGet.teacher.invalid" class="alert">
+            <div *ngIf="timeTableInputGet.teacher.errors?.maxlength">
+                {{'INPUT_ERRORS.MAXLENGTH' | translate:teacherMaxLengthParam }}
+            </div>
+        </div>
+        <mat-form-field class="time_table_input_form_field" appearance="fill">
+            <mat-label>{{'TIME_TABLE_INPUTS.CREDIT' | translate}}</mat-label>
+            <input type="text" matInput formControlName="credit" 
+            id="credit" [(ngModel)]="data.CREDIT">
+        </mat-form-field>
+        <div *ngIf="timeTableInputGet.credit.invalid" class="alert">
+            <div *ngIf="timeTableInputGet.credit.errors?.pattern">
+                {{'INPUT_ERRORS.PATTERN.ONLY_NUMBER' | translate:creditMaxLengthParam }}
+            </div>
+        </div>
+        <mat-form-field class="time_table_input_form_field" appearance="fill">
+            <mat-label>{{'TIME_TABLE_INPUTS.PRIORITY' | translate}}</mat-label>
+            <input type="text" matInput formControlName="priority" 
+            id="priority" [ngModel]="0" (ngModelChange)="data.PRIORITY = $event">
+        </mat-form-field>
+        <div *ngIf="timeTableInputGet.priority.invalid" class="alert">
+            <div *ngIf="timeTableInputGet.priority.errors?.pattern">
+                {{'INPUT_ERRORS.PATTERN.ONLY_NUMBER' | translate:priorityMaxLengthParam}}
+            </div>
+        </div>
+        <mat-form-field class="time_table_input_form_field">
+            <mat-label>{{'TIME_TABLE_INPUTS.COLOR' | translate}}</mat-label>
+            <input type="color" matInput formControlName="colorPick" name="colorPick"
+            id="colorPick" [(ngModel)]="data.COLOR">
+        </mat-form-field>
+        <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center" >
+            <button mat-raised-button color="primary" (click)="cancelClick()">
+                {{'BUTTON.CANCEL' | translate}}
+            </button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid" [mat-dialog-close]="data">
+                {{'BUTTON.ADD' | translate}}
+            </button>
+        </div>
+    </form>
