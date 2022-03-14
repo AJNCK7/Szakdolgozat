@@ -33,10 +33,10 @@ import { AuthService } from './shared/services/auth.service';
 import { UserVerifyEmailComponent } from './core/user_management/user_verify_email/user_verify_email.component';
 import { UserForgotPasswordComponent } from './core/user_management/user-forgot-password/user-forgot-password.component';
 import { TimeTableInputComponent } from './core/time_table/time-table-input/time-table-input.component';
-import { AddComponent } from './core/time_table/time-table-input/curd-dialogs/add/add.component';
-import { EditComponent } from './core/time_table/time-table-input/curd-dialogs/edit/edit.component';
-import { DeleteComponent } from './core/time_table/time-table-input/curd-dialogs/delete/delete.component';
-import { DeleteAllComponent } from './core/time_table/time-table-input/curd-dialogs/delete-all/delete-all.component';
+import { AddComponent } from './core/time_table/time-table-input/crud-dialogs/add/add.component';
+import { EditComponent } from './core/time_table/time-table-input/crud-dialogs/edit/edit.component';
+import { DeleteComponent } from './core/time_table/time-table-input/crud-dialogs/delete/delete.component';
+import { DeleteAllComponent } from './core/time_table/time-table-input/crud-dialogs/delete-all/delete-all.component';
 import { TimeTableResultDisplayComponent } from './core/time_table/time-table-result-display/time-table-result-display.component';
 import { TimeTableResultDisplayDialogComponent } from './core/time_table/time-table-result-display-dialog/time-table-result-display-dialog.component';
 
