@@ -47,13 +47,13 @@ export class TimeTableInputComponent implements OnInit{
     public router: Router
     ) {
         this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
-        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
+        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[]]');
     }
 
     ngOnInit(): void {
         this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
         this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
-        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[],[]]');
+        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
         if (this.dataSource.data[this.dataSource.data.length - 1]) {
             this.ID = this.dataSource.data[this.dataSource.data.length-1].ID + 1;
         }

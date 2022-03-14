@@ -19,6 +19,7 @@ th {
     border: 1px black solid;
     text-align: center;
     background: orange;
+    font-size: 18px;
 }
 
 tr {
@@ -26,6 +27,7 @@ tr {
     height: 60px;
     text-align: center;
     background: orange;
+    font-size: 18px;
 }
 td {
     border: 1px black solid;
