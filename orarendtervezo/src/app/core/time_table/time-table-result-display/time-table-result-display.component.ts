@@ -1,7 +1,9 @@
+import { TranslateService } from '@ngx-translate/core';
+import { NumberToTextController } from './../../../shared/controllers/numberdata-to-text-changer.controller';
 import { TimeTableResultDisplayDialogComponent } from '../time-table-result-display-dialog/time-table-result-display-dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TimeTableInputInterface } from '../time-table-input/time-table-input.component';
+import { TimeTableInputInterface } from '../interfaces/time-table-input.interface';
 
 @Component({
     selector: 'app-time-table-result-display',
@@ -21,7 +23,11 @@ export class TimeTableResultDisplayComponent implements OnInit {
     maxGenerationIndex = 0;
     maxPriority = 0;
 
-    constructor(public matDialog: MatDialog) { 
+    constructor(
+        public matDialog: MatDialog,
+        private NumberToTextController: NumberToTextController,
+        private translateService: TranslateService
+    ) { 
         this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
     }
 
@@ -59,26 +65,27 @@ export class TimeTableResultDisplayComponent implements OnInit {
                     if (this.daySortedData[i].length != 0) {
                         if(this.isTimeSlotAvailable(this.daySortedData[i][j].CLASS_START_TIME, this.daySortedData[i][j].CLASS_END_TIME, i)){
                             const div = document.createElement('div');
-                            div.innerHTML = this.daySortedData[i][j].SUBJECT_NAME + ', <br>' + this.daySortedData[i][j].CLASS_START_TIME
-                            + '-' + this.daySortedData[i][j].CLASS_END_TIME;
+                            const actualElement = this.daySortedData[i][j];
+                            div.innerHTML = actualElement.SUBJECT_NAME + ', <br>' 
+                                            + actualElement.CLASS_START_TIME + '-' + actualElement.CLASS_END_TIME;
                             div.title = div.innerHTML;
                             div.id = 'div' + i + j;
-                            div.style.backgroundColor = this.daySortedData[i][j].COLOR != null ? this.daySortedData[i][j].COLOR : 'red';
+                            div.style.backgroundColor = actualElement.COLOR != null ? actualElement.COLOR : 'red';
                             div.style.position = 'absolute';
                             div.style.overflow = 'hidden';
                             div.style.textOverflow = 'ellipsis';
-                            div.onclick=() => {this.openInfoDialog(this.daySortedData[i][j]);};
+                            div.onclick=() => {this.openInfoDialog(actualElement);};
                             div.style.border = '1px'; div.style.borderStyle = 'solid'; 
-                            const startTime = this.daySortedData[i][j].CLASS_START_TIME;
-                            const endTime = this.daySortedData[i][j].CLASS_END_TIME;
+                            const startTime = actualElement.CLASS_START_TIME;
+                            const endTime = actualElement.CLASS_END_TIME;
                             div.style.height = this.timeDifferenceInMinute(startTime, endTime).toString() + 'px';
                             div.style.fontSize = '20px';
                             div.style.fontWeight = 'bold';
-                            div.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth! - 10 + 'px';
-                            div.style.top = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom 
+                            div.style.width = document.getElementById(actualElement.DAY)?.offsetWidth! - 10 + 'px';
+                            div.style.top = (document.getElementById(actualElement.DAY)!.getBoundingClientRect().bottom 
                             - document.getElementById('mainCard')!.getBoundingClientRect().top)
                             + this.timeDifferenceInMinute('7:00', startTime) + 'px';
-                            div.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
+                            div.style.left = (document.getElementById(actualElement.DAY)!.getBoundingClientRect().x 
                             - document.getElementById('mainCard')!.getBoundingClientRect().left) + 4 + 'px';
                             document.getElementById('table')?.append(div);
                             this.currentDivs[i].push([div.id, j.toString()]);
@@ -113,7 +120,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
                 available = false;
                 break;
             }
-            else if (endTime < elementStartTime || startTime > elementEndTime) available = true; // egyenlő???
+            else if (endTime <= elementStartTime || startTime >= elementEndTime) available = true; // egyenlő???
             //else if (startTime > elementEndTime) available = true;
             else {
                 available = false;
@@ -126,7 +133,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
     newGeneration() {
         this.generationIndex++;
         if (this.generationIndex == this.maxGenerationIndex) {
-            if (this.maxGenerationIndex < this.maxPriority) { //módosítani a legnagyobb generált index értékére
+            if (this.maxGenerationIndex < this.maxPriority) {
                 for(const days of this.daySortedData) {
                     for(const element of days) {
                         if (element.PRIORITY > 0) {
@@ -143,7 +150,6 @@ export class TimeTableResultDisplayComponent implements OnInit {
             this.currentDivs = [[],[],[],[],[],[],[]];
             this.wasLoaded = false;
             this.tableDataFiller();
-            this.onResize(); //biztos hogy kell? ellenőrizni kell
         }
         else{
             this.clearHTMLElements();

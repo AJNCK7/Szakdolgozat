@@ -1,3 +1,5 @@
+import { FirebaseCrudsService } from './core/time_table/services/firebase-cruds.service';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -55,8 +57,7 @@ const MatImports = [
 
 const FirebaseImports = [
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireModule,
-    AngularFireModule,
+    AngularFirestoreModule,
 ];
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader{
@@ -104,7 +105,7 @@ const TranslateImports = [
         MatImports,
         NgbModule,
     ],
-    providers: [AuthService],
+    providers: [AuthService, AngularFirestoreModule, FirebaseCrudsService],
     bootstrap: [AppComponent]
 })
 export class AppModule { 

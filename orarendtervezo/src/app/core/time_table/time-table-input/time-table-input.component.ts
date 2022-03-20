@@ -1,3 +1,4 @@
+import { NumberToTextController } from './../../../shared/controllers/numberdata-to-text-changer.controller';
 import { Router } from '@angular/router';
 import { EditComponent } from './crud-dialogs/edit/edit.component';
 import { AddComponent } from './crud-dialogs/add/add.component';
@@ -8,20 +9,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { DeleteAllComponent } from 'src/app/core/time_table/time-table-input/crud-dialogs/delete-all/delete-all.component';
+import { TimeTableInputInterface } from '../interfaces/time-table-input.interface';
+import { FirebaseCrudsService } from './../services/firebase-cruds.service';
 
-export interface TimeTableInputInterface {
-    ID: number;
-    SUBJECT_NAME: string;
-    DAY: string;
-    SUBJECT_WEIGHT: string;
-    CLASS_START_TIME: string;
-    CLASS_END_TIME: string;
-    CLASSROOM: string;
-    TEACHER: string;
-    CREDIT: number;
-    PRIORITY: number;
-    COLOR: string;
-}
 
 @Component({
     selector: 'app-time-table-input',
@@ -32,22 +22,31 @@ export class TimeTableInputComponent implements OnInit{
 
     ID = 1;
     index = 0;
+    saveName = '';
 
     form: FormGroup = new FormGroup({});
 
     displayedColumns: string[] = ['id', 'subjectName', 'day', 'subjectWeight', 'classStartTime', 
         'classEndTime', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
 
+    savedElementColumns: string[] = ['saveName', 'buttons'];
+
     dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
     daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[]];
+    databaseSource = new MatTableDataSource<string>([]);
+
+    addToDatabaseButtonDisable = true;
 
     constructor (
     public authService: AuthService,
     public matDialog: MatDialog,
-    public router: Router
+    public router: Router,
+    public numberToTextController: NumberToTextController,
+    private firebaseCrudsService: FirebaseCrudsService,
     ) {
         this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
         this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[]]');
+        this.getTimeTableSaveNameCollection();
     }
 
     ngOnInit(): void {
@@ -56,6 +55,25 @@ export class TimeTableInputComponent implements OnInit{
         this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
         if (this.dataSource.data[this.dataSource.data.length - 1]) {
             this.ID = this.dataSource.data[this.dataSource.data.length-1].ID + 1;
+        }
+        this.authService.getUserUID() ? this.addToDatabaseButtonDisable = false : this.addToDatabaseButtonDisable = true;
+        
+    }
+
+    addTimeTableCollection(saveName: string) {
+        if (this.authService.getUserUID()) {
+            this.firebaseCrudsService.putUserDocument('TimeTableInputDatas', saveName, Object.assign({}, this.dataSource.data));
+            this.getTimeTableSaveNameCollection();
+        }
+    }
+
+    async getTimeTableSaveNameCollection() {
+        if (this.authService.getUserUID()) {
+            (await this.firebaseCrudsService.getUserDocument('TimeTableInputDatas')).subscribe(
+                result => this.databaseSource.data = result.docs.map(element => {
+                    return element.id;
+                }) 
+            );            
         }
     }
 
@@ -137,26 +155,5 @@ export class TimeTableInputComponent implements OnInit{
                 localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
             }
         });
-    }
-
-    dayChanger(day: string){
-        switch (day) {
-        case '0': return 'DAYS_SHORT_FORM.MONDAY';
-        case '1': return 'DAYS_SHORT_FORM.TUESDAY';
-        case '2': return 'DAYS_SHORT_FORM.WEDNESDAY';
-        case '3': return 'DAYS_SHORT_FORM.THURSDAY';
-        case '4': return 'DAYS_SHORT_FORM.FRIDAY';
-        case '5': return 'DAYS_SHORT_FORM.SATURDAY';
-        default: return 'Error';
-        }
-    }
-
-    subjectWeightChanger(subjectWeight: string){
-        switch (subjectWeight) {
-        case '2': return 'SUBJECT_WEIGHT_SHORT_FORM.MANDATORY';
-        case '1': return 'SUBJECT_WEIGHT_SHORT_FORM.MANDATORY_OPTIONAL';
-        case '0': return 'SUBJECT_WEIGHT_SHORT_FORM.OPTIONAL';
-        default: return 'Error';
-        }
     }
 }

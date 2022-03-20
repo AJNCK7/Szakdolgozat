@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { startTimeIsGreaterThanEndTime } from 'src/app/shared/customValidators';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { TimeTableInputInterface } from 'src/app/core/time_table/time-table-input/time-table-input.component';
+import { TimeTableInputInterface } from '../../../interfaces/time-table-input.interface';
 
 @Component({
     selector: 'app-edit',

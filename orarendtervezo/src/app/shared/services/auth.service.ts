@@ -106,4 +106,10 @@ export class AuthService {
         });
     }
 
+    getUserUID() {
+        if(this.userData) {
+            return this.userData.uid;
+        }
+    }
+
 }

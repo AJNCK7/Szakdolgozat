@@ -15,8 +15,8 @@
             </td>
             <td>
                 <p>{{daySortedData.element.SUBJECT_NAME}}</p>
-                <p>{{dayChanger(daySortedData.element.DAY) | translate }}</p>
-                <p>{{subjectWeightChanger(daySortedData.element.SUBJECT_WEIGHT) | translate}}</p>
+                <p>{{numberToTextController.dayChanger(daySortedData.element.DAY) | translate }}</p>
+                <p>{{numberToTextController.subjectWeightChanger(daySortedData.element.SUBJECT_WEIGHT) | translate}}</p>
                 <p>{{daySortedData.element.CLASS_START_TIME}}</p>
                 <p>{{daySortedData.element.CLASS_END_TIME}}</p>
                 <p>{{daySortedData.element.CLASSROOM != null ? daySortedData.element.CLASSROOM : '-'}}</p>
