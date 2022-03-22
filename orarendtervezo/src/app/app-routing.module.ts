@@ -1,12 +1,12 @@
-import { TimeTableResultDisplayComponent } from './core/time_table/time-table-result-display/time-table-result-display.component';
-import { TimeTableInputComponent } from './core/time_table/time-table-input/time-table-input.component';
-import { UserForgotPasswordComponent } from './core/user_management/user-forgot-password/user-forgot-password.component';
-import { UserVerifyEmailComponent } from './core/user_management/user_verify_email/user_verify_email.component';
-import { UserRegisterComponent } from './core/user_management/user_register/user_register.component';
-import { UserLoginComponent } from './core/user_management/user_login/user_login.component';
-import { HomepageComponent } from './commons/homepage/homepage.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { HomepageComponent } from './commons/components/homepage/homepage.component';
+import { TimeTableInputComponent } from './core/time_table/components/time-table-input/time-table-input.component';
+import { TimeTableResultDisplayComponent } from './core/time_table/components/time-table-result-display/time-table-result-display.component';
+import { UserForgotPasswordComponent } from './core/user_management/components/user-forgot-password/user-forgot-password.component';
+import { UserLoginComponent } from './core/user_management/components/user_login/user_login.component';
+import { UserRegisterComponent } from './core/user_management/components/user_register/user_register.component';
+import { UserVerifyEmailComponent } from './core/user_management/components/user_verify_email/user_verify_email.component';
 
 const routes: Routes = [
     { path: 'home_page', component: HomepageComponent},

@@ -64,36 +64,41 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<div fxLayout="row" fxLayoutAlign="center center">
+<div fxLayout="column" fxLayoutAlign="space-around center" >
     <button mat-raised-button color="primary" class="sortingButton" (click)="sorting()">
         {{'GENERATING' | translate}}
     </button>
-</div>
-<div fxLayout="row" fxLayoutAlign="center center">
-    <mat-form-field appearance="outline">
-        <input matInput placeholder="Give data" [(ngModel)]="saveName">
-    </mat-form-field>
-    <button mat-raised-button color="primary" class="sortingButton" 
-        [disabled]=addToDatabaseButtonDisable (click)="addTimeTableCollection(this.saveName)">
-        {{'SAVE_TO_DATABASE' | translate}}
-    </button>
-</div>
-<table mat-table [dataSource]="databaseSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="saveName">
-        <th mat-header-cell *matHeaderCellDef> {{ 'SAVE_NAME' | translate }} </th>
-        <td mat-cell *matCellDef="let element" style="font-size: 20px;"> {{element}} </td>
-    </ng-container>
-    <ng-container matColumnDef="buttons">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let row; let i=index;">
-            <button mat-icon-button >
-                <mat-icon>edit</mat-icon>
+    <mat-card *ngIf="this.authService.isLoggedIn" >
+        <div fxLayout="column" fxLayoutAlign="space-around center" >
+            <mat-form-field appearance="outline">
+                <mat-label >{{'SAVE_NAME' | translate}}</mat-label>
+                <input matInput [(ngModel)]="saveName">
+            </mat-form-field>
+            <button mat-raised-button color="primary" 
+                (click)="addTimeTableCollection(this.saveName)" Layoutgap>
+                {{'SAVE_TO_DATABASE' | translate}}
             </button>
-            <button mat-icon-button >
-                <mat-icon>delete</mat-icon>
-            </button>
-        </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="savedElementColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: savedElementColumns;"></tr>
-</table>
+        </div>
+    </mat-card>
+</div>
+<div *ngIf="this.authService.isLoggedIn">
+    <table mat-table [dataSource]="databaseSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="saveName">
+            <th mat-header-cell *matHeaderCellDef> {{ 'SAVE_NAME' | translate }} </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 20px;"> {{element}} </td>
+        </ng-container>
+        <ng-container matColumnDef="buttons">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row; let i=index;">
+                <button mat-icon-button (click)="loadTimeTableSaveNameCollection(row)">
+                    <mat-icon>cloud_download</mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteTimeTableSaveNameCollection(row)" >
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="savedElementColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: savedElementColumns;"></tr>
+    </table>
+</div>

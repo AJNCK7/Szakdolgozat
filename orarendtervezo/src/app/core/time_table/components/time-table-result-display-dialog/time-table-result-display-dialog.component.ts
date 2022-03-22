@@ -1,7 +1,6 @@
-import { NumberToTextController } from './../../../shared/controllers/numberdata-to-text-changer.controller';
-
 import { Component, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NumberToTextController } from 'src/app/shared/controllers/numberdata-to-text-changer.controller';
 
 @Component({
     selector: 'app-time-table-result-display-dialog',

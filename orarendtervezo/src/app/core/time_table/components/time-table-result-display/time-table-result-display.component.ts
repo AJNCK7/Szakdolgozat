@@ -1,9 +1,7 @@
-import { TranslateService } from '@ngx-translate/core';
-import { NumberToTextController } from './../../../shared/controllers/numberdata-to-text-changer.controller';
 import { TimeTableResultDisplayDialogComponent } from '../time-table-result-display-dialog/time-table-result-display-dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TimeTableInputInterface } from '../interfaces/time-table-input.interface';
+import { TimeTableInputInterface } from '../../interfaces/time-table-input.interface';
 
 @Component({
     selector: 'app-time-table-result-display',
@@ -25,11 +23,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
 
     constructor(
         public matDialog: MatDialog,
-        private NumberToTextController: NumberToTextController,
-        private translateService: TranslateService
-    ) { 
-        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
-    }
+    ) {}
 
     ngOnInit(): void {
         this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
@@ -63,7 +57,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
             for (let i = 0; i < 6; i++) {
                 for (let j = 0; j < this.daySortedData[i].length; j++) {
                     if (this.daySortedData[i].length != 0) {
-                        if(this.isTimeSlotAvailable(this.daySortedData[i][j].CLASS_START_TIME, this.daySortedData[i][j].CLASS_END_TIME, i)){
+                        if(this.isTimeSlotAvailable(this.daySortedData[i][j].CLASS_START_TIME, this.daySortedData[i][j].CLASS_END_TIME, i)) {
                             const div = document.createElement('div');
                             const actualElement = this.daySortedData[i][j];
                             div.innerHTML = actualElement.SUBJECT_NAME + ', <br>' 
@@ -74,8 +68,9 @@ export class TimeTableResultDisplayComponent implements OnInit {
                             div.style.position = 'absolute';
                             div.style.overflow = 'hidden';
                             div.style.textOverflow = 'ellipsis';
-                            div.onclick=() => {this.openInfoDialog(actualElement);};
-                            div.style.border = '1px'; div.style.borderStyle = 'solid'; 
+                            div.onclick=() => { this.openInfoDialog(actualElement); };
+                            div.style.border = '1px';
+                            div.style.borderStyle = 'solid'; 
                             const startTime = actualElement.CLASS_START_TIME;
                             const endTime = actualElement.CLASS_END_TIME;
                             div.style.height = this.timeDifferenceInMinute(startTime, endTime).toString() + 'px';
@@ -120,9 +115,10 @@ export class TimeTableResultDisplayComponent implements OnInit {
                 available = false;
                 break;
             }
-            else if (endTime <= elementStartTime || startTime >= elementEndTime) available = true; // egyenlő???
-            //else if (startTime > elementEndTime) available = true;
-            else {
+            else if (endTime <= elementStartTime || startTime >= elementEndTime) {
+                available = true; // egyenlő???
+                //else if (startTime > elementEndTime) available = true;
+            } else {
                 available = false;
                 break;
             }
@@ -142,16 +138,14 @@ export class TimeTableResultDisplayComponent implements OnInit {
                     }
                 }  
                 this.sortingByPriority();
-            }
-            else {
+            } else {
                 this.sortingByRandomOrder();
             }
             this.clearHTMLElements();
             this.currentDivs = [[],[],[],[],[],[],[]];
             this.wasLoaded = false;
             this.tableDataFiller();
-        }
-        else{
+        } else {
             this.clearHTMLElements();
             this.loadHTMLElements();
             this.loadDivs();

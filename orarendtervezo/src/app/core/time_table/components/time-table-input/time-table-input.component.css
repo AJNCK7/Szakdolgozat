@@ -1,5 +1,5 @@
 table {
-    min-width: 700px;
+    min-width: 600px;
     width: 98vw;
     margin: auto;
     margin-top: 10px;
@@ -51,7 +51,7 @@ td.mat-cell:first-of-type{
 }
 
 .sortingButton {
-    min-width: 350px;
+    min-width: 500px;
     width: 50vw;
     margin-bottom: 40px;
 }

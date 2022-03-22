@@ -1,16 +1,16 @@
 import { Component, Inject} from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { startTimeIsGreaterThanEndTime } from 'src/app/shared/customValidators';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { TimeTableInputInterface } from '../../../interfaces/time-table-input.interface';
+import { TimeTableInputInterface } from '../../../../interfaces/time-table-input.interface';
 
 @Component({
-    selector: 'app-edit',
-    templateUrl: './edit.component.html',
-    styleUrls: ['./edit.component.css']
+    selector: 'app-add-tableDialogInputs',
+    templateUrl: './add.component.html',
+    styleUrls: ['./add.component.css']
 })
-export class EditComponent{
+export class AddComponent {
 
     subjectNameMaxLengthParam = {value: '40'};
     classroomMaxLengthParam = {value: '10'};
@@ -20,12 +20,11 @@ export class EditComponent{
     form: FormGroup = new FormGroup({});
 
     constructor (
-    public dialogRef: MatDialogRef<EditComponent>,
+    public dialogRef: MatDialogRef<AddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TimeTableInputInterface,
     private fb: FormBuilder,
     public authService: AuthService
     ) {
-        this.dialogRef.disableClose = true;
         this.form = fb.group({
             subjectName: ['', [
                 Validators.required,
@@ -58,7 +57,7 @@ export class EditComponent{
             priority: ['', [
                 Validators.pattern('[0-9]'),
             ]],
-            colorPick: ['']
+            colorPick: ['', [ ]]
         }, {
             validator: [
                 startTimeIsGreaterThanEndTime('classStartTime', 'classEndTime'), 

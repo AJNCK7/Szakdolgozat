@@ -94,5 +94,7 @@
     "CONFIRM_DELETE_ALL": "Biztosan törölni szeretnéd mindet?",
     "GENERATING": "Generálás",
     "PREVIOUS": "Előző",
-    "NEXT": "Következő"
+    "NEXT": "Következő",
+    "SAVE_NAME": "Mentés neve",
+    "SAVE_TO_DATABASE": "Mentés az adatbázisba"
 }

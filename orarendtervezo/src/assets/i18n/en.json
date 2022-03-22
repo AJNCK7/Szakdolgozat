@@ -94,5 +94,7 @@
     "CONFIRM_DELETE_ALL": "Are you sure, you want to delete all?",
     "GENERATING": "Generating",
     "PREVIOUS": "Previous",
-    "NEXT": "Next"
+    "NEXT": "Next",
+    "SAVE_NAME": "Save name",
+    "SAVE_TO_DATABASE": "Save to database"
 }
