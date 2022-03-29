@@ -96,5 +96,6 @@
     "PREVIOUS": "Előző",
     "NEXT": "Következő",
     "SAVE_NAME": "Mentés neve",
-    "SAVE_TO_DATABASE": "Mentés az adatbázisba"
+    "SAVE_TO_DATABASE": "Mentés az adatbázisba",
+    "LOGIN_WITH_GOOGLE": "Jelenetkezz be Google fiókkal"
 }

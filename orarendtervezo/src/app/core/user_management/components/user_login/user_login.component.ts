@@ -17,7 +17,7 @@ export class UserLoginComponent implements OnInit{
     constructor (
     private fb: FormBuilder,
     private router: Router,
-    public authService: AuthService
+    public authService: AuthService,
     ) {
         this.form = fb.group({
             username: ['', [
@@ -35,5 +35,13 @@ export class UserLoginComponent implements OnInit{
 
     get loginForm() {
         return this.form.controls;
+    }
+
+    public navigateToForgetPassword() {
+        this.router.navigateByUrl('user_forgot_password');
+    }
+
+    public navigateToRegister() {
+        this.router.navigateByUrl('user_register');
     }
 }

@@ -48,4 +48,8 @@ export class UserRegisterComponent implements OnInit{
     get registerForm() {
         return this.form.controls;
     }
+
+    public navigateToLogin() {
+        this.router.navigate(['user_login']);
+    }
 }

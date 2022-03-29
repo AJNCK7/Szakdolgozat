@@ -2,6 +2,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Injectable, NgZone } from '@angular/core';
 import { User } from '../interfaces/user';
+import { GoogleAuthProvider } from 'firebase/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -32,11 +33,11 @@ export class AuthService {
     SignIn(email: any, password: any) {
         return this.afAuth.signInWithEmailAndPassword(email, password)
             .then((result) => {
+                window.location.reload();
                 this.ngZone.run(() => {
                     this.router.navigate(['home_page']);
                 });
                 this.SetUserData(result.user);
-                window.location.reload();
             }).catch((error) => {
                 window.alert(error.message);
             });
@@ -112,4 +113,7 @@ export class AuthService {
         }
     }
 
+    GoogleAuth() {
+        return this.AuthLogin(new GoogleAuthProvider());
+    }
 }

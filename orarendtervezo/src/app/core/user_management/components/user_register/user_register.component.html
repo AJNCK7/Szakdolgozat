@@ -1,7 +1,7 @@
 <mat-card class="user_register_card">
     <h1>{{'USER.REGISTER' | translate}}</h1>
     <mat-card-content>
-        <form [formGroup]="form" class="register_form">
+        <form [formGroup]="form" class="register_form" fxLayout="column" fxLayoutAlign="space-between center">
             <mat-form-field class="register_form_field" appearance="fill">
                 <mat-label>{{'USER.USERNAME' | translate}}</mat-label>
                 <input required type="text" matInput formControlName="username" #username id="username">
@@ -9,12 +9,12 @@
             <div *ngIf="registerForm.username.invalid && 
                         (registerForm.username.dirty || registerForm.username.touched)" 
                         class="alert">
-                  <div *ngIf="registerForm.username.errors?.required">
-                      {{'INPUT_ERRORS.REQUIRED' | translate }}
-                  </div>
+                    <div *ngIf="registerForm.username.errors?.required">
+                        {{'INPUT_ERRORS.REQUIRED' | translate }}
+                    </div>
                   <div *ngIf="registerForm.username.errors?.minlength">
-                      {{'INPUT_ERRORS.MINLENGTH.USERNAME' | translate:minimumLength }}
-                  </div>
+                        {{'INPUT_ERRORS.MINLENGTH.USERNAME' | translate:minimumLength }}
+                    </div>
             </div>
             <mat-form-field class="register_form_field" appearance="fill">
                 <mat-label>{{'USER.PASSWORD' | translate}}</mat-label>
@@ -77,6 +77,9 @@
                 type="submit" (click)="authService.SignUp(email.value, password.value)"
                 [disabled]="!form.valid">
                 {{ 'BUTTON.REGISTER' | translate }}
+            </button>
+            <button mat-raised-button color="primary" type="button" (click)="navigateToLogin()">
+                {{'BUTTON.LOGIN' | translate}}
             </button>
         </form>
     </mat-card-content>

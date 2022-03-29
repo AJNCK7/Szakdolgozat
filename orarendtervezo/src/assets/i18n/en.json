@@ -96,5 +96,6 @@
     "PREVIOUS": "Previous",
     "NEXT": "Next",
     "SAVE_NAME": "Save name",
-    "SAVE_TO_DATABASE": "Save to database"
+    "SAVE_TO_DATABASE": "Save to database",
+    "LOGIN_WITH_GOOGLE": "Log in with Google"
 }
