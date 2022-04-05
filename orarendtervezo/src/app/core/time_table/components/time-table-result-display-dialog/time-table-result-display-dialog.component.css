@@ -18,3 +18,11 @@ p{
 #color{
     background-color: color;
 }
+
+.resultCard {
+    min-width: 150px;
+}
+
+.resultCardData{
+    min-width: 300px;
+}

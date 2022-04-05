@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class UserForgotPasswordComponent {
 
     constructor (
     private fb: FormBuilder,
-    public authService: AuthService
+    public authService: AuthService,
+    public router: Router
     ) {
         this.form = fb.group({
             email: ['', [
@@ -25,5 +27,9 @@ export class UserForgotPasswordComponent {
 
     get forgetPasswordForm() {
         return this.form.controls;
+    }
+
+    public navigateToLogin() {
+        this.router.navigateByUrl('user_login');
     }
 }

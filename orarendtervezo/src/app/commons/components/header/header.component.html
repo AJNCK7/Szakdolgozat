@@ -1,14 +1,18 @@
 <div class="header" fxLayout="row" fxLayoutAlign="center center" >
-    <div fxFlex="20">
-        <button mat-button [matMenuTriggerFor]="menu">{{ 'MENU' | translate}}</button>
+    <div fxFlex="10">
+        <button mat-button class="menuButton" [matMenuTriggerFor]="menu">
+            <mat-icon>
+                menu
+            </mat-icon>
+        </button>
             <mat-menu #menu="matMenu">
             <a routerLink="/home_page" button mat-menu-item >{{ 'HOME_PAGE' | translate}}</a>
             <a routerLink="/time_table_input" button mat-menu-item>{{ 'MAIN_TITLE' | translate}}</a>
         </mat-menu>
     </div>
-    <div fxFlex="60" class="homeButton"> {{ 'MAIN_TITLE' | translate}} </div>
+    <div fxFlex="70" class="homeButton"> {{ 'MAIN_TITLE' | translate}} </div>
     <button *ngIf="!isloggedin" class="clickable_button" (click)=logginRoute()><mat-icon>person_pin</mat-icon></button>
-    <button *ngIf="isloggedin" mat-button [matMenuTriggerFor]="user"><mat-icon>home</mat-icon></button>
+    <button *ngIf="isloggedin" class="profileButton" mat-button [matMenuTriggerFor]="user"><mat-icon>home</mat-icon></button>
         <mat-menu #user="matMenu">
             <a routerLink="/home_page" (click)="logginOut()" button mat-menu-item>{{ 'BUTTON.LOG_OUT' | translate}}</a>
         </mat-menu>

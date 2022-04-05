@@ -20,7 +20,7 @@ export class UserLoginComponent implements OnInit{
     public authService: AuthService,
     ) {
         this.form = fb.group({
-            username: ['', [
+            email: ['', [
                 Validators.required,
             ]],
             password: ['', [

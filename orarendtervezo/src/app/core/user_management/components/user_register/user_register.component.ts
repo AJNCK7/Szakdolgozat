@@ -22,10 +22,6 @@ export class UserRegisterComponent implements OnInit{
     private router: Router
     ) {
         this.form = fb.group({
-            username: ['', [
-                Validators.required,
-                Validators.minLength(3)
-            ]],
             password: ['', [
                 Validators.required,
                 Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}')

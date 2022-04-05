@@ -47,7 +47,7 @@
     "SENT_TO": "Already sent to ",
     "SEND_AGAIN": "Send again",
     "BACK_TO": "Back to ",
-    "BACK_TO_LOGIN": "Login",
+    "BACK_TO_LOGIN": "Back to login",
     "EMAIL_VERIFY": "Email verify",
     "TIME_TABLE": {
         "BUTTONS": "Buttons"
@@ -97,5 +97,6 @@
     "NEXT": "Next",
     "SAVE_NAME": "Save name",
     "SAVE_TO_DATABASE": "Save to database",
+    "UPDATE_DATABASE": "Update database",
     "LOGIN_WITH_GOOGLE": "Log in with Google"
 }

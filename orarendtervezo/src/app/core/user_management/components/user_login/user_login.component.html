@@ -3,13 +3,13 @@
     <mat-card-content>
         <form [formGroup]="form" class="login_form" fxLayout="column" fxLayoutAlign="space-between center">
             <mat-form-field class="login_form_field" appearance="fill">
-                <mat-label>{{'USER.USERNAME' | translate}}</mat-label>
-                <input required type="text" matInput formControlName="username" #username id="username">
+                <mat-label>{{'USER.EMAIL' | translate}}</mat-label>
+                <input required type="text" matInput formControlName="email" #email id="email">
             </mat-form-field>
-            <div *ngIf="loginForm.username.invalid && 
-                        (loginForm.username.dirty || loginForm.username.touched)" 
+            <div *ngIf="loginForm.email.invalid && 
+                        (loginForm.email.dirty || loginForm.email.touched)" 
                         class="alert">
-                <div *ngIf="loginForm.username.errors?.required">
+                <div *ngIf="loginForm.email.errors?.required">
                     {{'INPUT_ERRORS.REQUIRED' | translate }}
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <button mat-raised-button color="primary" class="user_login_form_submit_button" type="submit" [disabled]="!form.valid"
-            (click)="authService.SignIn(username.value, password.value)">
+            (click)="authService.SignIn(email.value, password.value)">
                 {{ 'BUTTON.LOGIN' | translate }}
             </button>
             <button mat-button color="primary" type="submit" (click)="navigateToForgetPassword()">

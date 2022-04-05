@@ -47,7 +47,7 @@
     "SENT_TO": "Már elküldve ",
     "SEND_AGAIN": "Újraküldés",
     "BACK_TO": "Vissza a ",
-    "BACK_TO_LOGIN": "bejelentkezésre",
+    "BACK_TO_LOGIN": "Vissza a bejelentkezéshez",
     "EMAIL_VERIFY": "Email megerősítő",
     "TIME_TABLE": {
         "BUTTONS": "Gombok"
@@ -97,5 +97,6 @@
     "NEXT": "Következő",
     "SAVE_NAME": "Mentés neve",
     "SAVE_TO_DATABASE": "Mentés az adatbázisba",
+    "UPDATE_DATABASE": "Adatbázis módosítása",
     "LOGIN_WITH_GOOGLE": "Jelenetkezz be Google fiókkal"
 }

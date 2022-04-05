@@ -51,7 +51,7 @@ td.mat-cell:first-of-type{
 }
 
 .sortingButton {
-    min-width: 500px;
+    min-width: 600px;
     width: 50vw;
     margin-bottom: 40px;
 }
@@ -59,4 +59,8 @@ td.mat-cell:first-of-type{
 .mat-header-cell {
     font-weight: bold;
     font-size: 16px;
+}
+
+.databaseCruds {
+    width: 50vw
 }

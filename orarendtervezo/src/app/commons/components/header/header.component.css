@@ -4,7 +4,7 @@
     top: 0px;
     width: 100vw;
     height: 15vh;
-    min-width: 700px;
+    min-width: 600px;
     font-size: 16px;
 }
 
@@ -21,6 +21,14 @@ a{
 
 .homeButton{
     font-size: 32px;
+}
+
+.menuButton, .profileButton{
+    background-color: sandybrown;
+}
+
+.profileButton {
+    margin-right: 6px;
 }
 
 button {

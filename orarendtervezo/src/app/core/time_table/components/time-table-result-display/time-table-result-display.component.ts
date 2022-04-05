@@ -27,11 +27,30 @@ export class TimeTableResultDisplayComponent implements OnInit {
 
     ngOnInit(): void {
         this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
+        this.maxPrioritySearch();
+    }
+
+    maxPrioritySearch(): void {
+        const priorityQuantity: Array<number> = [];
         this.daySortedData.forEach(element => {
             element.forEach(element => {
-                if(element.PRIORITY > this.maxPriority) this.maxPriority = element.PRIORITY;
+                if(!priorityQuantity.includes(element.PRIORITY)) {
+                    priorityQuantity.push(element.PRIORITY);
+                    if(element.PRIORITY > this.maxPriority){
+                        this.maxPriority = element.PRIORITY;
+                    }
+                }
             });
         });
+        priorityQuantity.sort((a,b) => a - b);
+        if(priorityQuantity.length < 9) {
+            this.daySortedData.forEach(element => {
+                element.forEach(element => {
+                    element.PRIORITY = priorityQuantity.indexOf(element.PRIORITY);
+                });
+            });
+            this.maxPriority = priorityQuantity.length;
+        }
     }
 
     onResize() {
@@ -62,7 +81,8 @@ export class TimeTableResultDisplayComponent implements OnInit {
                             const actualElement = this.daySortedData[i][j];
                             div.innerHTML = actualElement.SUBJECT_NAME + ', <br>' 
                                             + actualElement.CLASS_START_TIME + '-' + actualElement.CLASS_END_TIME;
-                            div.title = div.innerHTML;
+                            div.title = actualElement.SUBJECT_NAME + ', ' 
+                                + actualElement.CLASS_START_TIME + '-' + actualElement.CLASS_END_TIME ;
                             div.id = 'div' + i + j;
                             div.style.backgroundColor = actualElement.COLOR != null ? actualElement.COLOR : 'red';
                             div.style.position = 'absolute';
@@ -127,6 +147,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
     }
 
     newGeneration() {
+        console.log(this.daySortedData);
         this.generationIndex++;
         if (this.generationIndex == this.maxGenerationIndex) {
             if (this.maxGenerationIndex < this.maxPriority) {

@@ -1,5 +1,5 @@
 <h3 mat-dialog-title>{{'BUTTON.EDIT' | translate}}</h3>
-    <form [formGroup]="form" class="mat-dialog-content">
+    <form [formGroup]="form" class="mat-dialog-content" fxLayout="column" fxLayoutAlign="space-between center">
         <mat-form-field class="time_table_input_form_field" appearance="fill">
             <mat-label>{{'TIME_TABLE_INPUTS.SUBJECT_NAME' | translate}}</mat-label>
             <input required type="text" matInput formControlName="subjectName" id="subjectName" 
@@ -89,9 +89,6 @@
             id="classroom" [(ngModel)]="data.CLASSROOM">
         </mat-form-field>
         <div *ngIf="timeTableInputGet.classroom.invalid" class="alert">
-            <div *ngIf="timeTableInputGet.classroom.errors?.pattern">
-                {{'INPUT_ERRORS.PATTERN.CLASSROOM' | translate }}
-            </div>
             <div *ngIf="timeTableInputGet.classroom.errors?.maxlength">
                 {{'INPUT_ERRORS.MAXLENGTH' | translate:classroomMaxLengthParam }}
             </div>

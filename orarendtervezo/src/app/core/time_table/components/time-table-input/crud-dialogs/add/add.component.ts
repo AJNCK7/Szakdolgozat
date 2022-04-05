@@ -45,7 +45,6 @@ export class AddComponent {
                 Validators.pattern('([1]?[0-9]|2[0-3]):[0-5][0-9]')
             ]],
             classroom: ['', [
-                Validators.pattern('[a-zA-Z][/][a-z0-9A-Z]+'),
                 Validators.maxLength(10)
             ]],
             teacher: ['', [

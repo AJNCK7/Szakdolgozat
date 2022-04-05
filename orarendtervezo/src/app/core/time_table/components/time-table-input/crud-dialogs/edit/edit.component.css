@@ -4,7 +4,7 @@
 }
 
 .time_table_input_form_field{
-    width: 70vw;
+    width: 100%;
     min-width: 400px;
 }
 
@@ -24,7 +24,6 @@
     background-color: #fed3d3;
     color: #820000;
     padding: 5px;
-    width: 55vw;
     margin-bottom: 5px;
     min-width: 400px;
     padding-top: 0;
