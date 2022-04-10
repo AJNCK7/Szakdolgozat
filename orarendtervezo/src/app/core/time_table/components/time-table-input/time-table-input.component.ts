@@ -54,6 +54,14 @@ export class TimeTableInputComponent implements OnInit{
             ? this.firebaseCrudsService.updateUserDocument('TimeTableInputDatas', saveName, Object.assign({}, this.dataSource.data))
             : this.firebaseCrudsService.putUserDocument('TimeTableInputDatas', saveName, Object.assign({}, this.dataSource.data));
         this.getTimeTableSaveNameCollection();
+        this.saveName = '';
+    }
+
+    deleteObjectUndefinedKeys() {
+        const test = Object.assign({}, this.dataSource.data);
+        Object.keys(test).forEach(key => test[key] === undefined && delete test[key]);
+        console.log(test);
+        return test;
     }
 
     async getTimeTableSaveNameCollection() {
@@ -78,13 +86,16 @@ export class TimeTableInputComponent implements OnInit{
             }) 
         );            
     }
-
+    
     deleteTimeTableSaveNameCollection(saveName: string) {
         const index = this.databaseSource.data.indexOf(saveName);
-        this.matDialog.open(DeleteComponent).afterClosed().subscribe(() => 
-            this.firebaseCrudsService.deleteUserDocument('TimeTableInputDatas', saveName)
-                .then(() => this.databaseSource.data[index].slice())
-                .then(() => this.getTimeTableSaveNameCollection()));
+        this.matDialog.open(DeleteComponent).afterClosed().subscribe((result) => {
+            if (result == 1) {
+                this.firebaseCrudsService.deleteUserDocument('TimeTableInputDatas', saveName)
+                    .then(() => this.databaseSource.data[index].slice())
+                    .then(() => this.getTimeTableSaveNameCollection());
+            }
+        });
     }
 
     get timeTableInputGet() {
@@ -94,15 +105,12 @@ export class TimeTableInputComponent implements OnInit{
     sorting() {
         for (let day = 0; day < 6; day++) {
             this.daySortedData[day].sort((first,second) => second.PRIORITY - first.PRIORITY);
-            for (let index = 0; index < this.daySortedData[day].length - 1; index++) {
-                if (this.daySortedData[day][index].PRIORITY == this.daySortedData[day][index+1].PRIORITY) {
-                    if (parseInt(this.daySortedData[day][index].SUBJECT_WEIGHT) < parseInt(this.daySortedData[day][index+1].SUBJECT_WEIGHT)) {
-                        const temp = this.daySortedData[day][index];
-                        this.daySortedData[day][index] = this.daySortedData[day][index+1];
-                        this.daySortedData[day][index+1] = temp;
-                    }
-                }
-            }
+            this.daySortedData[day].sort((first,second) => {
+                if(first.PRIORITY == second.PRIORITY) {
+                    return parseInt(second.SUBJECT_WEIGHT) - parseInt(first.SUBJECT_WEIGHT);
+                } 
+                else return parseInt(first.SUBJECT_WEIGHT);
+            });
         }
         localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
         this.router.navigate(['time_table_result_display']);

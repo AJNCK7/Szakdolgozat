@@ -35,7 +35,7 @@
             "EMAIL": "You have to use format e.g.: example@email.com",
             "ONLY_NUMBER": "Only numbers are accepted and only {{value}} number ",
             "CLASSROOM": "Classroom must follow the next: 'text/anything' e.g.:C/124",
-            "CLASS_TIME_PATTERN": "Requested time format: 1:00, 10:24, 23:59"
+            "CLASS_TIME_PATTERN": "Requested time format: 7:00, 10:24. Must be between 7:00-19:59"
         },
         "CONFIRM":{
             "PASSWORD" : "Not match with password",
@@ -44,7 +44,7 @@
         "START_ISGREATER_END": "Time can't be the same or End time is grater than Start time"
     },
     "RESET_PASSWORD": "Reset password",
-    "SENT_TO": "Already sent to ",
+    "SENT_TO": "Sent to ",
     "SEND_AGAIN": "Send again",
     "BACK_TO": "Back to ",
     "BACK_TO_LOGIN": "Back to login",

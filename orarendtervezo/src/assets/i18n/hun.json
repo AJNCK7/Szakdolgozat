@@ -1,5 +1,5 @@
 {
-    "MAIN_TITLE": "Órarend tervező",
+    "MAIN_TITLE": "Órarendtervező",
     "MENU": "Menü",
     "HOME_PAGE": "Kezdőlap",
     "MADE_BY": "Készítette",
@@ -35,7 +35,7 @@
             "EMAIL": "Kötelező a megadott forma pl.: example@email.com",
             "ONLY_NUMBER": "Csak szám lehet és csak {{value}} db",
             "CLASSROOM": "Az osztályterem követnie kell a következőt: 'szöveg/bármi' pl.:C/124",
-            "CLASS_TIME_PATTERN": "Kért időformátum: 1:00, 10:24, 23:59"
+            "CLASS_TIME_PATTERN": "Kért időformátum: 7:00, 10:24. Megadható intervallum: 7:00-19:59"
         },
         "CONFIRM":{
             "PASSWORD" : "Nem egyezzik a jelszóval",
@@ -44,7 +44,7 @@
         "START_ISGREATER_END": "Az idő nem lehet ugyan az vagy a vége idő nagyobb mint a kezdési idő"
     },
     "RESET_PASSWORD": "Jelszó emlékeztető",
-    "SENT_TO": "Már elküldve ",
+    "SENT_TO": "Elküldve",
     "SEND_AGAIN": "Újraküldés",
     "BACK_TO": "Vissza a ",
     "BACK_TO_LOGIN": "Vissza a bejelentkezéshez",

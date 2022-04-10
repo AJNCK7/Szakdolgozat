@@ -33,11 +33,17 @@ export class AuthService {
     SignIn(email: any, password: any) {
         return this.afAuth.signInWithEmailAndPassword(email, password)
             .then((result) => {
-                window.location.reload();
-                this.ngZone.run(() => {
-                    this.router.navigate(['home_page']);
-                });
-                this.SetUserData(result.user);
+                if(result.user?.emailVerified){
+                    window.location.reload();
+                    this.ngZone.run(() => {
+                        this.router.navigate(['home_page']);
+                    });
+                    this.SetUserData(result.user);
+                }
+                else {
+                    this.afAuth.signOut();
+                    window.alert('Not validated email');
+                }
             }).catch((error) => {
                 window.alert(error.message);
             });
@@ -47,6 +53,7 @@ export class AuthService {
         return this.afAuth.createUserWithEmailAndPassword(email, password)
             .then(() => {
                 this.SendVerificationMail();
+                this.SignOut();
             }).catch((error) => {
                 window.alert(error.message);
             });
@@ -78,12 +85,11 @@ export class AuthService {
     AuthLogin(provider: any) {
         return this.afAuth.signInWithPopup(provider)
             .then((result) => {
+                window.location.reload();
                 this.ngZone.run(() => {
                     this.router.navigate(['home_page']);
                 });
                 this.SetUserData(result.user);
-            }).catch((error) => {
-                window.alert(error);
             });
     }
 

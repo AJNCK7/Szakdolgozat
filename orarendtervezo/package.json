@@ -31,6 +31,7 @@
     "@types/color": "^3.0.2",
     "bootstrap": "^4.5.0",
     "firebase": "^9.6.8",
+    "firebase-admin": "^10.0.2",
     "flex-layout": "^1.0.1",
     "paginator": "^1.0.0",
     "rxjs": "~6.6.0",
