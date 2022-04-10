@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import * as firestore from 'firebase-admin';
 
 @Component({
     selector: 'app-root',
@@ -13,7 +12,6 @@ export class AppComponent implements OnInit{
     constructor(private translate: TranslateService){}
     ngOnInit(): void {
         this.translate.use(localStorage.getItem('Language') || 'hun');
-        firestore.firestore().settings({ignoreUndefinedProperties: true});
     }
 
 }

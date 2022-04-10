@@ -1,6 +1,8 @@
+import { TimeTableInputInterface } from './../interfaces/time-table-input.interface';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import {} from '@angular/fire';
 
 @Injectable()
 export class FirebaseCrudsService {

@@ -50,9 +50,10 @@ export class TimeTableInputComponent implements OnInit{
     }
 
     addTimeTableCollection(saveName: string) {
+        const data = Object.assign({}, JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]'));
         this.databaseSource.data.find(e => e == saveName) 
-            ? this.firebaseCrudsService.updateUserDocument('TimeTableInputDatas', saveName, Object.assign({}, this.dataSource.data))
-            : this.firebaseCrudsService.putUserDocument('TimeTableInputDatas', saveName, Object.assign({}, this.dataSource.data));
+            ? this.firebaseCrudsService.updateUserDocument('TimeTableInputDatas', saveName, data)
+            : this.firebaseCrudsService.putUserDocument('TimeTableInputDatas', saveName, data);
         this.getTimeTableSaveNameCollection();
         this.saveName = '';
     }
