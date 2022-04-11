@@ -11,7 +11,11 @@
         "PASSWORD": "Password",
         "CONFIRMPASSWORD": "Confirm password",
         "EMAIL": "Email",
-        "CONFIRMEMAIL": "Confirm email"
+        "CONFIRMEMAIL": "Confirm email",
+        "INVALID_EMAIL_OR_PASSWORD": "Wrong email address or password",
+        "EMIAL_ALREADY_EXISTS": "Email address already exists",
+        "EMAIL_NOT_EXISTS": "Email not exists",
+        "EMAIL_NOT_VALIDATED": "Email not validated"
     },
     "BUTTON":{
         "REGISTER": "Register",

@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Injectable, NgZone } from '@angular/core';
@@ -17,7 +18,8 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     public router: Router,  
     public ngZone: NgZone,
-    ) {    
+    private translateService: TranslateService,
+    ) {
         this.afAuth.authState.subscribe(user => {
             if (user) {
                 this.userData = user!;
@@ -34,18 +36,18 @@ export class AuthService {
         return this.afAuth.signInWithEmailAndPassword(email, password)
             .then((result) => {
                 if(result.user?.emailVerified){
-                    window.location.reload();
                     this.ngZone.run(() => {
                         this.router.navigate(['home_page']);
                     });
                     this.SetUserData(result.user);
+                    window.location.reload();
                 }
                 else {
                     this.afAuth.signOut();
-                    window.alert('Not validated email');
+                    window.alert(this.translateService.instant('USER.EMAIL_NOT_VALIDATED'));
                 }
-            }).catch((error) => {
-                window.alert(error.message);
+            }).catch(() => {
+                window.alert(this.translateService.instant('USER.INVALID_EMAIL_OR_PASSWORD'));
             });
     }
 
@@ -54,8 +56,8 @@ export class AuthService {
             .then(() => {
                 this.SendVerificationMail();
                 this.SignOut();
-            }).catch((error) => {
-                window.alert(error.message);
+            }).catch(() => {
+                window.alert(this.translateService.instant('USER.EMIAL_ALREADY_EXISTS'));
             });
     }
 
@@ -71,9 +73,7 @@ export class AuthService {
             .then(() => {
                 this.router.navigate(['user_login']);
             }).catch(() => {
-                localStorage.getItem('Language') === 'hun'
-                    ? window.alert('Nincs ilyen email címmel rendelkező felhasználó.')
-                    : window.alert('There is no user record corresponding to this identifier.');
+                window.alert(this.translateService.instant('USER.EMIAL_NOT_EXISTS'));
             });
     }
 
@@ -85,11 +85,11 @@ export class AuthService {
     AuthLogin(provider: any) {
         return this.afAuth.signInWithPopup(provider)
             .then((result) => {
-                window.location.reload();
                 this.ngZone.run(() => {
                     this.router.navigate(['home_page']);
                 });
                 this.SetUserData(result.user);
+                window.location.reload();
             });
     }
 
@@ -113,9 +113,8 @@ export class AuthService {
     }
 
     getUserUID() {
-        if(this.userData) {
-            return this.userData.uid;
-        }
+        const userUID = JSON.parse(localStorage.getItem('user') || 'null');
+        return userUID.uid;
     }
 
     GoogleAuth() {

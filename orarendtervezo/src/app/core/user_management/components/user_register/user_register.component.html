@@ -23,6 +23,9 @@
             <div *ngIf="registerForm.confirmEmail.invalid &&
             (registerForm.confirmEmail.dirty || registerForm.confirmEmail.touched)" 
             class="alert">
+                <div *ngIf="registerForm.confirmEmail.errors?.required">
+                    {{'INPUT_ERRORS.REQUIRED' | translate }}
+                </div>
                 <div *ngIf="registerForm.confirmEmail.errors?.confirmedValidator">
                     {{'INPUT_ERRORS.CONFIRM.EMAIL' | translate }}
                 </div>
@@ -55,6 +58,9 @@
             <div *ngIf="registerForm.confirmPassword.invalid && 
             (registerForm.confirmPassword.dirty || registerForm.confirmPassword.touched)" 
             class="alert">
+                <div *ngIf="registerForm.confirmPassword.errors?.required">
+                    {{'INPUT_ERRORS.REQUIRED' | translate }}
+                </div>
                 <div *ngIf="registerForm.confirmPassword.errors?.confirmedValidator">
                     {{'INPUT_ERRORS.CONFIRM.PASSWORD' | translate }}
                 </div>

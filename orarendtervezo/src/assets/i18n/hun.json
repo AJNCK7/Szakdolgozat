@@ -11,7 +11,11 @@
         "PASSWORD": "Jelszó",
         "CONFIRMPASSWORD": "Jelszó megerősítés",
         "EMAIL": "Email",
-        "CONFIRMEMAIL": "Email megerősítés"
+        "CONFIRMEMAIL": "Email megerősítés",
+        "INVALID_EMAIL_OR_PASSWORD": "Helytelen email cím vagy jelszó",
+        "EMIAL_ALREADY_EXISTS": "A megadott email cím már létezik",
+        "EMAIL_NOT_EXISTS": "Email cím nem létezik",
+        "EMAIL_NOT_VALIDATED": "Email cím nincs megerősítve"
     },
     "BUTTON":{
         "REGISTER": "Regisztrálás",

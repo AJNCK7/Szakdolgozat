@@ -1,8 +1,7 @@
-import { TimeTableInputInterface } from './../interfaces/time-table-input.interface';
+import { AuthService } from './../../../shared/services/auth.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {} from '@angular/fire';
 
 @Injectable()
 export class FirebaseCrudsService {
@@ -12,9 +11,11 @@ export class FirebaseCrudsService {
 
     constructor(
         private angularFirestore: AngularFirestore,
+        private authService: AuthService
     ){
-        //id nem jó
-        this.userDoc = this.angularFirestore.collection('users').doc('oFXbXHwjLAMseR0e2W27C7kJHkI2');
+        if(authService.isLoggedIn){
+            this.userDoc = this.angularFirestore.collection('users').doc(authService.getUserUID());
+        }
     }
 
     public getUserCollection(collection: string, document?: string) {

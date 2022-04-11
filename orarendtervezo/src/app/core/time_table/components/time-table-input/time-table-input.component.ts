@@ -50,53 +50,55 @@ export class TimeTableInputComponent implements OnInit{
     }
 
     addTimeTableCollection(saveName: string) {
-        const data = Object.assign({}, JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]'));
-        this.databaseSource.data.find(e => e == saveName) 
-            ? this.firebaseCrudsService.updateUserDocument('TimeTableInputDatas', saveName, data)
-            : this.firebaseCrudsService.putUserDocument('TimeTableInputDatas', saveName, data);
-        this.getTimeTableSaveNameCollection();
-        this.saveName = '';
-    }
-
-    deleteObjectUndefinedKeys() {
-        const test = Object.assign({}, this.dataSource.data);
-        Object.keys(test).forEach(key => test[key] === undefined && delete test[key]);
-        console.log(test);
-        return test;
+        if(this.authService.isLoggedIn) {
+            const data = Object.assign({}, JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]'));
+            this.databaseSource.data.find(e => e == saveName) 
+                ? this.firebaseCrudsService.updateUserDocument('TimeTableInputDatas', saveName, data)
+                : this.firebaseCrudsService.putUserDocument('TimeTableInputDatas', saveName, data);
+            this.getTimeTableSaveNameCollection();
+            this.saveName = '';
+        }
     }
 
     async getTimeTableSaveNameCollection() {
-        (await this.firebaseCrudsService.getUserDocument('TimeTableInputDatas')).subscribe(
-            result => this.databaseSource.data = result.docs.map(element => {
-                return element.id;
-            }) 
-        );            
+        if(this.authService.isLoggedIn) {
+            (await this.firebaseCrudsService.getUserDocument('TimeTableInputDatas')).subscribe(
+                result => this.databaseSource.data = result.docs.map(element => {
+                    return element.id;
+                }) 
+            );
+            this.databaseSource.data = this.databaseSource.data;
+        }
     }
 
     async loadTimeTableSaveNameCollection(saveName: string) {
-        (await this.firebaseCrudsService.getUserDocument('TimeTableInputDatas')).subscribe(
-            result => result.docs.map(element => {
-                if(element.id == saveName) {
-                    this.daySortedData = [[],[],[],[],[],[]];
-                    this.dataSource.data = Object.values(element.data());
-                    this.dataSource.data.forEach(element => {
-                        this.daySortedData[parseInt(element.DAY)].push(element);
-                    });
-                    this.localStorageSetItem();
-                }
-            }) 
-        );            
+        if(this.authService.isLoggedIn) {
+            (await this.firebaseCrudsService.getUserDocument('TimeTableInputDatas')).subscribe(
+                result => result.docs.map(element => {
+                    if(element.id == saveName) {
+                        this.daySortedData = [[],[],[],[],[],[]];
+                        this.dataSource.data = Object.values(element.data());
+                        this.dataSource.data.forEach(element => {
+                            this.daySortedData[parseInt(element.DAY)].push(element);
+                        });
+                        this.localStorageSetItem();
+                    }
+                }) 
+            );       
+        }     
     }
     
     deleteTimeTableSaveNameCollection(saveName: string) {
-        const index = this.databaseSource.data.indexOf(saveName);
-        this.matDialog.open(DeleteComponent).afterClosed().subscribe((result) => {
-            if (result == 1) {
-                this.firebaseCrudsService.deleteUserDocument('TimeTableInputDatas', saveName)
-                    .then(() => this.databaseSource.data[index].slice())
-                    .then(() => this.getTimeTableSaveNameCollection());
-            }
-        });
+        if(this.authService.isLoggedIn) {
+            const index = this.databaseSource.data.indexOf(saveName);
+            this.matDialog.open(DeleteComponent).afterClosed().subscribe((result) => {
+                if (result == 1) {
+                    this.firebaseCrudsService.deleteUserDocument('TimeTableInputDatas', saveName)
+                        .then(() => this.databaseSource.data[index].slice())
+                        .then(() => this.getTimeTableSaveNameCollection());
+                }
+            });
+        }
     }
 
     get timeTableInputGet() {
