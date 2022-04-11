@@ -15,7 +15,12 @@
         "INVALID_EMAIL_OR_PASSWORD": "Helytelen email cím vagy jelszó",
         "EMIAL_ALREADY_EXISTS": "A megadott email cím már létezik",
         "EMAIL_NOT_EXISTS": "Email cím nem létezik",
-        "EMAIL_NOT_VALIDATED": "Email cím nincs megerősítve"
+        "EMAIL_NOT_VALIDATED": "Email cím nincs megerősítve",
+        "PASSWORD_RESET": "Jelszó módosítása",
+        "NEW_PASSWORD": "Új jelszó",
+        "NEW_CONFIRMPASSWORD": "Új jelszó megerősítés",
+        "PASSWORD_RESET_SUCCESSFULLY_SEND": "Jelszó visszaállítási kérés sikeresen elküldve",
+        "SUCCESSFULL_PASSWORD_CHANGE": "Jelszó módosítása sikeresen megtörtént"
     },
     "BUTTON":{
         "REGISTER": "Regisztrálás",
@@ -28,7 +33,8 @@
         "CANCEL": "Visszavonás",
         "NO": "Nem",
         "YES": "Igen",
-        "OK": "Ok"
+        "OK": "Ok",
+        "SEND": "Küldés"
     },
     "INPUT_ERRORS":{
         "REQUIRED": "Kötelező mező",
@@ -42,12 +48,12 @@
             "CLASS_TIME_PATTERN": "Kért időformátum: 7:00, 10:24. Megadható intervallum: 7:00-19:59"
         },
         "CONFIRM":{
-            "PASSWORD" : "Nem egyezzik a jelszóval",
-            "EMAIL": "Nem egyezzik az emaillel"
+            "PASSWORD" : "Nem egyezik a jelszóval",
+            "EMAIL": "Nem egyezik az emaillel"
         },
         "START_ISGREATER_END": "Az idő nem lehet ugyan az vagy a vége idő nagyobb mint a kezdési idő"
     },
-    "RESET_PASSWORD": "Jelszó emlékeztető",
+    "RESET_PASSWORD": "Jelszó visszaállítási kérés",
     "SENT_TO": "Elküldve",
     "SEND_AGAIN": "Újraküldés",
     "BACK_TO": "Vissza a ",

@@ -42,6 +42,7 @@ import { TimeTableResultDisplayComponent } from './core/time_table/components/ti
 import { UserForgotPasswordComponent } from './core/user_management/components/user-forgot-password/user-forgot-password.component';
 import { UserRegisterComponent } from './core/user_management/components/user_register/user_register.component';
 import { UserVerifyEmailComponent } from './core/user_management/components/user_verify_email/user_verify_email.component';
+import { UserPasswordResetComponent } from './core/user_management/user-password-reset/user-password-reset.component';
 
 const MatImports = [
     MatIconModule,
@@ -93,6 +94,7 @@ const TranslateImports = [
         DeleteAllComponent,
         TimeTableResultDisplayComponent,
         TimeTableResultDisplayDialogComponent,
+        UserPasswordResetComponent,
     ],
     imports: [
         FirebaseImports,

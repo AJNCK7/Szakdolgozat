@@ -15,7 +15,12 @@
         "INVALID_EMAIL_OR_PASSWORD": "Wrong email address or password",
         "EMIAL_ALREADY_EXISTS": "Email address already exists",
         "EMAIL_NOT_EXISTS": "Email not exists",
-        "EMAIL_NOT_VALIDATED": "Email not validated"
+        "EMAIL_NOT_VALIDATED": "Email not validated",
+        "PASSWORD_RESET": "Password change",
+        "NEW_PASSWORD": "New password",
+        "NEW_CONFIRMPASSWORD": "Confirm new password",
+        "PASSWORD_RESET_SUCCESSFULLY_SEND": "Password reset successfully send",
+        "SUCCESSFULL_PASSWORD_CHANGE": "Password change was successful"
     },
     "BUTTON":{
         "REGISTER": "Register",
@@ -28,7 +33,8 @@
         "CANCEL": "Cancel",
         "NO": "No",
         "YES": "Yes",
-        "OK": "Ok"
+        "OK": "Ok",
+        "SEND": "Send"
     },
     "INPUT_ERRORS":{
         "REQUIRED": "Required input",

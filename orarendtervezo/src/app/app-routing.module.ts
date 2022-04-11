@@ -1,3 +1,4 @@
+import { UserPasswordResetComponent } from './core/user_management/user-password-reset/user-password-reset.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomepageComponent } from './commons/components/homepage/homepage.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
     { path: 'home_page', component: HomepageComponent},
     { path: 'user_login', component: UserLoginComponent},
     { path: 'user_register', component: UserRegisterComponent},
+    { path: 'user_password_reset', component: UserPasswordResetComponent},
     { path: 'user_verify_email', component: UserVerifyEmailComponent},
     { path: 'user_forgot_password', component: UserForgotPasswordComponent},
     { path: 'time_table_input', component: TimeTableInputComponent},

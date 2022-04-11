@@ -71,9 +71,10 @@ export class AuthService {
     ForgotPassword(passwordResetEmail: string) {
         return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
             .then(() => {
-                this.router.navigate(['user_login']);
-            }).catch(() => {
-                window.alert(this.translateService.instant('USER.EMIAL_NOT_EXISTS'));
+                window.alert(this.translateService.instant('USER.PASSWORD_RESET_SUCCESSFULLY_SEND'));
+            })
+            .catch(() => {
+                window.alert(this.translateService.instant('USER.EMAIL_NOT_EXISTS'));
             });
     }
 
@@ -119,5 +120,14 @@ export class AuthService {
 
     GoogleAuth() {
         return this.AuthLogin(new GoogleAuthProvider());
+    }
+
+    checkResetCode(code: string, password: string) {
+        this.afAuth.verifyPasswordResetCode(code).then(() => {
+            this.afAuth.confirmPasswordReset(code, password).then(() => {
+                window.alert(this.translateService.instant('USER.SUCCESSFULL_PASSWORD_CHANGE'));
+                this.router.navigate(['user_login']);
+            });
+        });
     }
 }
