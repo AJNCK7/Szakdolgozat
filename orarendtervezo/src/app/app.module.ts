@@ -43,6 +43,7 @@ import { UserForgotPasswordComponent } from './core/user_management/components/u
 import { UserRegisterComponent } from './core/user_management/components/user_register/user_register.component';
 import { UserVerifyEmailComponent } from './core/user_management/components/user_verify_email/user_verify_email.component';
 import { UserPasswordResetComponent } from './core/user_management/user-password-reset/user-password-reset.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const MatImports = [
     MatIconModule,
@@ -54,7 +55,8 @@ const MatImports = [
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatAutocompleteModule
 ];
 
 const FirebaseImports = [

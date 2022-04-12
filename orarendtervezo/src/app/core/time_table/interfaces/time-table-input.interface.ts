@@ -9,5 +9,6 @@ export interface TimeTableInputInterface {
     TEACHER?: string;
     CREDIT?: number;
     PRIORITY: number;
+    SAME_SUBJECT?: number
     COLOR: string;
 }

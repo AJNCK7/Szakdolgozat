@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { EditComponent } from './crud-dialogs/edit/edit.component';
 import { AddComponent } from './crud-dialogs/add/add.component';
 import { DeleteComponent } from './crud-dialogs/delete/delete.component';
-import { Component, OnInit, ViewChildren} from '@angular/core';
-import { FormGroup} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -23,8 +23,10 @@ export class TimeTableInputComponent implements OnInit{
     ID = 1;
     index = 0;
     saveName = '';
+    sameSubjectGroupName = '';
+    sameSubjectGroupNames: string[] = [];
     form: FormGroup = new FormGroup({});
-    displayedColumns: string[] = ['id', 'subjectName', 'day', 'subjectWeight', 'classStartTime', 
+    displayedColumns: string[] = ['id', 'subjectGroupID', 'subjectName', 'day', 'subjectWeight', 'classStartTime', 
         'classEndTime', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
     savedElementColumns: string[] = ['saveName', 'buttons'];
     dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
@@ -43,6 +45,7 @@ export class TimeTableInputComponent implements OnInit{
         this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
         this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
         this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
+        this.sameSubjectGroupNames = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
         if (this.dataSource.data[this.dataSource.data.length - 1]) {
             this.ID = this.dataSource.data[this.dataSource.data.length-1].ID + 1;
         }
@@ -51,6 +54,18 @@ export class TimeTableInputComponent implements OnInit{
 
     get timeTableInputGet() {
         return this.form.controls;
+    }
+
+    saveSameSubjectGroupName(sameSubjectGroupName: string) {
+        this.sameSubjectGroupNames.push(sameSubjectGroupName);
+        localStorage.setItem('SameSubjectGroups', JSON.stringify(this.sameSubjectGroupNames));
+    }
+
+    deleteSameSubjectGroup(sameSubjectGroupName: string) {
+        console.log(this.sameSubjectGroupNames);
+        this.sameSubjectGroupNames.splice(this.sameSubjectGroupNames.indexOf(sameSubjectGroupName), 1);
+        console.log(this.sameSubjectGroupNames);
+        localStorage.setItem('SameSubjectGroups', JSON.stringify(this.sameSubjectGroupNames));
     }
 
     sorting() {

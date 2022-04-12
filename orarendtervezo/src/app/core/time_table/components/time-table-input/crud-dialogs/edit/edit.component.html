@@ -123,6 +123,16 @@
                 {{'INPUT_ERRORS.PATTERN.ONLY_NUMBER' | translate:priorityMaxLengthParam }}
             </div>
         </div>
+        <mat-form-field class="time_table_input_form_field" appearance="fill">
+            <mat-label>Subject</mat-label>
+            <input type="text" placeholder="Subject" aria-label="Number" matInput
+                formControlName="sameSubject" [matAutocomplete]="auto" [(ngModel)]="data.SAME_SUBJECT" >
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let subject of filteredOptions | async; let i = index" [value]="i">
+                    {{i}} - {{subject}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
         <mat-form-field class="time_table_input_form_field">
             <mat-label>{{'TIME_TABLE_INPUTS.COLOR' | translate}}</mat-label>
             <input type="color" matInput formControlName="colorPick" name="colorPick"

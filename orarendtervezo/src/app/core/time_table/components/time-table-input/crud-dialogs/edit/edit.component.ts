@@ -1,6 +1,8 @@
 import { Component, Inject} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { startTimeIsGreaterThanEndTime } from 'src/app/shared/customValidators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TimeTableInputInterface } from '../../../../interfaces/time-table-input.interface';
@@ -20,6 +22,9 @@ export class EditComponent{
     form: FormGroup = new FormGroup({});
     data: TimeTableInputInterface;
 
+    sameSubjects: string[] = [];
+    filteredOptions: Observable<string[]> | undefined;
+
     constructor (
     public dialogRef: MatDialogRef<EditComponent>,
     @Inject(MAT_DIALOG_DATA) comingData,
@@ -28,6 +33,7 @@ export class EditComponent{
     ) {
         this.data = comingData;
         this.dialogRef.disableClose = true;
+        this.sameSubjects = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
         this.form = fb.group({
             subjectName: ['', [
                 Validators.required,
@@ -59,12 +65,17 @@ export class EditComponent{
             priority: ['', [
                 Validators.pattern('[0-9]'),
             ]],
+            sameSubject: [''],
             colorPick: ['']
         }, {
             validator: [
                 startTimeIsGreaterThanEndTime('classStartTime', 'classEndTime'), 
             ]
         });
+        this.filteredOptions = this.form.get('sameSubject')!.valueChanges.pipe(
+            startWith(''),
+            map(value => this.filterValue(value)),
+        );
     }
 
     get timeTableInputGet() {
@@ -73,5 +84,9 @@ export class EditComponent{
 
     cancelClick() {
         this.dialogRef.close();
+    }
+
+    private filterValue(value: string): string[] {
+        return this.sameSubjects.filter(option => option.toLowerCase().includes(value));
     }
 }

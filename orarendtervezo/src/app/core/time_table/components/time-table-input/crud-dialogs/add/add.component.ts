@@ -1,9 +1,11 @@
+import { Observable } from 'rxjs';
 import { Component, Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { startTimeIsGreaterThanEndTime } from 'src/app/shared/customValidators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TimeTableInputInterface } from '../../../../interfaces/time-table-input.interface';
+import {map, startWith } from 'rxjs/operators';
 
 @Component({
     selector: 'app-add-tableDialogInputs',
@@ -19,12 +21,16 @@ export class AddComponent {
     creditMaxLengthParam = {value: '2'};
     form: FormGroup = new FormGroup({});
 
+    sameSubjects: string[] = [];
+    filteredOptions: Observable<string[]> | undefined;
+
     constructor (
     public dialogRef: MatDialogRef<AddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TimeTableInputInterface,
     private fb: FormBuilder,
     public authService: AuthService
     ) {
+        this.sameSubjects = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
         this.form = fb.group({
             subjectName: ['', [
                 Validators.required,
@@ -56,20 +62,28 @@ export class AddComponent {
             priority: ['', [
                 Validators.pattern('[0-9]'),
             ]],
+            sameSubject: [''],
             colorPick: ['', [ ]]
         }, {
             validator: [
                 startTimeIsGreaterThanEndTime('classStartTime', 'classEndTime'), 
             ]
         });
+        this.filteredOptions = this.form.get('sameSubject')!.valueChanges.pipe(
+            startWith(''),
+            map(value => this.filterValue(value)),
+        );
     }
-
     get timeTableInputGet() {
         return this.form.controls;
     }
 
     cancelClick() {
         this.dialogRef.close();
+    }
+
+    private filterValue(value: string): string[] {
+        return this.sameSubjects.filter(option => option.toLowerCase().includes(value));
     }
 }
 
