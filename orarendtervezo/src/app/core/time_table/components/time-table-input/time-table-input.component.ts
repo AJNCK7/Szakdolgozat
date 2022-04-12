@@ -23,10 +23,9 @@ export class TimeTableInputComponent implements OnInit{
     ID = 1;
     index = 0;
     saveName = '';
-    sameSubjectGroupName = '';
     sameSubjectGroupNames: string[] = [];
     form: FormGroup = new FormGroup({});
-    displayedColumns: string[] = ['id', 'subjectGroupID', 'subjectName', 'day', 'subjectWeight', 'classStartTime', 
+    displayedColumns: string[] = ['id', 'subjectGroup', 'day', 'subjectWeight', 'classStartTime', 
         'classEndTime', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
     savedElementColumns: string[] = ['saveName', 'buttons'];
     dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
@@ -54,31 +53,21 @@ export class TimeTableInputComponent implements OnInit{
         return this.form.controls;
     }
 
-    saveSameSubjectGroupName(sameSubjectGroupName: string) {
-        this.sameSubjectGroupNames.push(sameSubjectGroupName);
-        localStorage.setItem('SameSubjectGroups', JSON.stringify(this.sameSubjectGroupNames));
-    }
-
-    deleteSameSubjectGroup(sameSubjectGroupName: string) {
-        console.log(this.sameSubjectGroupNames);
-        this.sameSubjectGroupNames.splice(this.sameSubjectGroupNames.indexOf(sameSubjectGroupName), 1);
-        console.log(this.sameSubjectGroupNames);
-        localStorage.setItem('SameSubjectGroups', JSON.stringify(this.sameSubjectGroupNames));
-    }
-
     openAddDialog() {
         this.matDialog.open(AddComponent, {data: {ID: this.ID}}).afterClosed()
             .subscribe(result => {
                 if(result){
+                    if(!this.sameSubjectGroupNames.includes(result.SUBJECT_GROUP)){
+                        this.sameSubjectGroupNames.push(result.SUBJECT_GROUP);
+                        localStorage.setItem('SameSubjectGroups', JSON.stringify(this.sameSubjectGroupNames)); 
+                    }
+                    result.SUBJECT_GROUP = this.sameSubjectGroupNames.indexOf(result.SUBJECT_GROUP);
                     this.dataSource.data.push(result);
                     this.dataSource.data = this.dataSource.data;
                     this.ID++;
+                    this.localStorageSetItem();
                 }
             });
-    }
-
-    sorting() {
-        this.router.navigate(['time_table_result_display']);
     }
 
     openEditDialog(index: number) {
@@ -86,6 +75,12 @@ export class TimeTableInputComponent implements OnInit{
         this.matDialog.open(EditComponent, { data: data }).afterClosed()
             .subscribe(result => {
                 if (result != null) {
+                    if(!this.sameSubjectGroupNames.includes(result.SUBJECT_GROUP)){
+                        this.sameSubjectGroupNames.push(result.SUBJECT_GROUP);
+                        console.log('ok');
+                        localStorage.setItem('SameSubjectGroups', JSON.stringify(this.sameSubjectGroupNames)); 
+                    }
+                    result.SUBJECT_GROUP = this.sameSubjectGroupNames.indexOf(result.SUBJECT_GROUP);
                     this.dataSource.data[index] = result;
                     this.dataSource.data = this.dataSource.data;
                     this.localStorageSetItem();
@@ -115,8 +110,16 @@ export class TimeTableInputComponent implements OnInit{
         });
     }
 
+    getSubjectGroupText(index: number) {
+        return this.sameSubjectGroupNames[index];
+    }
+
     localStorageSetItem() {
         localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
+    }
+    
+    sorting() {
+        this.router.navigate(['time_table_result_display']);
     }
 
     addTimeTableCollection(saveName: string) {

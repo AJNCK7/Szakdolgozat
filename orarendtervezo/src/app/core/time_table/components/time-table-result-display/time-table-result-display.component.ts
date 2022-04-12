@@ -21,6 +21,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
     generationIndex = 0;
     maxGenerationIndex = 0;
     maxPriority = 0;
+    sameSubjectGroupNames: string[] = [];
 
     constructor(
         public matDialog: MatDialog,
@@ -28,6 +29,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
 
     ngOnInit(): void {
         this.dataSource = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
+        this.sameSubjectGroupNames = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
         this.maxPrioritySearch();
         this.sorting(true);
     }
@@ -39,9 +41,9 @@ export class TimeTableResultDisplayComponent implements OnInit {
         this.dataSource.forEach(element => {
             let contain = false;
             this.daySortedData.forEach((_ , index) => {
-                if(element.SAME_SUBJECT != undefined) {
+                if(element.SUBJECT_GROUP != undefined) {
                     this.daySortedData[index].forEach(dayElement => {
-                        if(element.SAME_SUBJECT == dayElement.SAME_SUBJECT) {
+                        if(element.SUBJECT_GROUP == dayElement.SUBJECT_GROUP) {
                             contain = true;
                         }
                     });
@@ -105,9 +107,9 @@ export class TimeTableResultDisplayComponent implements OnInit {
                         if(this.isTimeSlotAvailable(this.daySortedData[i][j].CLASS_START_TIME, this.daySortedData[i][j].CLASS_END_TIME, i)) {
                             const div = document.createElement('div');
                             const actualElement = this.daySortedData[i][j];
-                            div.innerHTML = actualElement.SUBJECT_NAME + ', <br>' 
+                            div.innerHTML = this.sameSubjectGroupNames[actualElement.SUBJECT_GROUP] + ', <br>' 
                                             + actualElement.CLASS_START_TIME + '-' + actualElement.CLASS_END_TIME;
-                            div.title = actualElement.SUBJECT_NAME + ', ' 
+                            div.title = actualElement.SUBJECT_GROUP + ', ' 
                                 + actualElement.CLASS_START_TIME + '-' + actualElement.CLASS_END_TIME ;
                             div.id = 'div' + i + j;
                             div.style.backgroundColor = actualElement.COLOR != null ? actualElement.COLOR : 'red';

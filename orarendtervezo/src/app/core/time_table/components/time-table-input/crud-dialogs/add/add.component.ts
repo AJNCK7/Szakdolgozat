@@ -14,14 +14,14 @@ import {map, startWith } from 'rxjs/operators';
 })
 export class AddComponent {
 
-    subjectNameMaxLengthParam = {value: '40'};
+    subjectGroupMaxLengthParam = {value: '40'};
     classroomMaxLengthParam = {value: '10'};
     teacherMaxLengthParam = {value: '40'};
     priorityMaxLengthParam = {value: '1'};
     creditMaxLengthParam = {value: '2'};
     form: FormGroup = new FormGroup({});
 
-    sameSubjects: string[] = [];
+    subjectGroup: string[] = [];
     filteredOptions: Observable<string[]> | undefined;
 
     constructor (
@@ -30,11 +30,11 @@ export class AddComponent {
     private fb: FormBuilder,
     public authService: AuthService
     ) {
-        this.sameSubjects = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
+        this.subjectGroup = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
         this.form = fb.group({
-            subjectName: ['', [
+            subjectGroup: ['', [
                 Validators.required,
-                Validators.maxLength(40)
+                Validators.maxLength(40),
             ]],
             day: ['', [
                 Validators.required,
@@ -62,14 +62,13 @@ export class AddComponent {
             priority: ['', [
                 Validators.pattern('[0-9]'),
             ]],
-            sameSubject: [''],
             colorPick: ['', [ ]]
         }, {
             validator: [
                 startTimeIsGreaterThanEndTime('classStartTime', 'classEndTime'), 
             ]
         });
-        this.filteredOptions = this.form.get('sameSubject')!.valueChanges.pipe(
+        this.filteredOptions = this.form.get('subjectGroup')!.valueChanges.pipe(
             startWith(''),
             map(value => this.filterValue(value)),
         );
@@ -83,7 +82,7 @@ export class AddComponent {
     }
 
     private filterValue(value: string): string[] {
-        return this.sameSubjects.filter(option => option.toLowerCase().includes(value));
+        return this.subjectGroup.filter(option => option.toLowerCase().includes(value));
     }
 }
 

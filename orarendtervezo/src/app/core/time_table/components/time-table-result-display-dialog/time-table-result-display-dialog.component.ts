@@ -27,4 +27,8 @@ export class TimeTableResultDisplayDialogComponent{
         else document.getElementById('color')!.innerText = '-';    
     }
 
+    getSubjectGroupText() {
+        const subjectGroupNames: string[] = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
+        return subjectGroupNames[this.daySortedData.element.SUBJECT_GROUP];
+    }
 }

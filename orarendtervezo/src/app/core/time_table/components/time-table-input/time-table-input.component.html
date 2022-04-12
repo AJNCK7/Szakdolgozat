@@ -1,27 +1,11 @@
-<mat-form-field appearance="outline">
-    <mat-label >{{'SAVE_NAME' | translate}}</mat-label>
-    <input matInput [(ngModel)]="sameSubjectGroupName">
-</mat-form-field>
-<button mat-raised-button color="primary"
-    (click)="deleteSameSubjectGroup(this.sameSubjectGroupName)" Layoutgap>
-    {{'delete' | translate}}
-</button>
-<button mat-raised-button color="primary" 
-    (click)="saveSameSubjectGroupName(this.sameSubjectGroupName)" Layoutgap>
-    {{'SAVE_TO_DATABASE' | translate}}
-</button>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID </th>
         <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
     </ng-container>
-    <ng-container matColumnDef="subjectName">
+    <ng-container matColumnDef="subjectGroup">
         <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.SUBJECT_NAME' | translate}} </th>
-        <td mat-cell *matCellDef="let element"  class="breakword"> {{element.SUBJECT_NAME}} </td>
-    </ng-container>
-    <ng-container matColumnDef="subjectGroupID">
-        <th mat-header-cell *matHeaderCellDef> {{'ID' | translate}} </th>
-        <td mat-cell *matCellDef="let element" > {{element.SAME_SUBJECT}} </td>
+        <td mat-cell *matCellDef="let element" > {{getSubjectGroupText(element.SUBJECT_GROUP)}} </td>
     </ng-container>
     <ng-container matColumnDef="day">
         <th mat-header-cell *matHeaderCellDef> {{'TIME_TABLE_INPUTS.DAY' | translate}} </th>

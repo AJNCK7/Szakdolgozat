@@ -1,6 +1,6 @@
 export interface TimeTableInputInterface {
     ID: number;
-    SUBJECT_NAME: string;
+    SUBJECT_GROUP: number
     DAY: string;
     SUBJECT_WEIGHT: string;
     CLASS_START_TIME: string;
@@ -9,6 +9,5 @@ export interface TimeTableInputInterface {
     TEACHER?: string;
     CREDIT?: number;
     PRIORITY: number;
-    SAME_SUBJECT?: number
     COLOR: string;
 }

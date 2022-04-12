@@ -14,7 +14,7 @@
                 <p>{{'TIME_TABLE_INPUTS.COLOR'    | translate}}</p>
             </td>
             <td class="resultCardData">
-                <p>{{daySortedData.element.SUBJECT_NAME}}</p>
+                <p>{{getSubjectGroupText()}}</p>
                 <p>{{numberToTextController.dayChanger(daySortedData.element.DAY) | translate }}</p>
                 <p>{{numberToTextController.subjectWeightChanger(daySortedData.element.SUBJECT_WEIGHT) | translate}}</p>
                 <p>{{daySortedData.element.CLASS_START_TIME}}</p>
