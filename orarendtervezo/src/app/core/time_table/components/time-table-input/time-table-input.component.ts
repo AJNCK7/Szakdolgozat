@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { EditComponent } from './crud-dialogs/edit/edit.component';
 import { AddComponent } from './crud-dialogs/add/add.component';
 import { DeleteComponent } from './crud-dialogs/delete/delete.component';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChildren} from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -47,6 +47,86 @@ export class TimeTableInputComponent implements OnInit{
             this.ID = this.dataSource.data[this.dataSource.data.length-1].ID + 1;
         }
         this.getTimeTableSaveNameCollection();
+    }
+
+    get timeTableInputGet() {
+        return this.form.controls;
+    }
+
+    sorting() {
+        for (let day = 0; day < 6; day++) {
+            this.daySortedData[day].sort((first,second) => second.PRIORITY - first.PRIORITY);
+            this.daySortedData[day].sort((first,second) => {
+                if(first.PRIORITY == second.PRIORITY) {
+                    return parseInt(second.SUBJECT_WEIGHT) - parseInt(first.SUBJECT_WEIGHT);
+                } 
+                else return parseInt(first.SUBJECT_WEIGHT);
+            });
+        }
+        localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
+        this.router.navigate(['time_table_result_display']);
+    }
+
+    openAddDialog() {
+        this.matDialog.open(AddComponent, {data: {ID: this.ID}}).afterClosed()
+            .subscribe(result => {
+                if(result){
+                    this.dataSource.data.push(result);
+                    this.dataSource.data = this.dataSource.data;
+                    this.daySortedData[this.dataSource.data[this.dataSource.data.length-1].DAY].push(result);
+                    this.localStorageSetItem();
+                    this.ID++;
+                }
+            });
+    }
+
+    openEditDialog(index: number) {
+        const changeElementInIndex = this.daySortedData[this.dataSource.data[index].DAY]
+            .findIndex(element => element.ID == this.dataSource.data[index].ID);
+        const changeElementOutIndex = parseInt(this.dataSource.data[index].DAY);
+        const data = Object.assign({}, this.dataSource.data[index]);
+        this.matDialog.open(EditComponent, { data: data }).afterClosed()
+            .subscribe(result => {
+                if (result != null) {
+                    this.daySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
+                    this.dataSource.data[index] = result;
+                    this.dataSource.data = this.dataSource.data;
+                    this.daySortedData[this.dataSource.data[index].DAY].push(result);
+                    this.localStorageSetItem();
+                }
+            });
+    }
+
+    openDeleteDialog(index: number) {
+        const changeElementInIndex = this.daySortedData[this.dataSource.data[index].DAY]
+            .findIndex(element => element.ID == this.dataSource.data[index].ID);
+        const changeElementOutIndex = parseInt(this.dataSource.data[index].DAY);
+        this.matDialog.open(DeleteComponent).afterClosed()
+            .subscribe(result => {
+                if (result == 1) {
+                    this.daySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
+                    this.dataSource.data.splice(index, 1);
+                    //tesztelni törléshez
+                    this.dataSource.data = this.dataSource.data;
+                    this.localStorageSetItem();
+                }
+            });
+    }
+
+    openDeleteAllDialog() {
+        this.matDialog.open(DeleteAllComponent).afterClosed().subscribe(result => {
+            if (result == 1) {
+                this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
+                this.daySortedData = [[],[],[],[],[],[]];
+                this.ID = 1;
+                this.localStorageSetItem();
+            }
+        });
+    }
+
+    localStorageSetItem() {
+        localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
+        localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
     }
 
     addTimeTableCollection(saveName: string) {
@@ -94,89 +174,10 @@ export class TimeTableInputComponent implements OnInit{
             this.matDialog.open(DeleteComponent).afterClosed().subscribe((result) => {
                 if (result == 1) {
                     this.firebaseCrudsService.deleteUserDocument('TimeTableInputDatas', saveName)
-                        .then(() => this.databaseSource.data[index].slice())
-                        .then(() => this.getTimeTableSaveNameCollection());
+                        .then(() => this.databaseSource.data[index].slice());
+                    this.databaseSource.data = this.databaseSource.data;
                 }
             });
         }
-    }
-
-    get timeTableInputGet() {
-        return this.form.controls;
-    }
-
-    sorting() {
-        for (let day = 0; day < 6; day++) {
-            this.daySortedData[day].sort((first,second) => second.PRIORITY - first.PRIORITY);
-            this.daySortedData[day].sort((first,second) => {
-                if(first.PRIORITY == second.PRIORITY) {
-                    return parseInt(second.SUBJECT_WEIGHT) - parseInt(first.SUBJECT_WEIGHT);
-                } 
-                else return parseInt(first.SUBJECT_WEIGHT);
-            });
-        }
-        localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
-        this.router.navigate(['time_table_result_display']);
-    }
-
-    openAddDialog() {
-        this.matDialog.open(AddComponent, {data: {ID: this.ID}}).afterClosed()
-            .subscribe(result => {
-                if(result){
-                    this.dataSource.data.push(result);
-                    this.dataSource.data = this.dataSource.data;
-                    this.daySortedData[this.dataSource.data[this.dataSource.data.length-1].DAY].push(result);
-                    this.localStorageSetItem();
-                    this.ID++;
-                }
-            });
-    }
-
-    openEditDialog(index: number, id: number) {
-        const changeElementInIndex = this.daySortedData[this.dataSource.data[index].DAY]
-            .findIndex(element => element.ID == this.dataSource.data[index].ID);
-        const changeElementOutIndex = parseInt(this.dataSource.data[index].DAY);
-        this.matDialog.open(EditComponent, { data: this.dataSource.data[index] }).afterClosed()
-            .subscribe(result => {
-                if (result != null) {
-                    this.daySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
-                    this.dataSource.data[index] = result; 
-                    this.dataSource.data[index].ID = id;
-                    this.daySortedData[this.dataSource.data[index].DAY].push(result);
-                    this.localStorageSetItem();
-                }
-            });
-    }
-
-    openDeleteDialog(index: number) {
-        const changeElementInIndex = this.daySortedData[this.dataSource.data[index].DAY]
-            .findIndex(element => element.ID == this.dataSource.data[index].ID);
-        const changeElementOutIndex = parseInt(this.dataSource.data[index].DAY);
-        this.matDialog.open(DeleteComponent).afterClosed()
-            .subscribe(result => {
-                if (result == 1) {
-                    this.daySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
-                    this.dataSource.data.splice(index, 1);
-                    //tesztelni törléshez
-                    this.dataSource.data = this.dataSource.data;
-                    this.localStorageSetItem();
-                }
-            });
-    }
-
-    openDeleteAllDialog() {
-        this.matDialog.open(DeleteAllComponent).afterClosed().subscribe(result => {
-            if (result == 1) {
-                this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
-                this.daySortedData = [[],[],[],[],[],[]];
-                this.ID = 1;
-                this.localStorageSetItem();
-            }
-        });
-    }
-
-    localStorageSetItem() {
-        localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
-        localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
     }
 }

@@ -12,15 +12,15 @@
         "CONFIRMPASSWORD": "Confirm password",
         "EMAIL": "Email",
         "CONFIRMEMAIL": "Confirm email",
-        "INVALID_EMAIL_OR_PASSWORD": "Wrong email address or password",
-        "EMIAL_ALREADY_EXISTS": "Email address already exists",
-        "EMAIL_NOT_EXISTS": "Email not exists",
-        "EMAIL_NOT_VALIDATED": "Email not validated",
+        "INVALID_EMAIL_OR_PASSWORD": "Wrong email address or password!",
+        "EMIAL_ALREADY_EXISTS": "Email address already exists!",
+        "EMAIL_NOT_EXISTS": "Email not exists!",
+        "EMAIL_NOT_VALIDATED": "Email not validated!",
         "PASSWORD_RESET": "Password change",
         "NEW_PASSWORD": "New password",
         "NEW_CONFIRMPASSWORD": "Confirm new password",
-        "PASSWORD_RESET_SUCCESSFULLY_SEND": "Password reset successfully send",
-        "SUCCESSFULL_PASSWORD_CHANGE": "Password change was successful"
+        "PASSWORD_RESET_SUCCESSFULLY_SEND": "Password reset successfully send!",
+        "SUCCESSFULL_PASSWORD_CHANGE": "Password change was successful!"
     },
     "BUTTON":{
         "REGISTER": "Register",
@@ -37,21 +37,20 @@
         "SEND": "Send"
     },
     "INPUT_ERRORS":{
-        "REQUIRED": "Required input",
-        "MINLENGTH": "Minimum {{value}} character",
-        "MAXLENGTH": "Maximum {{value}} character",
+        "REQUIRED": "Required input!",
+        "MINLENGTH": "Minimum {{value}} character!",
+        "MAXLENGTH": "Maximum {{value}} character!",
         "PATTERN":{
-            "PASSWORD": "Minimum 8 character and must contain at least one number and one uppercase charachter",
-            "EMAIL": "You have to use format e.g.: example@email.com",
-            "ONLY_NUMBER": "Only numbers are accepted and only {{value}} number ",
-            "CLASSROOM": "Classroom must follow the next: 'text/anything' e.g.:C/124",
-            "CLASS_TIME_PATTERN": "Requested time format: 7:00, 10:24. Must be between 7:00-19:59"
+            "PASSWORD": "Minimum 8 character and must contain at least one number and one uppercase charachter!",
+            "EMAIL": "You have to use format e.g.: example@email.com!",
+            "ONLY_NUMBER": "Only numbers are accepted and only {{value}} number!",
+            "CLASS_TIME_PATTERN": "Requested time format: 7:00, 10:24. Must be between 7:00-19:59!"
         },
         "CONFIRM":{
-            "PASSWORD" : "Not match with password",
-            "EMAIL": "Not match with email"
+            "PASSWORD" : "Not match with password!",
+            "EMAIL": "Not match with email!"
         },
-        "START_ISGREATER_END": "Time can't be the same or End time is grater than Start time"
+        "START_ISGREATER_END": "Time can't be the same or End time is grater than Start time!"
     },
     "RESET_PASSWORD": "Reset password",
     "SENT_TO": "Sent to ",

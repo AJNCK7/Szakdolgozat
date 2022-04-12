@@ -18,13 +18,15 @@ export class EditComponent{
     priorityMaxLengthParam = {value: '1'};
     creditMaxLengthParam = {value: '2'};
     form: FormGroup = new FormGroup({});
+    data: TimeTableInputInterface;
 
     constructor (
     public dialogRef: MatDialogRef<EditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: TimeTableInputInterface,
+    @Inject(MAT_DIALOG_DATA) comingData,
     private fb: FormBuilder,
     public authService: AuthService
     ) {
+        this.data = comingData;
         this.dialogRef.disableClose = true;
         this.form = fb.group({
             subjectName: ['', [

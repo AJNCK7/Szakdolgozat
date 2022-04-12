@@ -12,15 +12,15 @@
         "CONFIRMPASSWORD": "Jelszó megerősítés",
         "EMAIL": "Email",
         "CONFIRMEMAIL": "Email megerősítés",
-        "INVALID_EMAIL_OR_PASSWORD": "Helytelen email cím vagy jelszó",
-        "EMIAL_ALREADY_EXISTS": "A megadott email cím már létezik",
-        "EMAIL_NOT_EXISTS": "Email cím nem létezik",
-        "EMAIL_NOT_VALIDATED": "Email cím nincs megerősítve",
+        "INVALID_EMAIL_OR_PASSWORD": "Helytelen email cím vagy jelszó!",
+        "EMIAL_ALREADY_EXISTS": "A megadott email cím már létezik!",
+        "EMAIL_NOT_EXISTS": "Email cím nem létezik!",
+        "EMAIL_NOT_VALIDATED": "Email cím nincs megerősítve!",
         "PASSWORD_RESET": "Jelszó módosítása",
         "NEW_PASSWORD": "Új jelszó",
         "NEW_CONFIRMPASSWORD": "Új jelszó megerősítés",
-        "PASSWORD_RESET_SUCCESSFULLY_SEND": "Jelszó visszaállítási kérés sikeresen elküldve",
-        "SUCCESSFULL_PASSWORD_CHANGE": "Jelszó módosítása sikeresen megtörtént"
+        "PASSWORD_RESET_SUCCESSFULLY_SEND": "Jelszó visszaállítási kérés sikeresen elküldve!",
+        "SUCCESSFULL_PASSWORD_CHANGE": "Jelszó módosítása sikeresen megtörtént!"
     },
     "BUTTON":{
         "REGISTER": "Regisztrálás",
@@ -37,19 +37,18 @@
         "SEND": "Küldés"
     },
     "INPUT_ERRORS":{
-        "REQUIRED": "Kötelező mező",
-        "MINLENGTH": "Minimum {{value}} karakter",
-        "MAXLENGTH": "Maximum {{value}} karakter",
+        "REQUIRED": "Kötelező mező!",
+        "MINLENGTH": "Minimum {{value}} karakter!",
+        "MAXLENGTH": "Maximum {{value}} karakter!",
         "PATTERN":{
-            "PASSWORD": "Minimum 8 karakter és kötelező tartalmaznia legalább egy számot és egy nagy betűt",
-            "EMAIL": "Kötelező a megadott forma pl.: example@email.com",
-            "ONLY_NUMBER": "Csak szám lehet és csak {{value}} db",
-            "CLASSROOM": "Az osztályterem követnie kell a következőt: 'szöveg/bármi' pl.:C/124",
-            "CLASS_TIME_PATTERN": "Kért időformátum: 7:00, 10:24. Megadható intervallum: 7:00-19:59"
+            "PASSWORD": "Minimum 8 karakter és kötelező tartalmaznia legalább egy számot és egy nagy betűt!",
+            "EMAIL": "Kötelező a megadott forma pl.: example@email.com!",
+            "ONLY_NUMBER": "Csak szám lehet és csak {{value}} db!",
+            "CLASS_TIME_PATTERN": "Kért időformátum: 7:00, 10:24. Megadható intervallum: 7:00-19:59!"
         },
         "CONFIRM":{
-            "PASSWORD" : "Nem egyezik a jelszóval",
-            "EMAIL": "Nem egyezik az emaillel"
+            "PASSWORD" : "Nem egyezik a jelszóval!",
+            "EMAIL": "Nem egyezik az email címmel!"
         },
         "START_ISGREATER_END": "Az idő nem lehet ugyan az vagy a vége idő nagyobb mint a kezdési idő"
     },
