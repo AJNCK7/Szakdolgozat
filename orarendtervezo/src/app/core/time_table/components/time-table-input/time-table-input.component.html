@@ -74,16 +74,10 @@
                 <mat-label >{{'SAVE_NAME' | translate}}</mat-label>
                 <input matInput [(ngModel)]="saveName">
             </mat-form-field>
-            <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
-                <button mat-raised-button color="primary" 
-                    (click)="addTimeTableCollection(this.saveName)" Layoutgap>
-                    {{'SAVE_TO_DATABASE' | translate}}
-                </button>
-                <button mat-raised-button color="primary" 
-                    (click)="addTimeTableCollection(this.saveName)" Layoutgap>
-                    {{'UPDATE_DATABASE' | translate}}
-                </button>
-            </div>
+            <button mat-raised-button color="primary" 
+                (click)="addTimeTableCollection(this.saveName)" Layoutgap>
+                {{'SAVE_TO_DATABASE' | translate}}
+            </button>
         </div>
     </mat-card>
 </div>

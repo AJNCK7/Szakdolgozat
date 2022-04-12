@@ -124,10 +124,10 @@ export class TimeTableInputComponent implements OnInit{
 
     addTimeTableCollection(saveName: string) {
         if(this.authService.isLoggedIn) {
-            const data = Object.assign({}, JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]'));
-            this.databaseSource.data.find(e => e == saveName) 
-                ? this.firebaseCrudsService.updateUserDocument('TimeTableInputDatas', saveName, data)
-                : this.firebaseCrudsService.putUserDocument('TimeTableInputDatas', saveName, data);
+            const timeTableInputdata = Object.assign({}, JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]'));
+            const sameSubjectGroups = Object.assign({}, JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]'));
+            this.firebaseCrudsService.putUserDocument('TimeTableInputDatas', saveName, timeTableInputdata);
+            this.firebaseCrudsService.putUserDocument('SameSubjectGroups', saveName, sameSubjectGroups);
             this.getTimeTableSaveNameCollection();
             this.saveName = '';
         }
@@ -153,7 +153,15 @@ export class TimeTableInputComponent implements OnInit{
                         this.localStorageSetItem();
                     }
                 }) 
-            );       
+            );
+            (await this.firebaseCrudsService.getUserDocument('SameSubjectGroups')).subscribe(
+                result => result.docs.map(element => {
+                    if(element.id == saveName) {
+                        this.sameSubjectGroupNames = Object.values(element.data());
+                        localStorage.setItem('SameSubjectGroups', JSON.stringify(this.sameSubjectGroupNames));
+                    }
+                })
+            );
         }     
     }
     
@@ -163,6 +171,7 @@ export class TimeTableInputComponent implements OnInit{
             this.matDialog.open(DeleteComponent).afterClosed().subscribe((result) => {
                 if (result == 1) {
                     this.firebaseCrudsService.deleteUserDocument('TimeTableInputDatas', saveName)
+                        .then(() => this.firebaseCrudsService.deleteUserDocument('SameSubjectGroups', saveName))
                         .then(() => this.databaseSource.data[index].slice());
                     this.databaseSource.data = this.databaseSource.data;
                 }
