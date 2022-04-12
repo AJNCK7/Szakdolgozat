@@ -30,7 +30,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
     ngOnInit(): void {
         this.dataSource = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
         this.sameSubjectGroupNames = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
-        this.maxPrioritySearch();
+        this.priorityOptimalize();
         this.sorting(true);
     }
 
@@ -65,7 +65,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
         });
     }
 
-    maxPrioritySearch(): void {
+    priorityOptimalize(): void {
         const priorityQuantity: Array<number> = [];
         this.dataSource.forEach(element => {
             if(!priorityQuantity.includes(element.PRIORITY)) {
@@ -163,9 +163,8 @@ export class TimeTableResultDisplayComponent implements OnInit {
                 available = false;
                 break;
             }
-            else if (endTime <= elementStartTime || startTime >= elementEndTime) {
-                available = true; // egyenlő???
-                //else if (startTime > elementEndTime) available = true;
+            else if (startTime >= elementEndTime || endTime <= elementStartTime ) {
+                available = true;
             } else {
                 available = false;
                 break;

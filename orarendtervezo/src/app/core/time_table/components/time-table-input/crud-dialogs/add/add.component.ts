@@ -69,7 +69,6 @@ export class AddComponent {
             ]
         });
         this.filteredOptions = this.form.get('subjectGroup')!.valueChanges.pipe(
-            startWith(''),
             map(value => this.filterValue(value)),
         );
     }

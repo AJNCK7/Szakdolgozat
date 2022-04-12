@@ -77,7 +77,6 @@ export class TimeTableInputComponent implements OnInit{
                 if (result != null) {
                     if(!this.sameSubjectGroupNames.includes(result.SUBJECT_GROUP)){
                         this.sameSubjectGroupNames.push(result.SUBJECT_GROUP);
-                        console.log('ok');
                         localStorage.setItem('SameSubjectGroups', JSON.stringify(this.sameSubjectGroupNames)); 
                     }
                     result.SUBJECT_GROUP = this.sameSubjectGroupNames.indexOf(result.SUBJECT_GROUP);
@@ -93,7 +92,6 @@ export class TimeTableInputComponent implements OnInit{
             .subscribe(result => {
                 if (result == 1) {
                     this.dataSource.data.splice(index, 1);
-                    //tesztelni törléshez
                     this.dataSource.data = this.dataSource.data;
                     this.localStorageSetItem();
                 }
@@ -105,6 +103,8 @@ export class TimeTableInputComponent implements OnInit{
             if (result == 1) {
                 this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
                 this.ID = 1;
+                this.sameSubjectGroupNames = [];
+                localStorage.setItem('SameSubjectGroups', '');
                 this.localStorageSetItem();
             }
         });

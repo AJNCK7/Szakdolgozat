@@ -24,6 +24,7 @@ export class EditComponent{
 
     subjectGroup: string[] = [];
     filteredOptions: Observable<string[]> | undefined;
+    subjectGroupText = '';
 
     constructor (
     public dialogRef: MatDialogRef<EditComponent>,
@@ -32,8 +33,10 @@ export class EditComponent{
     public authService: AuthService
     ) {
         this.data = comingData;
+        
         this.dialogRef.disableClose = true;
         this.subjectGroup = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
+        this.subjectGroupText = this.subjectGroup[this.data.SUBJECT_GROUP];
         this.form = fb.group({
             subjectGroup: ['', [
                 Validators.required,
@@ -72,7 +75,6 @@ export class EditComponent{
             ]
         });
         this.filteredOptions = this.form.get('subjectGroup')!.valueChanges.pipe(
-            startWith(''),
             map(value => this.filterValue(value)),
         );
     }
@@ -87,5 +89,9 @@ export class EditComponent{
 
     private filterValue(value: string): string[] {
         return this.subjectGroup.filter(option => option.toLowerCase().includes(value));
+    }
+
+    getSubjectGroupText() {
+        return this.subjectGroup[this.data.SUBJECT_GROUP];
     }
 }

@@ -3,9 +3,10 @@
         <mat-form-field class="time_table_input_form_field" appearance="fill">
             <mat-label>{{'TIME_TABLE_INPUTS.SUBJECT_NAME' | translate}}</mat-label>
             <input type="text" matInput required
-                formControlName="subjectGroup" [matAutocomplete]="auto" [(ngModel)]="data.SUBJECT_GROUP" >
+                formControlName="subjectGroup" [matAutocomplete]="auto"
+                [ngModel]="subjectGroupText" (ngModelChange)="data.SUBJECT_GROUP = $event">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let subject of filteredOptions | async; let i = index" [value]="subject">
+                <mat-option *ngFor="let subject of filteredOptions | async;" [value]="subject">
                     {{subject}}
                 </mat-option>
             </mat-autocomplete>
