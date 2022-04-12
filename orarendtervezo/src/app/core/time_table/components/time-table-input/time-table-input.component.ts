@@ -30,7 +30,6 @@ export class TimeTableInputComponent implements OnInit{
         'classEndTime', 'classroom',  'teacher', 'credit', 'priority', 'color', 'buttons'];
     savedElementColumns: string[] = ['saveName', 'buttons'];
     dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
-    daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[]];
     databaseSource = new MatTableDataSource<string>([]);
 
     constructor (
@@ -44,7 +43,6 @@ export class TimeTableInputComponent implements OnInit{
     ngOnInit(): void {
         this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
         this.dataSource.data = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
-        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
         this.sameSubjectGroupNames = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
         if (this.dataSource.data[this.dataSource.data.length - 1]) {
             this.ID = this.dataSource.data[this.dataSource.data.length-1].ID + 1;
@@ -68,41 +66,6 @@ export class TimeTableInputComponent implements OnInit{
         localStorage.setItem('SameSubjectGroups', JSON.stringify(this.sameSubjectGroupNames));
     }
 
-    sorting() {
-        const descSortedData = this.sortDesc();
-        descSortedData.forEach(element => {
-            let ok = true;
-            this.daySortedData.forEach((_ , index) => {
-                if(element.SAME_SUBJECT != undefined) {
-                    this.daySortedData[index].forEach(dayElement => {
-                        if(element.SAME_SUBJECT == dayElement.SAME_SUBJECT) {
-                            ok = false;
-                        }
-                    });
-                }
-            });
-            if(ok) {
-                this.daySortedData[element.DAY].push(element);
-            }
-        });
-        localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
-        this.router.navigate(['time_table_result_display']);
-    }
-
-    sortDesc() {
-        const sortableData = Object.keys(this.dataSource.data).map((index) =>{
-            return this.dataSource.data[index];
-        });
-        sortableData.sort((first,second) => second.PRIORITY - first.PRIORITY);
-        sortableData.sort((first,second) => {
-            if(first.PRIORITY == second.PRIORITY) {
-                return parseInt(second.SUBJECT_WEIGHT) - parseInt(first.SUBJECT_WEIGHT);
-            } 
-            else return parseInt(first.SUBJECT_WEIGHT);
-        });
-        return sortableData;
-    }
-
     openAddDialog() {
         this.matDialog.open(AddComponent, {data: {ID: this.ID}}).afterClosed()
             .subscribe(result => {
@@ -114,31 +77,26 @@ export class TimeTableInputComponent implements OnInit{
             });
     }
 
+    sorting() {
+        this.router.navigate(['time_table_result_display']);
+    }
+
     openEditDialog(index: number) {
-        const changeElementInIndex = this.daySortedData[this.dataSource.data[index].DAY]
-            .findIndex(element => element.ID == this.dataSource.data[index].ID);
-        const changeElementOutIndex = parseInt(this.dataSource.data[index].DAY);
         const data = Object.assign({}, this.dataSource.data[index]);
         this.matDialog.open(EditComponent, { data: data }).afterClosed()
             .subscribe(result => {
                 if (result != null) {
-                    this.daySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
                     this.dataSource.data[index] = result;
                     this.dataSource.data = this.dataSource.data;
-                    this.daySortedData[this.dataSource.data[index].DAY].push(result);
                     this.localStorageSetItem();
                 }
             });
     }
 
     openDeleteDialog(index: number) {
-        const changeElementInIndex = this.daySortedData[this.dataSource.data[index].DAY]
-            .findIndex(element => element.ID == this.dataSource.data[index].ID);
-        const changeElementOutIndex = parseInt(this.dataSource.data[index].DAY);
         this.matDialog.open(DeleteComponent).afterClosed()
             .subscribe(result => {
                 if (result == 1) {
-                    this.daySortedData[changeElementOutIndex].splice(changeElementInIndex,1);
                     this.dataSource.data.splice(index, 1);
                     //tesztelni törléshez
                     this.dataSource.data = this.dataSource.data;
@@ -151,7 +109,6 @@ export class TimeTableInputComponent implements OnInit{
         this.matDialog.open(DeleteAllComponent).afterClosed().subscribe(result => {
             if (result == 1) {
                 this.dataSource = new MatTableDataSource<TimeTableInputInterface>([]);
-                this.daySortedData = [[],[],[],[],[],[]];
                 this.ID = 1;
                 this.localStorageSetItem();
             }
@@ -160,7 +117,6 @@ export class TimeTableInputComponent implements OnInit{
 
     localStorageSetItem() {
         localStorage.setItem('TimeTableInputDatas', JSON.stringify(this.dataSource.data));
-        localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
     }
 
     addTimeTableCollection(saveName: string) {
@@ -190,11 +146,7 @@ export class TimeTableInputComponent implements OnInit{
             (await this.firebaseCrudsService.getUserDocument('TimeTableInputDatas')).subscribe(
                 result => result.docs.map(element => {
                     if(element.id == saveName) {
-                        this.daySortedData = [[],[],[],[],[],[]];
                         this.dataSource.data = Object.values(element.data());
-                        this.dataSource.data.forEach(element => {
-                            this.daySortedData[parseInt(element.DAY)].push(element);
-                        });
                         this.localStorageSetItem();
                     }
                 }) 

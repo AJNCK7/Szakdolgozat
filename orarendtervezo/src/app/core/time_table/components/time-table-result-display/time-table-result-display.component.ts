@@ -13,6 +13,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
 
     hours: string[] = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
     daySortedData: TimeTableInputInterface[][] = [[],[],[],[],[],[]];
+    dataSource: TimeTableInputInterface[] = [];
     wasLoaded = false;
     currentDivs: string[][][] = [[],[],[],[],[],[]];
     savedDivs: string[][][][] = [];
@@ -26,25 +27,53 @@ export class TimeTableResultDisplayComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.daySortedData = JSON.parse(localStorage.getItem('TimeTableDaySortedData') || '[[],[],[],[],[],[]]');
+        this.dataSource = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
         this.maxPrioritySearch();
+        this.sorting(true);
+    }
+
+    sorting(inOrder: boolean) {
+        this.daySortedData = [[],[],[],[],[],[]];
+        if(inOrder) this.sortDesc();
+        else this.sortingByRandomOrder();
+        this.dataSource.forEach(element => {
+            let contain = false;
+            this.daySortedData.forEach((_ , index) => {
+                if(element.SAME_SUBJECT != undefined) {
+                    this.daySortedData[index].forEach(dayElement => {
+                        if(element.SAME_SUBJECT == dayElement.SAME_SUBJECT) {
+                            contain = true;
+                        }
+                    });
+                }
+            });
+            if(!contain) {
+                this.daySortedData[element.DAY].push(element);
+            }
+        });
+    }
+
+    sortDesc() {
+        this.dataSource.sort((first,second) => second.PRIORITY - first.PRIORITY);
+        this.dataSource.sort((first,second) => {
+            if(first.PRIORITY == second.PRIORITY) {
+                return parseInt(second.SUBJECT_WEIGHT) - parseInt(first.SUBJECT_WEIGHT);
+            } 
+            else return parseInt(first.SUBJECT_WEIGHT);
+        });
     }
 
     maxPrioritySearch(): void {
         const priorityQuantity: Array<number> = [];
-        this.daySortedData.forEach(element => {
-            element.forEach(dayElement => {
-                if(!priorityQuantity.includes(dayElement.PRIORITY)) {
-                    priorityQuantity.push(dayElement.PRIORITY);
-                }
-            });
+        this.dataSource.forEach(element => {
+            if(!priorityQuantity.includes(element.PRIORITY)) {
+                priorityQuantity.push(element.PRIORITY);
+            }
         });
         priorityQuantity.sort((a,b) => a - b);
         if(priorityQuantity.length < 9) {
-            this.daySortedData.forEach(element => {
-                element.forEach(element => {
-                    element.PRIORITY = priorityQuantity.indexOf(element.PRIORITY);
-                });
+            this.dataSource.forEach(element => {
+                element.PRIORITY = priorityQuantity.indexOf(element.PRIORITY);
             });
             this.maxPriority = priorityQuantity.length;
         }
@@ -147,19 +176,17 @@ export class TimeTableResultDisplayComponent implements OnInit {
         this.generationIndex++;
         if (this.generationIndex == this.maxGenerationIndex) {
             if (this.maxGenerationIndex < this.maxPriority) {
-                for(const days of this.daySortedData) {
-                    for(const element of days) {
-                        if (element.PRIORITY > 0) {
-                            element.PRIORITY--;
-                        }
+                for(const data of this.dataSource) {
+                    if (data.PRIORITY > 0) {
+                        data.PRIORITY--;
                     }
                 }  
-                this.sortingByPriority();
+                this.sorting(true);
             } else {
-                this.sortingByRandomOrder();
+                this.sorting(false);
             }
             this.clearHTMLElements();
-            this.currentDivs = [[],[],[],[],[],[],[]];
+            this.currentDivs = [[],[],[],[],[],[]];
             this.wasLoaded = false;
             this.tableDataFiller();
         } else {
@@ -167,7 +194,6 @@ export class TimeTableResultDisplayComponent implements OnInit {
             this.loadHTMLElements();
             this.loadDivs();
         }
-        console.log(this.daySortedData);
     }
 
     previousGeneration() {
@@ -179,25 +205,11 @@ export class TimeTableResultDisplayComponent implements OnInit {
         }
     }
 
-    sortingByPriority() {
-        for (let day = 0; day < 6; day++) {
-            this.daySortedData[day].sort((first,second) => second.PRIORITY - first.PRIORITY);
-            for (let index = 0; index < this.daySortedData[day].length - 1; index++) {
-                if (this.daySortedData[day][index].PRIORITY == this.daySortedData[day][index+1].PRIORITY) {
-                    if (parseInt(this.daySortedData[day][index].SUBJECT_WEIGHT) < parseInt(this.daySortedData[day][index+1].SUBJECT_WEIGHT)) {
-                        const temp = this.daySortedData[day][index];
-                        this.daySortedData[day][index] = this.daySortedData[day][index+1];
-                        this.daySortedData[day][index+1] = temp;
-                    }
-                }
-            }
-        }
+    sortingByRandomOrder() {
+        this.dataSource.sort(() => Math.random() - 0.5);        
     }
 
-    sortingByRandomOrder() {
-        for (let index = 0; index < 6; index++)
-            this.daySortedData[index].sort(() => Math.random() - 0.5);
-    }
+
 
     clearHTMLElements() {
         for(const divs of this.currentDivs) {
