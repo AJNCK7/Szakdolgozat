@@ -33,12 +33,9 @@ export class TimeTableResultDisplayComponent implements OnInit {
     maxPrioritySearch(): void {
         const priorityQuantity: Array<number> = [];
         this.daySortedData.forEach(element => {
-            element.forEach(element => {
-                if(!priorityQuantity.includes(element.PRIORITY)) {
-                    priorityQuantity.push(element.PRIORITY);
-                    if(element.PRIORITY > this.maxPriority){
-                        this.maxPriority = element.PRIORITY;
-                    }
+            element.forEach(dayElement => {
+                if(!priorityQuantity.includes(dayElement.PRIORITY)) {
+                    priorityQuantity.push(dayElement.PRIORITY);
                 }
             });
         });
@@ -147,7 +144,6 @@ export class TimeTableResultDisplayComponent implements OnInit {
     }
 
     newGeneration() {
-        console.log(this.daySortedData);
         this.generationIndex++;
         if (this.generationIndex == this.maxGenerationIndex) {
             if (this.maxGenerationIndex < this.maxPriority) {
@@ -171,6 +167,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
             this.loadHTMLElements();
             this.loadDivs();
         }
+        console.log(this.daySortedData);
     }
 
     previousGeneration() {

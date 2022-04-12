@@ -69,17 +69,38 @@ export class TimeTableInputComponent implements OnInit{
     }
 
     sorting() {
-        for (let day = 0; day < 6; day++) {
-            this.daySortedData[day].sort((first,second) => second.PRIORITY - first.PRIORITY);
-            this.daySortedData[day].sort((first,second) => {
-                if(first.PRIORITY == second.PRIORITY) {
-                    return parseInt(second.SUBJECT_WEIGHT) - parseInt(first.SUBJECT_WEIGHT);
-                } 
-                else return parseInt(first.SUBJECT_WEIGHT);
+        const descSortedData = this.sortDesc();
+        descSortedData.forEach(element => {
+            let ok = true;
+            this.daySortedData.forEach((_ , index) => {
+                if(element.SAME_SUBJECT != undefined) {
+                    this.daySortedData[index].forEach(dayElement => {
+                        if(element.SAME_SUBJECT == dayElement.SAME_SUBJECT) {
+                            ok = false;
+                        }
+                    });
+                }
             });
-        }
+            if(ok) {
+                this.daySortedData[element.DAY].push(element);
+            }
+        });
         localStorage.setItem('TimeTableDaySortedData', JSON.stringify(this.daySortedData));
         this.router.navigate(['time_table_result_display']);
+    }
+
+    sortDesc() {
+        const sortableData = Object.keys(this.dataSource.data).map((index) =>{
+            return this.dataSource.data[index];
+        });
+        sortableData.sort((first,second) => second.PRIORITY - first.PRIORITY);
+        sortableData.sort((first,second) => {
+            if(first.PRIORITY == second.PRIORITY) {
+                return parseInt(second.SUBJECT_WEIGHT) - parseInt(first.SUBJECT_WEIGHT);
+            } 
+            else return parseInt(first.SUBJECT_WEIGHT);
+        });
+        return sortableData;
     }
 
     openAddDialog() {
@@ -88,8 +109,6 @@ export class TimeTableInputComponent implements OnInit{
                 if(result){
                     this.dataSource.data.push(result);
                     this.dataSource.data = this.dataSource.data;
-                    this.daySortedData[this.dataSource.data[this.dataSource.data.length-1].DAY].push(result);
-                    this.localStorageSetItem();
                     this.ID++;
                 }
             });
