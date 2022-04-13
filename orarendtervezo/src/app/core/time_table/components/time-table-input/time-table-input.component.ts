@@ -140,7 +140,6 @@ export class TimeTableInputComponent implements OnInit{
                     return element.id;
                 }) 
             );
-            this.databaseSource.data = this.databaseSource.data;
         }
     }
 
@@ -167,13 +166,11 @@ export class TimeTableInputComponent implements OnInit{
     
     deleteTimeTableSaveNameCollection(saveName: string) {
         if(this.authService.isLoggedIn) {
-            const index = this.databaseSource.data.indexOf(saveName);
             this.matDialog.open(DeleteComponent).afterClosed().subscribe((result) => {
                 if (result == 1) {
                     this.firebaseCrudsService.deleteUserDocument('TimeTableInputDatas', saveName)
-                        .then(() => this.firebaseCrudsService.deleteUserDocument('SameSubjectGroups', saveName))
-                        .then(() => this.databaseSource.data[index].slice());
-                    this.databaseSource.data = this.databaseSource.data;
+                        .then(() => this.firebaseCrudsService.deleteUserDocument('SameSubjectGroups', saveName));
+                    this.getTimeTableSaveNameCollection();
                 }
             });
         }
