@@ -2,7 +2,7 @@ import { Component, Inject} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { startTimeIsGreaterThanEndTime } from 'src/app/shared/customValidators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TimeTableInputInterface } from '../../../../interfaces/time-table-input.interface';
@@ -33,7 +33,6 @@ export class EditComponent{
     public authService: AuthService
     ) {
         this.data = comingData;
-        
         this.dialogRef.disableClose = true;
         this.subjectGroup = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
         this.subjectGroupText = this.subjectGroup[this.data.SUBJECT_GROUP];

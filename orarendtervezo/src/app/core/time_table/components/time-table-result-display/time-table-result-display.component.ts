@@ -38,16 +38,19 @@ export class TimeTableResultDisplayComponent implements OnInit {
         this.daySortedData = [[],[],[],[],[],[]];
         if(inOrder) this.sortDesc();
         else this.sortingByRandomOrder();
+        const usedGroupNames: Array<number> = [];
         this.dataSource.forEach(element => {
+            if(usedGroupNames.includes(element.SUBJECT_GROUP)) return;
             let contain = false;
             this.daySortedData.forEach((_ , index) => {
-                if(element.SUBJECT_GROUP != undefined) {
-                    this.daySortedData[index].forEach(dayElement => {
-                        if(element.SUBJECT_GROUP == dayElement.SUBJECT_GROUP) {
-                            contain = true;
-                        }
-                    });
-                }
+                if(contain) return;
+                this.daySortedData[index].forEach(dayElement => {
+                    if(element.SUBJECT_GROUP == dayElement.SUBJECT_GROUP) {
+                        contain = true;
+                        usedGroupNames.push(element.SUBJECT_GROUP);
+                        return;
+                    }
+                });
             });
             if(!contain) {
                 this.daySortedData[element.DAY].push(element);

@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { startTimeIsGreaterThanEndTime } from 'src/app/shared/customValidators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TimeTableInputInterface } from '../../../../interfaces/time-table-input.interface';
-import {map, startWith } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-add-tableDialogInputs',
@@ -31,6 +31,7 @@ export class AddComponent {
     public authService: AuthService
     ) {
         this.subjectGroup = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
+        this.dialogRef.disableClose = true;
         this.form = fb.group({
             subjectGroup: ['', [
                 Validators.required,
