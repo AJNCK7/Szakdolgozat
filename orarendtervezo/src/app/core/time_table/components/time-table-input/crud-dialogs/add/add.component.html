@@ -121,7 +121,7 @@
         <mat-form-field class="time_table_input_form_field" appearance="fill">
             <mat-label>{{'TIME_TABLE_INPUTS.PRIORITY' | translate}}</mat-label>
             <input type="text" matInput formControlName="priority" 
-            id="priority" [ngModel]="0" (ngModelChange)="data.PRIORITY = $event">
+            id="priority" [ngModel]="'0'" (ngModelChange)="data.PRIORITY = $event">
         </mat-form-field>
         <div *ngIf="timeTableInputGet.priority.invalid" class="alert">
             <div *ngIf="timeTableInputGet.priority.errors?.pattern">

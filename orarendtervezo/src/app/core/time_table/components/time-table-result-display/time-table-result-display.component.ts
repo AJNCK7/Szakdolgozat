@@ -1,7 +1,7 @@
+import { TimeTableInputInterface } from './../../interfaces/time-table-input.interface';
 import { TimeTableResultDisplayDialogComponent } from '../time-table-result-display-dialog/time-table-result-display-dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TimeTableInputInterface } from '../../interfaces/time-table-input.interface';
 
 @Component({
     selector: 'app-time-table-result-display',
@@ -25,11 +25,12 @@ export class TimeTableResultDisplayComponent implements OnInit {
 
     constructor(
         public matDialog: MatDialog,
-    ) {}
-
-    ngOnInit(): void {
+    ) {
         this.dataSource = JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]');
         this.sameSubjectGroupNames = JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]');
+    }
+
+    ngOnInit(): void {
         this.priorityOptimalize();
         this.sorting(true);
     }
@@ -41,6 +42,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
         const usedGroupNames: Array<number> = [];
         this.dataSource.forEach(element => {
             if(usedGroupNames.includes(element.SUBJECT_GROUP)) return;
+            if(!this.isTimeSlotAvailable(element.CLASS_START_TIME, element.CLASS_END_TIME, parseInt(element.DAY))) return;
             let contain = false;
             this.daySortedData.forEach((_ , index) => {
                 if(contain) return;
@@ -82,6 +84,7 @@ export class TimeTableResultDisplayComponent implements OnInit {
             });
             this.maxPriority = priorityQuantity.length;
         }
+        
     }
 
     onResize() {
@@ -107,35 +110,33 @@ export class TimeTableResultDisplayComponent implements OnInit {
             for (let i = 0; i < 6; i++) {
                 for (let j = 0; j < this.daySortedData[i].length; j++) {
                     if (this.daySortedData[i].length != 0) {
-                        if(this.isTimeSlotAvailable(this.daySortedData[i][j].CLASS_START_TIME, this.daySortedData[i][j].CLASS_END_TIME, i)) {
-                            const div = document.createElement('div');
-                            const actualElement = this.daySortedData[i][j];
-                            div.innerHTML = this.sameSubjectGroupNames[actualElement.SUBJECT_GROUP] + ', <br>' 
+                        const div = document.createElement('div');
+                        const actualElement = this.daySortedData[i][j];
+                        div.innerHTML = this.sameSubjectGroupNames[actualElement.SUBJECT_GROUP] + ', <br>' 
                                             + actualElement.CLASS_START_TIME + '-' + actualElement.CLASS_END_TIME;
-                            div.title = actualElement.SUBJECT_GROUP + ', ' 
+                        div.title = actualElement.SUBJECT_GROUP + ', ' 
                                 + actualElement.CLASS_START_TIME + '-' + actualElement.CLASS_END_TIME ;
-                            div.id = 'div' + i + j;
-                            div.style.backgroundColor = actualElement.COLOR != null ? actualElement.COLOR : 'red';
-                            div.style.position = 'absolute';
-                            div.style.overflow = 'hidden';
-                            div.style.textOverflow = 'ellipsis';
-                            div.onclick=() => { this.openInfoDialog(actualElement); };
-                            div.style.border = '1px';
-                            div.style.borderStyle = 'solid'; 
-                            const startTime = actualElement.CLASS_START_TIME;
-                            const endTime = actualElement.CLASS_END_TIME;
-                            div.style.height = this.timeDifferenceInMinute(startTime, endTime).toString() + 'px';
-                            div.style.fontSize = '20px';
-                            div.style.fontWeight = 'bold';
-                            div.style.width = document.getElementById(actualElement.DAY)?.offsetWidth! - 10 + 'px';
-                            div.style.top = (document.getElementById(actualElement.DAY)!.getBoundingClientRect().bottom 
+                        div.id = 'div' + i + j;
+                        div.style.backgroundColor = actualElement.COLOR != null ? actualElement.COLOR : 'red';
+                        div.style.position = 'absolute';
+                        div.style.overflow = 'hidden';
+                        div.style.textOverflow = 'ellipsis';
+                        div.onclick=() => { this.openInfoDialog(actualElement); };
+                        div.style.border = '1px';
+                        div.style.borderStyle = 'solid'; 
+                        const startTime = actualElement.CLASS_START_TIME;
+                        const endTime = actualElement.CLASS_END_TIME;
+                        div.style.height = this.timeDifferenceInMinute(startTime, endTime).toString() + 'px';
+                        div.style.fontSize = '20px';
+                        div.style.fontWeight = 'bold';
+                        div.style.width = document.getElementById(actualElement.DAY)?.offsetWidth! - 10 + 'px';
+                        div.style.top = (document.getElementById(actualElement.DAY)!.getBoundingClientRect().bottom 
                             - document.getElementById('mainCard')!.getBoundingClientRect().top)
                             + this.timeDifferenceInMinute('7:00', startTime) + 'px';
-                            div.style.left = (document.getElementById(actualElement.DAY)!.getBoundingClientRect().x 
+                        div.style.left = (document.getElementById(actualElement.DAY)!.getBoundingClientRect().x 
                             - document.getElementById('mainCard')!.getBoundingClientRect().left) + 4 + 'px';
-                            document.getElementById('table')?.append(div);
-                            this.currentDivs[i].push([div.id, j.toString()]);
-                        }
+                        document.getElementById('table')?.append(div);
+                        this.currentDivs[i].push([div.id, j.toString()]);
                     }
                 }
             }
@@ -158,19 +159,21 @@ export class TimeTableResultDisplayComponent implements OnInit {
     isTimeSlotAvailable(start: string, end: string, i: number) : boolean {
         const startTime: number = parseInt(start.replace(':', '')); const endTime: number = parseInt(end.replace(':', ''));
         let available = false;
-        if (this.currentDivs[i].length == 0) return true;
-        for(const element of this.currentDivs[i]) {
-            const elementStartTime = parseInt(this.daySortedData[i][element[1]].CLASS_START_TIME.replace(':',''));
-            const elementEndTime = parseInt(this.daySortedData[i][element[1]].CLASS_END_TIME.replace(':',''));
-            if (startTime < elementStartTime && endTime > elementEndTime) {
-                available = false;
-                break;
-            }
-            else if (startTime >= elementEndTime || endTime <= elementStartTime ) {
-                available = true;
-            } else {
-                available = false;
-                break;
+        if(this.daySortedData[i].length == 0) available = true;
+        else {
+            for(const element of this.daySortedData[i]) {
+                const elementStartTime = parseInt(element.CLASS_START_TIME.replace(':',''));
+                const elementEndTime = parseInt(element.CLASS_END_TIME.replace(':',''));
+                if (startTime < elementStartTime && endTime > elementEndTime) {
+                    available = false;
+                    break;
+                }
+                else if (startTime >= elementEndTime || endTime <= elementStartTime ) {
+                    available = true;
+                } else {
+                    available = false;
+                    break;
+                }
             }
         }
         return available;
@@ -212,8 +215,6 @@ export class TimeTableResultDisplayComponent implements OnInit {
     sortingByRandomOrder() {
         this.dataSource.sort(() => Math.random() - 0.5);        
     }
-
-
 
     clearHTMLElements() {
         for(const divs of this.currentDivs) {

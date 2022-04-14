@@ -61,6 +61,7 @@ export class TimeTableInputComponent implements OnInit{
                         this.sameSubjectGroupNames.push(result.SUBJECT_GROUP);
                         localStorage.setItem('SameSubjectGroups', JSON.stringify(this.sameSubjectGroupNames)); 
                     }
+                    if(result.PRIORITY == 0 || null) result.PRIORITY = '0'; 
                     result.SUBJECT_GROUP = this.sameSubjectGroupNames.indexOf(result.SUBJECT_GROUP);
                     this.dataSource.data.push(result);
                     this.dataSource.data = this.dataSource.data;
@@ -79,6 +80,7 @@ export class TimeTableInputComponent implements OnInit{
                         this.sameSubjectGroupNames.push(result.SUBJECT_GROUP);
                         localStorage.setItem('SameSubjectGroups', JSON.stringify(this.sameSubjectGroupNames)); 
                     }
+                    if(result.PRIORITY == 0 || null) result.PRIORITY = '0'; 
                     result.SUBJECT_GROUP = this.sameSubjectGroupNames.indexOf(result.SUBJECT_GROUP);
                     this.dataSource.data[index] = result;
                     this.dataSource.data = this.dataSource.data;
