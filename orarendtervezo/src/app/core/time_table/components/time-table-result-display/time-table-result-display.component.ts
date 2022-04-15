@@ -35,6 +35,23 @@ export class TimeTableResultDisplayComponent implements OnInit {
         this.sorting(true);
     }
 
+    priorityOptimalize(): void {
+        const priorityQuantity: Array<number> = [];
+        this.dataSource.forEach(element => {
+            if(!priorityQuantity.includes(element.PRIORITY)) {
+                priorityQuantity.push(element.PRIORITY);
+            }
+        });
+        priorityQuantity.sort((a,b) => a - b);
+        if(priorityQuantity.length < 9) {
+            this.dataSource.forEach(element => {
+                element.PRIORITY = priorityQuantity.indexOf(element.PRIORITY);
+            });
+            this.maxPriority = priorityQuantity.length;
+        }
+        
+    }
+
     sorting(inOrder: boolean) {
         this.daySortedData = [[],[],[],[],[],[]];
         if(inOrder) this.sortDesc();
@@ -68,41 +85,6 @@ export class TimeTableResultDisplayComponent implements OnInit {
             } 
             else return parseInt(first.SUBJECT_WEIGHT);
         });
-    }
-
-    priorityOptimalize(): void {
-        const priorityQuantity: Array<number> = [];
-        this.dataSource.forEach(element => {
-            if(!priorityQuantity.includes(element.PRIORITY)) {
-                priorityQuantity.push(element.PRIORITY);
-            }
-        });
-        priorityQuantity.sort((a,b) => a - b);
-        if(priorityQuantity.length < 9) {
-            this.dataSource.forEach(element => {
-                element.PRIORITY = priorityQuantity.indexOf(element.PRIORITY);
-            });
-            this.maxPriority = priorityQuantity.length;
-        }
-        
-    }
-
-    onResize() {
-        for (let index = 0; index < this.currentDivs.length - 1; index++) {
-            this.currentDivs[index].forEach(element => {
-                const div = document.getElementById(element[0]);
-                const i = index;
-                const j = parseInt(element[1]);
-                if(div){
-                    const startTime = this.daySortedData[i][j].CLASS_START_TIME.replace(':', '');
-        div!.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth! - 10  + 'px';
-        div!.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom +
-                        this.timeDifferenceInMinute('7:00', startTime) + 'px';
-        div!.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
-                        - document.getElementById('mainCard')!.getBoundingClientRect().left) + 4 + 'px';
-                }
-            });
-        }
     }
 
     tableDataFiller() {
@@ -144,6 +126,24 @@ export class TimeTableResultDisplayComponent implements OnInit {
             this.saveDivs();
             this.wasLoaded = true;
             this.maxGenerationIndex++;
+        }
+    }
+
+    onResize() {
+        for (let index = 0; index < this.currentDivs.length; index++) {
+            this.currentDivs[index].forEach(element => {
+                const div = document.getElementById(element[0]);
+                const i = index;
+                const j = parseInt(element[1]);
+                if(div){
+                    const startTime = this.daySortedData[i][j].CLASS_START_TIME.replace(':', '');
+        div!.style.width = document.getElementById(this.daySortedData[i][j].DAY)?.offsetWidth! - 10  + 'px';
+        div!.style.top = document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().bottom +
+                        this.timeDifferenceInMinute('7:00', startTime) + 'px';
+        div!.style.left = (document.getElementById(this.daySortedData[i][j].DAY)!.getBoundingClientRect().x 
+                        - document.getElementById('mainCard')!.getBoundingClientRect().left) + 4 + 'px';
+                }
+            });
         }
     }
 

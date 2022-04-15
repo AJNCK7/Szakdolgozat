@@ -107,5 +107,13 @@
     "SAVE_NAME": "Save name",
     "SAVE_TO_DATABASE": "Save to database",
     "UPDATE_DATABASE": "Update database",
-    "LOGIN_WITH_GOOGLE": "Log in with Google"
+    "LOGIN_WITH_GOOGLE": "Log in with Google",
+    "HOMEPAGE": {
+        "MAIN_TEXT": "The purpose of the website is to help university students create timetable versions.",
+        "DATA_TABLE_TEXT": "The recommended data can be read, modified and deleted via the list.",
+        "ADD_TEXT": "Adding and modifying subjects is easy and a pop-up error message will help you get the data in the format that suits the system.",
+        "ADD_FIREBASE_TEXT": "Registered users have the option to save the specified subjects to the cloud so they can access them anytime and anywhere.",
+        "GENERATED_RESULT_TEXT": "You can view the results of the generation and create new options with a single click."
+    }
+
 }

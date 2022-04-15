@@ -107,5 +107,12 @@
     "SAVE_NAME": "Mentés neve",
     "SAVE_TO_DATABASE": "Mentés az adatbázisba",
     "UPDATE_DATABASE": "Adatbázis módosítása",
-    "LOGIN_WITH_GOOGLE": "Jelenetkezz be Google fiókkal"
+    "LOGIN_WITH_GOOGLE": "Jelenetkezz be Google fiókkal",
+    "HOMEPAGE": {
+        "MAIN_TEXT": "A weboldal célja segítséget nyújtson az egyetemesiták számára elkészíteni órarendi változatokat.",
+        "DATA_TABLE_TEXT": "A megadott adatok a listázón keresztül olvasható, módosítható és törölhető.",
+        "ADD_TEXT": "A tárgyak hozzáadása és módosítása egyszerű, a felugró hiba üzenetet segítséget nyújtanak, hogy a rendszernek megfelelő alakban kerüljenek megadásra az adatok.",
+        "ADD_FIREBASE_TEXT": "Regisztrált felhasználók számára lehetőség nyílik, hogy a felhőbe mentsék a megadott tantárgyakat, így bármikor és bárhonnan elérhetik.",
+        "GENERATED_RESULT_TEXT": "A generálás eredményét megtekinthetik és egyetlen kattintással új lehetőségek előállítása is lehetséges."
+    }
 }
