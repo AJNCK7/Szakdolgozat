@@ -24,7 +24,7 @@ export class TimeTableResultDisplayDialogComponent{
         document.getElementById('color')!.style.backgroundColor = color;
         document.getElementById('color')!.innerText = color;
         }
-        else document.getElementById('color')!.innerText = '-';    
+        else document.getElementById('color')!.innerText = '#FF0000';    
     }
 
     getSubjectGroupText() {

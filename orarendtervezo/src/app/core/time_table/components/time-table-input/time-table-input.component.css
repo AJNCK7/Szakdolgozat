@@ -47,7 +47,7 @@ th.mat-header-cell:first-of-type{
 
 td.mat-cell:first-of-type{
     padding: 0px;
-    width: 40px;
+    width: 30px;
 }
 
 .sortingButton {
@@ -62,5 +62,6 @@ td.mat-cell:first-of-type{
 }
 
 .databaseCruds {
-    width: 50vw
+    width: 50vw;
+    margin-bottom: 85px;
 }

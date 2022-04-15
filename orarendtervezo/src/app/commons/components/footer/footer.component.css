@@ -1,10 +1,10 @@
 .footer{
-    background-color: #333333;
     position: fixed;
+    background-color: beige;
     bottom: 0px;
     left: 0px;
     width: 100vw;
-    height: 3vh;
+    height: 60px;
 }
 
 p{

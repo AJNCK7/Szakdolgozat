@@ -48,3 +48,7 @@ button {
 button:first-of-type {
     margin-right: 10px;
 }
+
+.generationIndexChanger {
+    margin-bottom: 55px;
+}

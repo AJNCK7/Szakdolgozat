@@ -59,6 +59,25 @@ const MatImports = [
     MatAutocompleteModule
 ];
 
+const ComponentImports = [
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    UserRegisterComponent,
+    UserLoginComponent,
+    UserVerifyEmailComponent,
+    UserForgotPasswordComponent,
+    TimeTableInputComponent,
+    AddComponent,
+    EditComponent,
+    DeleteComponent,
+    DeleteAllComponent,
+    TimeTableResultDisplayComponent,
+    TimeTableResultDisplayDialogComponent,
+    UserPasswordResetComponent,
+
+];
+
 const FirebaseImports = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -81,22 +100,8 @@ const TranslateImports = [
 
 @NgModule({
     declarations: [
-        AppComponent,
-        HeaderComponent,
-        FooterComponent,
         RoutingComponents,
-        UserRegisterComponent,
-        UserLoginComponent,
-        UserVerifyEmailComponent,
-        UserForgotPasswordComponent,
-        TimeTableInputComponent,
-        AddComponent,
-        EditComponent,
-        DeleteComponent,
-        DeleteAllComponent,
-        TimeTableResultDisplayComponent,
-        TimeTableResultDisplayDialogComponent,
-        UserPasswordResetComponent,
+        ComponentImports,
     ],
     imports: [
         FirebaseImports,

@@ -24,22 +24,20 @@ export class AuthService {
             if (user) {
                 this.userData = user!;
                 localStorage.setItem('user', JSON.stringify(this.userData));
-                JSON.parse(localStorage.getItem('user') || '{}');
             } else {
                 localStorage.setItem('user', 'null');
-                JSON.parse(localStorage.getItem('user') || '{}');
             }
         });
     }
 
     SignIn(email: any, password: any) {
         return this.afAuth.signInWithEmailAndPassword(email, password)
-            .then((result) => {
+            .then(async (result) => {
                 if(result.user?.emailVerified){
+                    await(this.SetUserData(result.user));
                     this.ngZone.run(() => {
                         this.router.navigate(['home_page']);
                     });
-                    this.SetUserData(result.user);
                     window.location.reload();
                 }
                 else {
@@ -78,18 +76,19 @@ export class AuthService {
             });
     }
 
-    get isLoggedIn(): boolean {
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
-        return (user !== null && user.emailVerified !== false) ? true : false;
+    isLoggedIn(): boolean {
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        return (user !== null && user !== 'null' && user.emailVerified !== false) ? true : false;
     }
 
     AuthLogin(provider: any) {
         return this.afAuth.signInWithPopup(provider)
-            .then((result) => {
+            .then(async (result) => {
+                await(this.SetUserData(result.user));
                 this.ngZone.run(() => {
                     this.router.navigate(['home_page']);
                 });
-                this.SetUserData(result.user);
+                console.log(result);
                 window.location.reload();
             });
     }
@@ -107,9 +106,9 @@ export class AuthService {
     }
 
     SignOut() {
-        return this.afAuth.signOut().then(() => {
-            localStorage.removeItem('user');
-            this.router.navigate(['home_page']);
+        return this.afAuth.signOut().then(async () => {
+            await(localStorage.removeItem('user'));
+            location.reload();
         });
     }
 
@@ -119,7 +118,7 @@ export class AuthService {
     }
 
     GoogleAuth() {
-        return this.AuthLogin(new GoogleAuthProvider());
+        this.AuthLogin(new GoogleAuthProvider());
     }
 
     checkResetCode(code: string, password: string) {

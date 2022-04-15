@@ -19,13 +19,15 @@
     </table>
     {{tableDataFiller()}}
 </mat-card>
-<div fxLayout="row" fxLayoutAlign="center center">
-    <button mat-raised-button (click)="previousGeneration()" [disabled]="this.generationIndex == 0 || this.generationIndex == -1">
-        {{'PREVIOUS' | translate}}
-    </button>
-    <button mat-raised-button (click)="newGeneration()">
-        {{'NEXT' | translate}}
-    </button>
+<div class="generationIndexChanger">
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button (click)="previousGeneration()" [disabled]="this.generationIndex == 0 || this.generationIndex == -1">
+            {{'PREVIOUS' | translate}}
+        </button>
+        <button mat-raised-button (click)="newGeneration()">
+            {{'NEXT' | translate}}
+        </button>
+    </div>
 </div>
 <div (window:resize)="onResize()"></div>
 

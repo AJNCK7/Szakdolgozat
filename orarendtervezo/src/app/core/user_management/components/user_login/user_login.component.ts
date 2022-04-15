@@ -30,7 +30,7 @@ export class UserLoginComponent implements OnInit{
     }
 
     ngOnInit(): void {
-        if(localStorage.getItem('user') != 'null') this.router.navigate(['home_page']);
+        if(this.authService.isLoggedIn()) this.router.navigate(['home_page']);
     }
 
     get loginForm() {

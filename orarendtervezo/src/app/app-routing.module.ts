@@ -10,6 +10,7 @@ import { UserRegisterComponent } from './core/user_management/components/user_re
 import { UserVerifyEmailComponent } from './core/user_management/components/user_verify_email/user_verify_email.component';
 
 const routes: Routes = [
+    { path: '', component: HomepageComponent},
     { path: 'home_page', component: HomepageComponent},
     { path: 'user_login', component: UserLoginComponent},
     { path: 'user_register', component: UserRegisterComponent},

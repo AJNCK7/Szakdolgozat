@@ -13,7 +13,7 @@ export class FirebaseCrudsService {
         private angularFirestore: AngularFirestore,
         private authService: AuthService
     ){
-        if(authService.isLoggedIn){
+        if(authService.isLoggedIn()){
             this.userDoc = this.angularFirestore.collection('users').doc(authService.getUserUID());
         }
     }
@@ -34,10 +34,6 @@ export class FirebaseCrudsService {
 
     public async putUserDocument(collection: string, document: string, data: object) {
         this.userDoc.collection(collection).doc(document).set(data);
-    }
-
-    public async updateUserDocument(collection: string, document: string, data: object) {
-        this.userDoc.collection(collection).doc(document).update(data);
     }
 
     public async deleteUserDocument(collection: string, document: string) {

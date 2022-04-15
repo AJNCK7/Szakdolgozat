@@ -9,26 +9,22 @@ import { AuthService } from 'src/app/shared/services/auth.service';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit{
-
-    setLanguageLocalStorage(language: string){
-        localStorage.setItem('Language', language);
-        window.location.reload();
-    }
+    isloggedin = false;
 
     constructor(
     public afAuth: AngularFireAuth, 
     public authService: AuthService, 
-    public router: Router){}
-
-    ngOnInit(): void {
-        this.isLoggedIn();
+    public router: Router){
     }
 
-    isloggedin = false;
-
-    isLoggedIn() {
-        if (localStorage.getItem('user') != 'null') { this.isloggedin = true; }
+    ngOnInit(): void {
+        if (this.authService.isLoggedIn()) { this.isloggedin = true; }
         else { this.isloggedin = false; }
+    }
+
+    setLanguageLocalStorage(language: string){
+        localStorage.setItem('Language', language);
+        window.location.reload();
     }
 
     logginRoute() {
@@ -36,7 +32,6 @@ export class HeaderComponent implements OnInit{
     }
 
     logginOut(){
-        this.afAuth.signOut();
-        location.reload();
+        this.authService.SignOut();
     }
 }

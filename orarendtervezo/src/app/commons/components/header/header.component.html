@@ -11,12 +11,24 @@
         </mat-menu>
     </div>
     <div fxFlex="70" class="homeButton"> {{ 'MAIN_TITLE' | translate}} </div>
-    <button *ngIf="!isloggedin" class="clickable_button" (click)=logginRoute()><mat-icon>person_pin</mat-icon></button>
-    <button *ngIf="isloggedin" class="profileButton" mat-button [matMenuTriggerFor]="user"><mat-icon>home</mat-icon></button>
-        <mat-menu #user="matMenu">
-            <a routerLink="/home_page" (click)="logginOut()" button mat-menu-item>{{ 'BUTTON.LOG_OUT' | translate}}</a>
-        </mat-menu>
-    <button class="clickable_button" (click)="setLanguageLocalStorage('hun')">HUN</button>
+    <button *ngIf="!isloggedin" class="clickable_button" (click)=logginRoute()>
+        <mat-icon>
+            person_pin
+        </mat-icon>
+    </button>
+    <button *ngIf="isloggedin" class="profileButton" mat-button [matMenuTriggerFor]="user">
+        <mat-icon>
+            home
+        </mat-icon>
+    </button>
+    <mat-menu #user="matMenu">
+        <a routerLink="/home_page" (click)="logginOut()" button mat-menu-item>{{ 'BUTTON.LOG_OUT' | translate}}</a>
+    </mat-menu>
+    <button class="clickable_button" (click)="setLanguageLocalStorage('hun')">
+        HUN
+    </button>
     /
-    <button class="clickable_button" (click)="setLanguageLocalStorage('en')">ENG</button>
+    <button class="clickable_button" (click)="setLanguageLocalStorage('en')">
+        ENG
+    </button>
 </div>

@@ -4,7 +4,7 @@
 }
 
 .time_table_input_form_submit_button{
-    width: 50vw;
+    width: 50%;
     min-width: 400px;
 }
 
@@ -18,15 +18,14 @@
 .alert{
     background-color: #fed3d3;
     color: #820000;
-    padding: 5px;
-    margin-bottom: 5px;
+    width: 100%;
     min-width: 400px;
     padding-top: 0;
-    padding-bottom: 6px;
+    padding-bottom: 0px;
 }
 
 #colorPick{
-    width: 68vw;
+    width: 5%;
     margin:10px;
     min-width: 350px;
 }

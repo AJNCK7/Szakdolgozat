@@ -112,12 +112,12 @@ export class TimeTableResultDisplayComponent implements OnInit {
                     if (this.daySortedData[i].length != 0) {
                         const div = document.createElement('div');
                         const actualElement = this.daySortedData[i][j];
-                        div.innerHTML = this.sameSubjectGroupNames[actualElement.SUBJECT_GROUP] + ', <br>' 
+                        div.innerHTML = this.sameSubjectGroupNames[actualElement.SUBJECT_GROUP] + '<br>' 
                                             + actualElement.CLASS_START_TIME + '-' + actualElement.CLASS_END_TIME;
                         div.title = actualElement.SUBJECT_GROUP + ', ' 
                                 + actualElement.CLASS_START_TIME + '-' + actualElement.CLASS_END_TIME ;
                         div.id = 'div' + i + j;
-                        div.style.backgroundColor = actualElement.COLOR != null ? actualElement.COLOR : 'red';
+                        div.style.backgroundColor = actualElement.COLOR != null ? actualElement.COLOR : '#FF0000';
                         div.style.position = 'absolute';
                         div.style.overflow = 'hidden';
                         div.style.textOverflow = 'ellipsis';

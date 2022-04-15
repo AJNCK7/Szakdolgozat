@@ -125,7 +125,7 @@ export class TimeTableInputComponent implements OnInit{
     }
 
     addTimeTableCollection(saveName: string) {
-        if(this.authService.isLoggedIn) {
+        if(this.authService.isLoggedIn()) {
             const timeTableInputdata = Object.assign({}, JSON.parse(localStorage.getItem('TimeTableInputDatas') || '[]'));
             const sameSubjectGroups = Object.assign({}, JSON.parse(localStorage.getItem('SameSubjectGroups') || '[]'));
             this.firebaseCrudsService.putUserDocument('TimeTableInputDatas', saveName, timeTableInputdata);
@@ -136,7 +136,7 @@ export class TimeTableInputComponent implements OnInit{
     }
 
     async getTimeTableSaveNameCollection() {
-        if(this.authService.isLoggedIn) {
+        if(this.authService.isLoggedIn()) {
             (await this.firebaseCrudsService.getUserDocument('TimeTableInputDatas')).subscribe(
                 result => this.databaseSource.data = result.docs.map(element => {
                     return element.id;
@@ -146,7 +146,7 @@ export class TimeTableInputComponent implements OnInit{
     }
 
     async loadTimeTableSaveNameCollection(saveName: string) {
-        if(this.authService.isLoggedIn) {
+        if(this.authService.isLoggedIn()) {
             (await this.firebaseCrudsService.getUserDocument('TimeTableInputDatas')).subscribe(
                 result => result.docs.map(element => {
                     if(element.id == saveName) {
@@ -167,7 +167,7 @@ export class TimeTableInputComponent implements OnInit{
     }
     
     deleteTimeTableSaveNameCollection(saveName: string) {
-        if(this.authService.isLoggedIn) {
+        if(this.authService.isLoggedIn()) {
             this.matDialog.open(DeleteComponent).afterClosed().subscribe((result) => {
                 if (result == 1) {
                     this.firebaseCrudsService.deleteUserDocument('TimeTableInputDatas', saveName)
