@@ -88,7 +88,6 @@ export class AuthService {
                 this.ngZone.run(() => {
                     this.router.navigate(['home_page']);
                 });
-                console.log(result);
                 window.location.reload();
             });
     }

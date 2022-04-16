@@ -68,7 +68,7 @@
     <button mat-raised-button color="primary" class="sortingButton" (click)="sorting()">
         {{'GENERATING' | translate}}
     </button>
-    <mat-card *ngIf="this.authService.isLoggedIn" >
+    <mat-card *ngIf="this.authService.isLoggedIn()" >
         <div fxLayout="column" fxLayoutAlign="space-around center" >
             <mat-form-field appearance="outline">
                 <mat-label >{{'SAVE_NAME' | translate}}</mat-label>
@@ -81,7 +81,7 @@
         </div>
     </mat-card>
 </div>
-<div *ngIf="this.authService.isLoggedIn" >
+<div *ngIf="this.authService.isLoggedIn()" >
     <table mat-table [dataSource]="databaseSource" class="databaseCruds" >
         <ng-container matColumnDef="saveName">
             <th mat-header-cell *matHeaderCellDef> {{ 'SAVE_NAME' | translate }} </th>
